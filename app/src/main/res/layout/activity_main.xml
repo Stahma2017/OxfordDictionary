@@ -7,21 +7,19 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".ui.MainActivity">
-
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/mainbackground"
-        android:padding="10dp">
-        <ImageButton
-            android:id="@+id/hamburgerBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_menu_hamburger"
-            android:onClick="openDrawer"/>
-    </FrameLayout>
-
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/hamburgerBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_menu_hamburger"
+                android:onClick="openDrawer"
+                android:elevation="2dp"
+                android:layout_margin="10dp"/>
+        </FrameLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -30,5 +28,4 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:itemBackground="@drawable/menu_item_selector"/>
-
 </android.support.v4.widget.DrawerLayout>
