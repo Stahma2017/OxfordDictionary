@@ -1,7 +1,6 @@
 package com.example.stas.oxforddictionary.ui;
 
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +10,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
 import com.example.stas.oxforddictionary.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.hamburgerBtn)ImageButton hamburgerBtn;
+    //@BindView(R.id.allWordsCount) TextView allWordsCount;
+    //@BindView(R.id.learnedWordsCount) TextView learnedWordsCount;
+
 
     private MainContract.Presenter presenter;
 
@@ -35,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         EntryFragment entryFragment = new EntryFragment();
         fragmentTransaction.add(R.id.content_frame, entryFragment);
         fragmentTransaction.commit();
+
+        //todo find way of casting with butterknife
+        View headerLayout = navigationView.getHeaderView(0);
+        TextView allWordsCount = headerLayout.findViewById(R.id.allWordsCount);
+        allWordsCount.setText("157");
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
