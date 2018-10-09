@@ -28,5 +28,5 @@
         app:headerLayout="@layout/nav_drawer"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:itemBackground="@drawable/menu_item_selector"/>
+        app:itemBackground="@drawable/selector_menu_item"/>
 </android.support.v4.widget.DrawerLayout>

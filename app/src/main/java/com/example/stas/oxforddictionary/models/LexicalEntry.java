@@ -3,10 +3,12 @@ package com.example.stas.oxforddictionary.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class LexicalEntry {
-//    @SerializedName("entries")
-//    @Expose
-//    private List<Entry> entries = null;
+    @SerializedName("entries")
+    @Expose
+    private List<Entry> entries = null;
     @SerializedName("language")
     @Expose
     private String language;
@@ -20,9 +22,9 @@ public class LexicalEntry {
     @Expose
     private String text;
 
-//    public List<Entry> getEntries() {
-//        return entries;
-//    }
+    public List<Entry> getEntries() {
+        return entries;
+    }
 
 //    public void setEntries(List<Entry> entries) {
 //        this.entries = entries;
