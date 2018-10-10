@@ -23,7 +23,7 @@ class EntryPresenter implements EntryContract.Presenter {
 
     @Override
     public void getDefinition(String word) {
-        apiClient.reposForEntry("en", word, "53974e4d", "5b849e1ae6cc825986f969ce9ec8c198")
+        apiClient.reposForEntry("en", word)
                 .enqueue(new Callback<EntryResponse>() {
                     @Override
                     public void onResponse(Call<EntryResponse> call, Response<EntryResponse> response) {

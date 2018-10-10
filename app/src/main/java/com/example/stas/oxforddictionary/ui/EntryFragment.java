@@ -4,6 +4,8 @@ package com.example.stas.oxforddictionary.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +25,10 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @BindView(R.id.wordEntryET) EditText wordEntry;
     @BindView(R.id.definitionOutputTW) TextView output;
     @BindView(R.id.searchSubmitBtn) Button searchBtn;
+    @BindView(R.id.definition_recycler_view) RecyclerView definitionRecyclerView;
     private Unbinder unbinder;
-    EntryContract.Presenter presenter;
+    private EntryContract.Presenter presenter;
+    /*private RecyclerView.LayoutManager layoutManager;*/
 
 
     public EntryFragment() {
@@ -49,6 +53,9 @@ public class EntryFragment extends Fragment implements EntryContract.View {
                 }
             }
         });
+
+       /* layoutManager = new LinearLayoutManager(getContext());
+        definitionRecyclerView.setLayoutManager(layoutManager);*/
 
 
         return view;

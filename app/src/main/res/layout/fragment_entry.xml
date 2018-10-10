@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
     tools:context=".ui.EntryFragment"
-    android:paddingTop="80dp">
+    android:paddingTop="80dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
 
     <EditText
         android:id="@+id/wordEntryET"
@@ -15,7 +17,6 @@
         android:layout_height="50dp"
         app:layout_constraintWidth_percent="0.7"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="8dp"
         android:background="@drawable/background_word_entry_edittext"
         android:hint="type word here"
         android:imeOptions="actionSearch"
@@ -32,27 +33,47 @@
         android:layout_height="50dp"
         app:layout_constraintWidth_percent="0.25"
         android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:background="@drawable/background_entry_submit_button"
         android:text="search"
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/wordEntryET"/>
 
-
-    <TextView
-        android:id="@+id/definitionOutputTW"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_output"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wordEntryET" />
+        app:layout_constraintTop_toBottomOf="@+id/wordEntryET">
+
+
+
+        <TextView
+            android:id="@+id/definitionOutputTW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="15dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wordEntryET" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/definition_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+
+
 
 
 </android.support.constraint.ConstraintLayout>
