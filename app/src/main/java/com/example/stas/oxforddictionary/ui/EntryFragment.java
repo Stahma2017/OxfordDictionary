@@ -15,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.stas.oxforddictionary.R;
+import com.example.stas.oxforddictionary.adapters.DefinitionAdapter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +31,8 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @BindView(R.id.definition_recycler_view) RecyclerView definitionRecyclerView;
     private Unbinder unbinder;
     private EntryContract.Presenter presenter;
-    /*private RecyclerView.LayoutManager layoutManager;*/
+    private RecyclerView.LayoutManager layoutManager;
+    private DefinitionAdapter definitionAdapter;
 
 
     public EntryFragment() {
@@ -54,16 +58,20 @@ public class EntryFragment extends Fragment implements EntryContract.View {
             }
         });
 
-       /* layoutManager = new LinearLayoutManager(getContext());
-        definitionRecyclerView.setLayoutManager(layoutManager);*/
+        layoutManager = new LinearLayoutManager(getContext());
+        definitionAdapter = new DefinitionAdapter();
+        definitionRecyclerView.setLayoutManager(layoutManager);
+        definitionRecyclerView.setAdapter(definitionAdapter);
+
 
 
         return view;
     }
 
     @Override
-    public void showDefinition(String definitioni) {
-        output.setText(definitioni);
+    public void showDefinition(List<String> definitions) {
+        definitionAdapter.setList(definitions);
+        definitionAdapter.notifyDataSetChanged();
     }
 
     @Override

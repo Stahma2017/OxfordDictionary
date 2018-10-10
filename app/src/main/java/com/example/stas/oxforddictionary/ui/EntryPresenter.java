@@ -1,8 +1,14 @@
 package com.example.stas.oxforddictionary.ui;
 
+import android.support.annotation.NonNull;
+
 import com.example.stas.oxforddictionary.models.EntryResponse;
+import com.example.stas.oxforddictionary.models.Sense;
 import com.example.stas.oxforddictionary.network.ApiClient;
 import com.example.stas.oxforddictionary.network.OxfordApi;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,13 +32,19 @@ class EntryPresenter implements EntryContract.Presenter {
         apiClient.reposForEntry("en", word)
                 .enqueue(new Callback<EntryResponse>() {
                     @Override
-                    public void onResponse(Call<EntryResponse> call, Response<EntryResponse> response) {
-                        view.showDefinition(response.body().getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSenses().get(0).getDefinitions().get(0));
+                    public void onResponse(@NonNull Call<EntryResponse> call, @NonNull Response<EntryResponse> response) {
+                        List<String> definitions = new ArrayList<>();
+                        for (Sense s: response.body().getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSenses()) {
+                           definitions.addAll(s.getDefinitions());
+                        }
+                        view.showDefinition(definitions);
+
+
                     }
 
                     @Override
                     public void onFailure(Call<EntryResponse> call, Throwable t) {
-                        view.showDefinition("Error");
+                        t.printStackTrace();
                     }
                 });
     }
