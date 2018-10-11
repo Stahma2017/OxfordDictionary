@@ -9,8 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +29,16 @@ import butterknife.Unbinder;
 public class EntryFragment extends Fragment implements EntryContract.View {
 
     @BindView(R.id.wordEntryET) EditText wordEntry;
-    @BindView(R.id.definitionOutputTW) TextView output;
+    @BindView(R.id.wordTW) TextView output;
     @BindView(R.id.searchSubmitBtn) Button searchBtn;
     @BindView(R.id.definition_recycler_view) RecyclerView definitionRecyclerView;
+    @BindView(R.id.infoContainer) LinearLayout infoContainer;
     private Unbinder unbinder;
     private EntryContract.Presenter presenter;
     private RecyclerView.LayoutManager layoutManager;
     private DefinitionAdapter definitionAdapter;
+
+    Animation moveUp;
 
 
     public EntryFragment() {
@@ -46,6 +52,9 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         View view = inflater.inflate(R.layout.fragment_entry, container, false);
         unbinder = ButterKnife.bind(this, view);
         presenter = new EntryPresenter(this);
+
+        moveUp = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.move_up);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +78,10 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     }
 
     @Override
-    public void showDefinition(List<String> definitions) {
+    public void showDefinition(List<String> definitions, String word) {
+        infoContainer.setVisibility(View.VISIBLE);
+        infoContainer.startAnimation(moveUp);
+        output.setText(word);
         definitionAdapter.setList(definitions);
         definitionAdapter.notifyDataSetChanged();
     }
