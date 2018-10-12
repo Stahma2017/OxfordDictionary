@@ -15,9 +15,9 @@ public class LexicalEntry {
     @SerializedName("lexicalCategory")
     @Expose
     private String lexicalCategory;
-//    @SerializedName("pronunciations")
-//    @Expose
-//    private List<Pronunciation> pronunciations = null;
+    @SerializedName("pronunciations")
+    @Expose
+    private List<Pronunciation> pronunciations = null;
     @SerializedName("text")
     @Expose
     private String text;
@@ -46,13 +46,13 @@ public class LexicalEntry {
         this.lexicalCategory = lexicalCategory;
     }
 
-//    public List<Pronunciation> getPronunciations() {
-//        return pronunciations;
-//    }
-//
-//    public void setPronunciations(List<Pronunciation> pronunciations) {
-//        this.pronunciations = pronunciations;
-//    }
+    public List<Pronunciation> getPronunciations() {
+        return pronunciations;
+    }
+
+    public void setPronunciations(List<Pronunciation> pronunciations) {
+        this.pronunciations = pronunciations;
+    }
 
     public String getText() {
         return text;

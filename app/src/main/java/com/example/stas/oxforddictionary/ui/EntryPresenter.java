@@ -37,7 +37,9 @@ class EntryPresenter implements EntryContract.Presenter {
                         for (Sense s: response.body().getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSenses()) {
                            definitions.addAll(s.getDefinitions());
                         }
-                        view.showDefinition(definitions, response.body().getResults().get(0).getWord());
+                        String soundURL = response.body().getResults().get(0).getLexicalEntries().get(0).getPronunciations().get(0).getAudioFile();
+                        String word = response.body().getResults().get(0).getWord();
+                        view.showDefinition(definitions, word, soundURL);
 
 
                     }
