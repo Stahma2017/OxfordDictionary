@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.stas.oxforddictionary.R;
+import com.example.stas.oxforddictionary.models.Sense;
+import com.example.stas.oxforddictionary.models.Subsense;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +19,20 @@ import butterknife.ButterKnife;
 
 public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.DefinitionViewHolder> {
 
-    private List<String> definitions = new ArrayList<>();
+    private List<String> senses = new ArrayList<>();
 
-    public void setList(List<String> definitions){
-        this.definitions = definitions;
+    public void setList(List<Sense> senses){
+       this.senses = extractSubsenses(senses);
+    }
+    private List<String> extractSubsenses(List<Sense> senses){
+        List<String> allSenses = new ArrayList<>();
+        for (Sense sense: senses) {
+           allSenses.add( sense.getDefinitions().get(0));
+            for (Subsense subsense: sense.getSubsenses()) {
+                allSenses.add("   " + subsense.getDefinitions().get(0));
+            }
+        }
+        return allSenses;
     }
 
 
@@ -33,12 +45,12 @@ public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.De
 
     @Override
     public void onBindViewHolder(@NonNull DefinitionViewHolder definitionViewHolder, int position) {
-        definitionViewHolder.bind(definitions.get(position));
+        definitionViewHolder.bind(senses.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return definitions.size();
+        return senses.size();
     }
 
     class DefinitionViewHolder extends RecyclerView.ViewHolder{
@@ -50,8 +62,9 @@ public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.De
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(String definition){
-            definitionTW.setText(definition);
+        void bind(String sense)
+        {
+            definitionTW.setText(sense);
         }
     }
 }

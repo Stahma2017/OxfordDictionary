@@ -1,5 +1,7 @@
 package com.example.stas.oxforddictionary.network;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
@@ -43,6 +45,7 @@ public class ApiClient {
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(API_BASE_URL)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okClient)
                     .build();

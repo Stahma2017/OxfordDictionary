@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.adapters.DefinitionAdapter;
+import com.example.stas.oxforddictionary.models.Sense;
 
 import java.io.IOException;
 import java.util.List;
@@ -81,15 +82,15 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     }
 
     @Override
-    public void showDefinition(List<String> definitions, String word, String sound) {
+    public void showDefinition(List<Sense> senses) {
         infoContainer.setVisibility(View.VISIBLE);
         infoContainer.startAnimation(moveUp);
-        output.setText(word);
-        definitionAdapter.setList(definitions);
+        output.setText("SomeWord");
+        definitionAdapter.setList(senses);
         definitionAdapter.notifyDataSetChanged();
 
 
-        MediaPlayer mediaPlayer = new MediaPlayer();
+        /*MediaPlayer mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(sound);
@@ -101,8 +102,13 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mediaPlayer.start();
+        mediaPlayer.start();*/
 
+    }
+
+    @Override
+    public void showToast(String word){
+        Toast.makeText(getContext(), word, Toast.LENGTH_SHORT).show();
     }
 
     @Override

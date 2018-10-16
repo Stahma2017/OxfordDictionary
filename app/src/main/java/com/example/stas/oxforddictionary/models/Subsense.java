@@ -5,25 +5,25 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Sense {
+public class Subsense {
     @SerializedName("definitions")
     @Expose
     private List<String> definitions = null;
-  /*  @SerializedName("examples")
+    @SerializedName("examples")
     @Expose
-    private List<Example> examples = null;*/
+    private List<SubExample> examples = null;
     @SerializedName("id")
     @Expose
     private String id;
     @SerializedName("short_definitions")
     @Expose
     private List<String> shortDefinitions = null;
-    @SerializedName("subsenses")
-    @Expose
-    private List<Subsense> subsenses = null;
     /*@SerializedName("thesaurusLinks")
     @Expose
-    private List<ThesaurusLink_> thesaurusLinks = null;*/
+    private List<ThesaurusLink> thesaurusLinks = null;*/
+    @SerializedName("domains")
+    @Expose
+    private List<String> domains = null;
 
     public List<String> getDefinitions() {
         return definitions;
@@ -33,13 +33,13 @@ public class Sense {
         this.definitions = definitions;
     }
 
-   /* public List<Example> getExamples() {
+    public List<SubExample> getExamples() {
         return examples;
     }
 
-    public void setExamples(List<Example> examples) {
+    public void setExamples(List<SubExample> examples) {
         this.examples = examples;
-    }*/
+    }
 
     public String getId() {
         return id;
@@ -57,21 +57,19 @@ public class Sense {
         this.shortDefinitions = shortDefinitions;
     }
 
-    public List<Subsense> getSubsenses() {
-        return subsenses;
-    }
-
-    public void setSubsenses(List<Subsense> subsenses) {
-        this.subsenses = subsenses;
-    }
-
-   /* public List<ThesaurusLink_> getThesaurusLinks() {
+    /*public List<ThesaurusLink> getThesaurusLinks() {
         return thesaurusLinks;
     }
 
-    public void setThesaurusLinks(List<ThesaurusLink_> thesaurusLinks) {
+    public void setThesaurusLinks(List<ThesaurusLink> thesaurusLinks) {
         this.thesaurusLinks = thesaurusLinks;
     }*/
 
+    public List<String> getDomains() {
+        return domains;
+    }
 
+    public void setDomains(List<String> domains) {
+        this.domains = domains;
+    }
 }
