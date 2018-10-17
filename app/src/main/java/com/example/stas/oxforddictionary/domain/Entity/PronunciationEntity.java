@@ -1,22 +1,15 @@
-package com.example.stas.oxforddictionary.models;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+package com.example.stas.oxforddictionary.domain.Entity;
 
 import java.util.List;
 
-public class Pronunciation {
-    @SerializedName("audioFile")
-    @Expose
+public class PronunciationEntity {
+
     private String audioFile;
-    @SerializedName("dialects")
-    @Expose
+
     private List<String> dialects = null;
-    @SerializedName("phoneticNotation")
-    @Expose
+
     private String phoneticNotation;
-    @SerializedName("phoneticSpelling")
-    @Expose
+
     private String phoneticSpelling;
 
     public String getAudioFile() {
@@ -50,6 +43,4 @@ public class Pronunciation {
     public void setPhoneticSpelling(String phoneticSpelling) {
         this.phoneticSpelling = phoneticSpelling;
     }
-
-
 }

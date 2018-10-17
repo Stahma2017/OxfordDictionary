@@ -1,15 +1,11 @@
 package com.example.stas.oxforddictionary.domain;
 
-import com.example.stas.oxforddictionary.models.EntryResponse;
-import com.example.stas.oxforddictionary.models.LexicalEntry;
-import com.example.stas.oxforddictionary.models.Sense;
+import com.example.stas.oxforddictionary.data.model.EntryResponse;
+import com.example.stas.oxforddictionary.data.model.LexicalEntry;
 import com.example.stas.oxforddictionary.network.ApiClient;
 import com.example.stas.oxforddictionary.network.OxfordApi;
 
-import java.util.List;
-
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 
 

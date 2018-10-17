@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.models;
+package com.example.stas.oxforddictionary.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -26,7 +26,7 @@ public class LexicalEntry {
         return entries;
     }
 
-//    public void setEntries(List<Entry> entries) {
+//    public void setEntries(List<EntryEntity> entries) {
 //        this.entries = entries;
 //    }
 

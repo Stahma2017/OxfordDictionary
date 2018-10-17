@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.adapters;
+package com.example.stas.oxforddictionary.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.stas.oxforddictionary.R;
-import com.example.stas.oxforddictionary.models.Sense;
-import com.example.stas.oxforddictionary.models.Subsense;
+import com.example.stas.oxforddictionary.data.model.Sense;
+import com.example.stas.oxforddictionary.data.model.Subsense;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +47,7 @@ public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.De
     public void onBindViewHolder(@NonNull DefinitionViewHolder definitionViewHolder, int position) {
         definitionViewHolder.bind(senses.get(position));
     }
+
 
     @Override
     public int getItemCount() {

@@ -1,23 +1,18 @@
-package com.example.stas.oxforddictionary.models;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+package com.example.stas.oxforddictionary.domain.Entity;
 
 import java.util.List;
 
-public class Entry {
-    @SerializedName("etymologies")
-    @Expose
+public class EntryEntity {
+
+
     private List<String> etymologies = null;
     /*@SerializedName("grammaticalFeatures")
     @Expose
     private List<GrammaticalFeature> grammaticalFeatures = null;*/
-    @SerializedName("homographNumber")
-    @Expose
+
     private String homographNumber;
-    @SerializedName("senses")
-    @Expose
-    private List<Sense> senses = null;
+
+    private List<SenseEntity> sens = null;
 
     public List<String> getEtymologies() {
         return etymologies;
@@ -43,13 +38,12 @@ public class Entry {
         this.homographNumber = homographNumber;
     }
 
-    public List<Sense> getSenses() {
-        return senses;
+    public List<SenseEntity> getSens() {
+        return sens;
     }
 
-    public void setSenses(List<Sense> senses) {
-        this.senses = senses;
+    public void setSens(List<SenseEntity> sens) {
+        this.sens = sens;
     }
 
 }
-

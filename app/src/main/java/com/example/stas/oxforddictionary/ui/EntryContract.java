@@ -1,6 +1,6 @@
 package com.example.stas.oxforddictionary.ui;
 
-import com.example.stas.oxforddictionary.models.Sense;
+import com.example.stas.oxforddictionary.data.model.Sense;
 
 import java.util.List;
 

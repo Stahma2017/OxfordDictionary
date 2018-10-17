@@ -1,6 +1,6 @@
 package com.example.stas.oxforddictionary.network;
 
-import com.example.stas.oxforddictionary.models.EntryResponse;
+import com.example.stas.oxforddictionary.data.model.EntryResponse;
 
 
 import io.reactivex.Observable;

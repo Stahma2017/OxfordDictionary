@@ -1,8 +1,6 @@
 package com.example.stas.oxforddictionary.ui;
 
 
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -20,10 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.stas.oxforddictionary.R;
-import com.example.stas.oxforddictionary.adapters.DefinitionAdapter;
-import com.example.stas.oxforddictionary.models.Sense;
+import com.example.stas.oxforddictionary.adapter.DefinitionAdapter;
+import com.example.stas.oxforddictionary.adapter.MultipleAdapter;
+import com.example.stas.oxforddictionary.data.model.Sense;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,6 +40,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     private EntryContract.Presenter presenter;
     private RecyclerView.LayoutManager layoutManager;
     private DefinitionAdapter definitionAdapter;
+    private MultipleAdapter multipleAdapter;
 
     Animation moveUp;
 
@@ -72,11 +72,10 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         });
 
         layoutManager = new LinearLayoutManager(getContext());
-        definitionAdapter = new DefinitionAdapter();
+      //  definitionAdapter = new DefinitionAdapter();
+        multipleAdapter = new MultipleAdapter();
         definitionRecyclerView.setLayoutManager(layoutManager);
-        definitionRecyclerView.setAdapter(definitionAdapter);
-
-
+        definitionRecyclerView.setAdapter(multipleAdapter);
 
         return view;
     }
@@ -86,8 +85,11 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         infoContainer.setVisibility(View.VISIBLE);
         infoContainer.startAnimation(moveUp);
         output.setText("SomeWord");
-        definitionAdapter.setList(senses);
-        definitionAdapter.notifyDataSetChanged();
+        List<Object> objectList = new ArrayList<Object>(senses);
+        multipleAdapter.setList(objectList);
+        multipleAdapter.addToList(new ArrayList<Object>(senses.get(0).getSubsenses()) );
+        multipleAdapter.notifyDataSetChanged();
+      //  definitionAdapter.notifyDataSetChanged();
 
 
         /*MediaPlayer mediaPlayer = new MediaPlayer();
