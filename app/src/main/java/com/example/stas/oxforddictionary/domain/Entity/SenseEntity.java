@@ -1,19 +1,22 @@
 package com.example.stas.oxforddictionary.domain.Entity;
 
+import com.example.stas.oxforddictionary.adapter.Item;
+import com.example.stas.oxforddictionary.adapter.Visitor;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class SenseEntity {
+public class SenseEntity implements Item {
 
-    private List<String> definitions = null;
-    /*  @SerializedName("examples")
-      @Expose
-      private List<Example> examples = null;*/
+    private List<String> definitions = new ArrayList<>();
+
+      private List<ExampleEntity> examples = null;
 
     private String id;
 
-    private List<String> shortDefinitions = null;
+    private List<String> shortDefinitions = new ArrayList<>();
 
-    private List<SubsenseEntity> subsens = null;
+    private List<SubsenseEntity> subsens = new ArrayList<>();
     /*@SerializedName("thesaurusLinks")
     @Expose
     private List<ThesaurusLink_> thesaurusLinks = null;*/
@@ -26,13 +29,13 @@ public class SenseEntity {
         this.definitions = definitions;
     }
 
-   /* public List<Example> getExamples() {
+    public List<ExampleEntity> getExamples() {
         return examples;
     }
 
-    public void setExamples(List<Example> examples) {
+    public void setExamples(List<ExampleEntity> examples) {
         this.examples = examples;
-    }*/
+    }
 
     public String getId() {
         return id;
@@ -66,4 +69,15 @@ public class SenseEntity {
         this.thesaurusLinks = thesaurusLinks;
     }*/
 
+
+
+    @Override
+    public List<String> accept(Visitor visitor) {
+        return visitor.visitSense(this);
+    }
+
+    @Override
+    public int getType() {
+        return Item.TYPE_SENSE;
+    }
 }

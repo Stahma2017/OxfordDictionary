@@ -9,11 +9,6 @@ public class LexicalEntryMapper {
     private EntryMapper entryMapper = new EntryMapper();
     private PronunciationMapper pronunciationMapper = new PronunciationMapper();
 
-    public LexicalEntryMapper(EntryMapper entryMapper, PronunciationMapper pronunciationMapper) {
-        this.entryMapper = entryMapper;
-        this.pronunciationMapper = pronunciationMapper;
-    }
-
     public LexicalEntryEntity mapLexicalEntry(LexicalEntry from){
         LexicalEntryEntity lexicalEntryEntity = new LexicalEntryEntity();
         lexicalEntryEntity.setLanguage(from.getLanguage());

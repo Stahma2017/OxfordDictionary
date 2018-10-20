@@ -3,24 +3,25 @@ package com.example.stas.oxforddictionary.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sense {
     @SerializedName("definitions")
     @Expose
-    private List<String> definitions = null;
-  /*  @SerializedName("examples")
+    private List<String> definitions = new ArrayList<>();
+    @SerializedName("examples")
     @Expose
-    private List<Example> examples = null;*/
+    private List<Example> examples = new ArrayList<>();
     @SerializedName("id")
     @Expose
     private String id;
     @SerializedName("short_definitions")
     @Expose
-    private List<String> shortDefinitions = null;
+    private List<String> shortDefinitions = new ArrayList<>();
     @SerializedName("subsenses")
     @Expose
-    private List<Subsense> subsenses = null;
+    private List<Subsense> subsenses = new ArrayList<>();
     /*@SerializedName("thesaurusLinks")
     @Expose
     private List<ThesaurusLink_> thesaurusLinks = null;*/
@@ -33,13 +34,13 @@ public class Sense {
         this.definitions = definitions;
     }
 
-   /* public List<Example> getExamples() {
+    public List<Example> getExamples() {
         return examples;
     }
 
     public void setExamples(List<Example> examples) {
         this.examples = examples;
-    }*/
+    }
 
     public String getId() {
         return id;

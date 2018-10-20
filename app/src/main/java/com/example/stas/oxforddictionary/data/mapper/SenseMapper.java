@@ -9,6 +9,7 @@ import java.util.List;
 public class SenseMapper {
 
     private SubsenseMapper subSenseMapper = new SubsenseMapper();
+    private ExampleMapper exampleMapper = new ExampleMapper();
 
     public SenseEntity mapSense(Sense from){
         SenseEntity senseEntity = new SenseEntity();
@@ -16,6 +17,7 @@ public class SenseMapper {
         senseEntity.setDefinitions(from.getDefinitions());
         senseEntity.setShortDefinitions(from.getShortDefinitions());
         senseEntity.setSubsens(subSenseMapper.mapSubsenses(from.getSubsenses()));
+        senseEntity.setExamples(exampleMapper.mapExamples(from.getExamples()));
         return senseEntity;
     }
 

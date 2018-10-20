@@ -19,10 +19,8 @@ import android.widget.Toast;
 
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.adapter.DefinitionAdapter;
-import com.example.stas.oxforddictionary.adapter.MultipleAdapter;
-import com.example.stas.oxforddictionary.data.model.Sense;
+import com.example.stas.oxforddictionary.adapter.Item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,7 +38,6 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     private EntryContract.Presenter presenter;
     private RecyclerView.LayoutManager layoutManager;
     private DefinitionAdapter definitionAdapter;
-    private MultipleAdapter multipleAdapter;
 
     Animation moveUp;
 
@@ -64,7 +61,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
             @Override
             public void onClick(View v) {
                 if (wordEntry.length() > 0){
-                    presenter.getDefinition(wordEntry.getText().toString());
+                   presenter.getDefinition(wordEntry.getText().toString());
                 }else {
                     Toast.makeText(getContext(), "word is missing", Toast.LENGTH_SHORT).show();
                 }
@@ -72,24 +69,21 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         });
 
         layoutManager = new LinearLayoutManager(getContext());
-      //  definitionAdapter = new DefinitionAdapter();
-        multipleAdapter = new MultipleAdapter();
+        definitionAdapter = new DefinitionAdapter();
         definitionRecyclerView.setLayoutManager(layoutManager);
-        definitionRecyclerView.setAdapter(multipleAdapter);
+        definitionRecyclerView.setAdapter(definitionAdapter);
 
         return view;
     }
 
     @Override
-    public void showDefinition(List<Sense> senses) {
+    public void showDefinition(List<Item> definitions) {
         infoContainer.setVisibility(View.VISIBLE);
         infoContainer.startAnimation(moveUp);
         output.setText("SomeWord");
-        List<Object> objectList = new ArrayList<Object>(senses);
-        multipleAdapter.setList(objectList);
-        multipleAdapter.addToList(new ArrayList<Object>(senses.get(0).getSubsenses()) );
-        multipleAdapter.notifyDataSetChanged();
-      //  definitionAdapter.notifyDataSetChanged();
+
+        definitionAdapter.setItems(definitions);
+        definitionAdapter.notifyDataSetChanged();
 
 
         /*MediaPlayer mediaPlayer = new MediaPlayer();

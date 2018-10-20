@@ -1,8 +1,11 @@
 package com.example.stas.oxforddictionary.domain.Entity;
 
+import com.example.stas.oxforddictionary.adapter.Item;
+import com.example.stas.oxforddictionary.adapter.Visitor;
+
 import java.util.List;
 
-public class SubsenseEntity {
+public class SubsenseEntity implements Item {
 
     private List<String> definitions = null;
 
@@ -63,5 +66,15 @@ public class SubsenseEntity {
 
     public void setDomains(List<String> domains) {
         this.domains = domains;
+    }
+
+    @Override
+    public int getType() {
+        return Item.TYPE_SUBSENSE;
+    }
+
+    @Override
+    public List<String> accept(Visitor visitor) {
+        return visitor.visitSubsense(this);
     }
 }

@@ -8,64 +8,90 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.stas.oxforddictionary.R;
-import com.example.stas.oxforddictionary.data.model.Sense;
-import com.example.stas.oxforddictionary.data.model.Subsense;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.DefinitionViewHolder> {
+    private List<Item> definitions = new ArrayList<>();
+    private DefinitionExportVisitor definitionExporter = new DefinitionExportVisitor();
 
-    private List<String> senses = new ArrayList<>();
-
-    public void setList(List<Sense> senses){
-       this.senses = extractSubsenses(senses);
-    }
-    private List<String> extractSubsenses(List<Sense> senses){
-        List<String> allSenses = new ArrayList<>();
-        for (Sense sense: senses) {
-           allSenses.add( sense.getDefinitions().get(0));
-            for (Subsense subsense: sense.getSubsenses()) {
-                allSenses.add("   " + subsense.getDefinitions().get(0));
-            }
-        }
-        return allSenses;
+    public void setItems(List<Item> definitions) {
+        this.definitions = definitions;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return definitions.get(position).getType();
+    }
 
     @NonNull
     @Override
-    public DefinitionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        return new DefinitionViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.definition_recylcer_item, parent, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        switch(viewType){
+            case Item.TYPE_SENSE:
+                View senseView = inflater.inflate(R.layout.recycler_sense_item, viewGroup, false);
+                return new SenseViewHolder(senseView);
+            case Item.TYPE_SUBSENSE:
+                View subsenseView = inflater.inflate(R.layout.recycler_subsense_item, viewGroup, false);
+                return new SubsenseViewHolder(subsenseView);
+            default:
+                throw new RuntimeException("Unknown type");
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DefinitionViewHolder definitionViewHolder, int position) {
-        definitionViewHolder.bind(senses.get(position));
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        switch (viewHolder.getItemViewType()){
+            case Item.TYPE_SENSE:
+                SenseViewHolder senseHolder = (SenseViewHolder) viewHolder;
+                senseHolder.bindSense(definitions.get(i));
+                break;
+            case Item.TYPE_SUBSENSE:
+                SubsenseViewHolder subsenseHolder = (SubsenseViewHolder) viewHolder;
+                subsenseHolder.bindSubsense(definitions.get(i));
+                break;
+        }
     }
-
 
     @Override
     public int getItemCount() {
-        return senses.size();
+        return definitions.size();
     }
 
-    class DefinitionViewHolder extends RecyclerView.ViewHolder{
+    public class SenseViewHolder extends RecyclerView.ViewHolder{
+        private TextView sense, example;
 
-        @BindView(R.id.definitionOutput)TextView definitionTW;
-
-        public DefinitionViewHolder(@NonNull View itemView) {
+        public SenseViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            sense = (TextView)itemView.findViewById(R.id.senseTW);
+            example = (TextView)itemView.findViewById(R.id.senseExampleTW);
         }
 
-        void bind(String sense)
-        {
-            definitionTW.setText(sense);
+        void bindSense(Item item){
+            List<String> definition = definitionExporter.export(item);
+            this.sense.setText(definition.get(0));
+            this.example.setText(definition.get(1));
         }
+    }
+
+    public class SubsenseViewHolder extends RecyclerView.ViewHolder{
+        private TextView subsense, example;
+
+        public SubsenseViewHolder(@NonNull View itemView) {
+            super(itemView);
+            subsense = (TextView)itemView.findViewById(R.id.subsenseTW);
+            example = (TextView)itemView.findViewById(R.id.subsenseExampleTW);
+        }
+
+        void bindSubsense(Item item){
+            List<String> definition = definitionExporter.export(item);
+            this.subsense.setText(definition.get(0));
+            this.example.setText(definition.get(1));
+        }
+
     }
 }

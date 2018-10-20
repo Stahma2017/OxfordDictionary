@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EntryMapper {
 
-    private SenseMapper senseMapper;
+    private SenseMapper senseMapper = new SenseMapper();
 
     public EntryEntity mapEntry(Entry from){
         EntryEntity entryEntity = new EntryEntity();

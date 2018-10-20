@@ -1,7 +1,12 @@
 package com.example.stas.oxforddictionary.ui;
 
+import com.example.stas.oxforddictionary.adapter.Item;
 import com.example.stas.oxforddictionary.domain.DictionaryInteractor;
-import com.example.stas.oxforddictionary.data.model.LexicalEntry;
+import com.example.stas.oxforddictionary.domain.Entity.LexicalEntryEntity;
+import com.example.stas.oxforddictionary.domain.Entity.SenseEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -29,23 +34,23 @@ class EntryPresenter implements EntryContract.Presenter {
       Disposable definitionDisp = interactor.loadDefinition(word)
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(new Consumer<LexicalEntry>() {
+              .subscribe(new Consumer<LexicalEntryEntity>() {
                              @Override
-                             public void accept(LexicalEntry lexicalEntry) throws Exception {
-                                 view.showDefinition(lexicalEntry.getEntries().get(0).getSenses());
-
+                             public void accept(LexicalEntryEntity lexicalEntry) throws Exception {
+                                 view.showDefinition(extractDefinitions(lexicalEntry.getEntries().get(0).getSense()));
                              }
                          });
                       compositeDisposable.add(definitionDisp);
     }
 
-
-
-    /*List<String> definitions = new ArrayList<>();
-                        for (Sense s: response.body().getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSenses()) {
-        definitions.addAll(s.getDefinitions());
+    private List<Item> extractDefinitions(List<SenseEntity> senses){
+        List<Item> definitions = new ArrayList<>();
+        for(SenseEntity sense : senses){
+            definitions.add(sense);
+            definitions.addAll(sense.getSubsens());
+        }
+        return definitions;
     }
-    String soundURL = response.body().getResults().get(0).getLexicalEntries().get(0).getPronunciationEntities().get(0).getAudioFile();
-    String word = response.body().getResults().get(0).getWord();
-                        view.showDefinition(definitions, word, soundURL);*/
+
+
 }

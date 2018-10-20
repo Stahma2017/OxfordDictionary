@@ -1,5 +1,8 @@
 package com.example.stas.oxforddictionary.domain.Entity;
 
+
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntryEntity {
@@ -12,7 +15,7 @@ public class EntryEntity {
 
     private String homographNumber;
 
-    private List<SenseEntity> sens = null;
+    private List<SenseEntity> sense = new ArrayList<>();
 
     public List<String> getEtymologies() {
         return etymologies;
@@ -38,12 +41,12 @@ public class EntryEntity {
         this.homographNumber = homographNumber;
     }
 
-    public List<SenseEntity> getSens() {
-        return sens;
+    public List<SenseEntity> getSense() {
+        return sense;
     }
 
     public void setSens(List<SenseEntity> sens) {
-        this.sens = sens;
+        this.sense = sens;
     }
 
 }
