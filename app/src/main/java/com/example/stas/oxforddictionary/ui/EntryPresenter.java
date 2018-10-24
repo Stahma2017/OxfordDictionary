@@ -37,15 +37,17 @@ class EntryPresenter implements EntryContract.Presenter {
               .subscribe(new Consumer<LexicalEntryEntity>() {
                              @Override
                              public void accept(LexicalEntryEntity lexicalEntry) throws Exception {
-                                 view.showDefinition(extractDefinitions(lexicalEntry.getEntries().get(0).getSense()));
+                                 view.showDefinition(extractDefinitions(lexicalEntry));
+
                              }
                          });
                       compositeDisposable.add(definitionDisp);
     }
 
-    private List<Item> extractDefinitions(List<SenseEntity> senses){
+    private List<Item> extractDefinitions(LexicalEntryEntity lexicalEntry){
         List<Item> definitions = new ArrayList<>();
-        for(SenseEntity sense : senses){
+        definitions.add(lexicalEntry);
+        for(SenseEntity sense : lexicalEntry.getEntries().get(0).getSense()){
             definitions.add(sense);
             definitions.addAll(sense.getSubsens());
         }

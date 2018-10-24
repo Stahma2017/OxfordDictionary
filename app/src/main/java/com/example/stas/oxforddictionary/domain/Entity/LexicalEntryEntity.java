@@ -1,8 +1,11 @@
 package com.example.stas.oxforddictionary.domain.Entity;
 
+import com.example.stas.oxforddictionary.adapter.Item;
+import com.example.stas.oxforddictionary.adapter.Visitor;
+
 import java.util.List;
 
-public class LexicalEntryEntity {
+public class LexicalEntryEntity implements Item{
 
     private List<EntryEntity> entries = null;
 
@@ -52,5 +55,15 @@ public class LexicalEntryEntity {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public int getType() {
+        return Item.TYPE_HEADER;
+    }
+
+    @Override
+    public List<String> accept(Visitor visitor) {
+        return visitor.visitLexicalEntry(this);
     }
 }

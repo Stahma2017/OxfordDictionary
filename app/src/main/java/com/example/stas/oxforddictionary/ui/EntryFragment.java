@@ -30,7 +30,6 @@ import butterknife.Unbinder;
 public class EntryFragment extends Fragment implements EntryContract.View {
 
     @BindView(R.id.wordEntryET) EditText wordEntry;
-    @BindView(R.id.wordTW) TextView output;
     @BindView(R.id.searchSubmitBtn) Button searchBtn;
     @BindView(R.id.definition_recycler_view) RecyclerView definitionRecyclerView;
     @BindView(R.id.infoContainer) LinearLayout infoContainer;
@@ -80,7 +79,6 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     public void showDefinition(List<Item> definitions) {
         infoContainer.setVisibility(View.VISIBLE);
         infoContainer.startAnimation(moveUp);
-        output.setText("SomeWord");
 
         definitionAdapter.setItems(definitions);
         definitionAdapter.notifyDataSetChanged();

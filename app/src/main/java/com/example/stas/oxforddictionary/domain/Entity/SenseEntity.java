@@ -10,7 +10,7 @@ public class SenseEntity implements Item {
 
     private List<String> definitions = new ArrayList<>();
 
-      private List<ExampleEntity> examples = null;
+      private List<ExampleEntity> examples = new ArrayList<>();
 
     private String id;
 

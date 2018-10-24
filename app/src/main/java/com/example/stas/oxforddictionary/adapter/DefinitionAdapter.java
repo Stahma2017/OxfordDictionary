@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.example.stas.oxforddictionary.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,6 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         switch(viewType){
             case Item.TYPE_SENSE:
@@ -38,6 +36,9 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case Item.TYPE_SUBSENSE:
                 View subsenseView = inflater.inflate(R.layout.recycler_subsense_item, viewGroup, false);
                 return new SubsenseViewHolder(subsenseView);
+            case Item.TYPE_HEADER:
+                View headerView = inflater.inflate(R.layout.recycler_header_item, viewGroup, false);
+                return new HeaderViewHolder(headerView);
             default:
                 throw new RuntimeException("Unknown type");
         }
@@ -54,12 +55,33 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 SubsenseViewHolder subsenseHolder = (SubsenseViewHolder) viewHolder;
                 subsenseHolder.bindSubsense(definitions.get(i));
                 break;
+            case Item.TYPE_HEADER:
+                HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
+                headerViewHolder.bindHeader(definitions.get(0));
+                break;
         }
     }
 
     @Override
     public int getItemCount() {
         return definitions.size();
+    }
+
+    public class HeaderViewHolder extends RecyclerView.ViewHolder{
+        private TextView word, spell;
+        private ImageButton imageButton;
+
+        public HeaderViewHolder(@NonNull View itemView) {
+            super(itemView);
+            word = (TextView) itemView.findViewById(R.id.wordTW);
+            spell = (TextView) itemView.findViewById(R.id.wordSpellTW);
+        }
+
+        void bindHeader(Item item){
+            List<String> heaaderDetails = definitionExporter.export(item);
+            this.word.setText(heaaderDetails.get(0));
+            this.spell.setText(heaaderDetails.get(1));
+        }
     }
 
     public class SenseViewHolder extends RecyclerView.ViewHolder{
@@ -74,7 +96,9 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         void bindSense(Item item){
             List<String> definition = definitionExporter.export(item);
             this.sense.setText(definition.get(0));
-            this.example.setText(definition.get(1));
+            if (definition.size()>1){
+                this.example.setText(definition.get(1));
+            }
         }
     }
 
@@ -90,7 +114,9 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         void bindSubsense(Item item){
             List<String> definition = definitionExporter.export(item);
             this.subsense.setText(definition.get(0));
-            this.example.setText(definition.get(1));
+            if (definition.size()>1){
+                this.example.setText(definition.get(1));
+            }
         }
 
     }
