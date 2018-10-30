@@ -1,6 +1,8 @@
 package com.example.stas.oxforddictionary.ui;
 
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -22,6 +24,7 @@ import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.adapter.DefinitionAdapter;
 import com.example.stas.oxforddictionary.adapter.Item;
 
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,7 +39,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @BindView(R.id.wordInfoContainer) LinearLayout infoContainer;
     @BindView(R.id.titleText) TextView word;
     @BindView(R.id.titleTranscription) TextView transcription;
-    @BindView(R.id.titleSound) ImageButton sound;
+    @BindView(R.id.titleSound) ImageButton soundBtn;
     private Unbinder unbinder;
     private EntryContract.Presenter presenter;
     private RecyclerView.LayoutManager layoutManager;
@@ -71,6 +74,13 @@ public class EntryFragment extends Fragment implements EntryContract.View {
             }
         });
 
+        soundBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.getSound(word.getText().toString());
+            }
+        });
+
         layoutManager = new LinearLayoutManager(getContext());
         definitionAdapter = new DefinitionAdapter();
         definitionRecyclerView.setLayoutManager(layoutManager);
@@ -87,20 +97,24 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         infoContainer.startAnimation(moveUp);
         definitionAdapter.setItems(definitions);
         definitionAdapter.notifyDataSetChanged();
+    }
 
-        /*MediaPlayer mediaPlayer = new MediaPlayer();
+    @Override
+    public void playSound(String soundURL) {
+         MediaPlayer mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
-            mediaPlayer.setDataSource(sound);
+            mediaPlayer.setDataSource(soundURL);
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
             mediaPlayer.prepare();
         } catch (IOException e) {
+            //todo handle error
             e.printStackTrace();
         }
-        mediaPlayer.start();*/
+        mediaPlayer.start();
     }
 
     @Override

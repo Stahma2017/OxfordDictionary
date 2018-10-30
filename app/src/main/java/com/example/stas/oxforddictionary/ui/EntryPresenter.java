@@ -44,6 +44,20 @@ class EntryPresenter implements EntryContract.Presenter {
                       compositeDisposable.add(definitionDisp);
     }
 
+    @Override
+    public void getSound(String word) {
+        Disposable soundDisp = interactor.loadDefinition(word)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<LexicalEntryEntity>() {
+                    @Override
+                    public void accept(LexicalEntryEntity lexicalEntryEntity) throws Exception {
+                        view.playSound(lexicalEntryEntity.getPronunciationEntities().get(0).getAudioFile());
+                    }
+                });
+        compositeDisposable.add(soundDisp);
+    }
+
     private List<Item> extractDefinitions(LexicalEntryEntity lexicalEntry){
         List<Item> definitions = new ArrayList<>();
         for(SenseEntity sense : lexicalEntry.getEntries().get(0).getSense()){
