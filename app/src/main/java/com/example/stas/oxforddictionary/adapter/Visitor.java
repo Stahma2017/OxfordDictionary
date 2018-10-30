@@ -9,5 +9,4 @@ import java.util.List;
 public interface Visitor {
     public List<String> visitSense(SenseEntity sense);
     public List<String> visitSubsense(SubsenseEntity subsense);
-    public List<String> visitLexicalEntry(LexicalEntryEntity lexicalEntryEntity);
 }

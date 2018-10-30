@@ -7,60 +7,79 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
     tools:context=".ui.EntryFragment"
-    android:paddingTop="80dp"
+    android:paddingTop="70dp"
     android:paddingStart="10dp"
     android:paddingEnd="10dp">
 
-    <EditText
-        android:id="@+id/wordEntryET"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:layout_constraintWidth_percent="0.7"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/background_word_entry_edittext"
-        android:hint="type word here"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
-        android:textColorHint="#ffffff"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <EditText
+            android:id="@+id/wordEntryET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/background_word_entry_edittext"
+            android:hint="type word here"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColorHint="#ffffff"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/searchSubmitBtn"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/searchSubmitBtn"
+            android:layout_marginEnd="4dp"/>
 
-    <Button
-        android:id="@+id/searchSubmitBtn"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:layout_constraintWidth_percent="0.25"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/background_entry_submit_button"
-        android:text="search"
-        android:textColor="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/wordEntryET"/>
+        <Button
+            android:id="@+id/searchSubmitBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/background_entry_submit_button"
+            android:text="search"
+            android:textColor="#ffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/wordEntryET"/>
 
-    <LinearLayout
-        android:id="@+id/infoContainer"
-        android:visibility="invisible"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/background_output"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wordEntryET">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/definition_recycler_view"
+        <LinearLayout
+            android:id="@+id/wordInfoContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_output"
+            android:orientation="vertical"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wordEntryET">
+               <GridLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:columnCount="4">
 
-
-
-
+                       <TextView
+                           android:id="@+id/titleText"
+                           android:textColor="#000000"
+                           android:textSize="18sp"/>
+                       <ImageButton
+                           android:id="@+id/titleSound"
+                           android:background="@drawable/ic_action_sound"
+                           android:layout_column="3"/>
+                       <TextView
+                               android:id="@+id/titleTranscription"
+                           android:textColor="#000000"
+                           android:textSize="10sp"
+                           android:layout_columnSpan="2"/>
+               </GridLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/definition_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+        </LinearLayout>
 </android.support.constraint.ConstraintLayout>

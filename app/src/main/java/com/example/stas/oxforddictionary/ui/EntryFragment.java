@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,10 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @BindView(R.id.wordEntryET) EditText wordEntry;
     @BindView(R.id.searchSubmitBtn) Button searchBtn;
     @BindView(R.id.definition_recycler_view) RecyclerView definitionRecyclerView;
-    @BindView(R.id.infoContainer) LinearLayout infoContainer;
+    @BindView(R.id.wordInfoContainer) LinearLayout infoContainer;
+    @BindView(R.id.titleText) TextView word;
+    @BindView(R.id.titleTranscription) TextView transcription;
+    @BindView(R.id.titleSound) ImageButton sound;
     private Unbinder unbinder;
     private EntryContract.Presenter presenter;
     private RecyclerView.LayoutManager layoutManager;
@@ -76,13 +80,13 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     }
 
     @Override
-    public void showDefinition(List<Item> definitions) {
+    public void showDefinition(List<Item> definitions, List<String> titleSet) {
+        word.setText(titleSet.get(0));
+        transcription.setText(titleSet.get(1));
         infoContainer.setVisibility(View.VISIBLE);
         infoContainer.startAnimation(moveUp);
-
         definitionAdapter.setItems(definitions);
         definitionAdapter.notifyDataSetChanged();
-
 
         /*MediaPlayer mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -97,7 +101,6 @@ public class EntryFragment extends Fragment implements EntryContract.View {
             e.printStackTrace();
         }
         mediaPlayer.start();*/
-
     }
 
     @Override

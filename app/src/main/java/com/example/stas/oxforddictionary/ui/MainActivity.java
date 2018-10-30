@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         presenter = new MainPresenter(this);
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         EntryFragment entryFragment = new EntryFragment();
         fragmentTransaction.add(R.id.content_frame, entryFragment);

@@ -47,17 +47,4 @@ public class DefinitionExportVisitor implements Visitor {
         }
         return definitions;
     }
-
-    @Override
-    public List<String> visitLexicalEntry(LexicalEntryEntity lexicalEntryEntity) {
-        List<String> headerDetils = new ArrayList<>();
-        headerDetils.add(lexicalEntryEntity.getText());
-        for (PronunciationEntity pronunciation: lexicalEntryEntity.getPronunciationEntities()){
-            if (pronunciation.getAudioFile() != null){
-                headerDetils.add(pronunciation.getPhoneticSpelling());
-                headerDetils.add(pronunciation.getAudioFile());
-            }
-        }
-        return headerDetils;
-    }
 }
