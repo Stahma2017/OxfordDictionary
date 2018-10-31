@@ -5,6 +5,8 @@ import com.example.stas.oxforddictionary.domain.DictionaryInteractor;
 import com.example.stas.oxforddictionary.domain.Entity.LexicalEntryEntity;
 import com.example.stas.oxforddictionary.domain.Entity.PronunciationEntity;
 import com.example.stas.oxforddictionary.domain.Entity.SenseEntity;
+import com.example.stas.oxforddictionary.ui.base.BaseErrorHandler;
+import com.example.stas.oxforddictionary.ui.base.ErrorHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +21,16 @@ class EntryPresenter implements EntryContract.Presenter {
     private EntryContract.View view;
     private DictionaryInteractor interactor = new DictionaryInteractor();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private ErrorHandler errorHandler = new BaseErrorHandler();
 
     EntryPresenter(EntryContract.View view) {
         this.view = view;
+        errorHandler.attachView(this.view);
     }
 
    @Override
    public void detachView(){
+        errorHandler.detachView();
         view = null;
         compositeDisposable.dispose();
     }
@@ -36,11 +41,16 @@ class EntryPresenter implements EntryContract.Presenter {
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribe(new Consumer<LexicalEntryEntity>() {
-                             @Override
-                             public void accept(LexicalEntryEntity lexicalEntry) throws Exception {
-                                 view.showDefinition(extractDefinitions(lexicalEntry), extractTitle(lexicalEntry));
-                             }
-                         });
+                  @Override
+                  public void accept(LexicalEntryEntity lexicalEntry) throws Exception {
+                      view.showDefinition(extractDefinitions(lexicalEntry), extractTitle(lexicalEntry));
+                  }
+              }, new Consumer<Throwable>() {
+                  @Override
+                  public void accept(Throwable throwable) throws Exception {
+                      errorHandler.proceed(throwable);
+                  }
+              });
                       compositeDisposable.add(definitionDisp);
     }
 

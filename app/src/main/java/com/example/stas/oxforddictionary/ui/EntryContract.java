@@ -2,11 +2,12 @@ package com.example.stas.oxforddictionary.ui;
 
 
 import com.example.stas.oxforddictionary.adapter.Item;
+import com.example.stas.oxforddictionary.ui.base.CanShowError;
 
 import java.util.List;
 
 public interface EntryContract {
-    interface View{
+    interface View extends CanShowError {
         void showDefinition(List<Item> definitions, List<String> titleSet);
         void showToast(String msg);
         void playSound(String soundURL);

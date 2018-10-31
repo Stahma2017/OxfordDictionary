@@ -52,7 +52,6 @@ public class EntryFragment extends Fragment implements EntryContract.View {
 
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -115,6 +114,11 @@ public class EntryFragment extends Fragment implements EntryContract.View {
             e.printStackTrace();
         }
         mediaPlayer.start();
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override
