@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.ui;
+package com.example.stas.oxforddictionary.presentation.view.main;
 
 public interface MainContract {
 

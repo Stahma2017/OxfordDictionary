@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.ui.base;
+package com.example.stas.oxforddictionary.presentation.view.base;
 
 import android.content.Context;
 import android.util.Log;

@@ -6,36 +6,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
-    tools:context=".ui.EntryFragment"
-    android:paddingTop="70dp"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp">
+    tools:context=".presentation.view.entry.EntryFragment"
+    android:paddingTop="@dimen/entry_constraint_padding_top"
+    android:paddingStart="@dimen/entry_constraint_padding_start"
+    android:paddingEnd="@dimen/entry_constraint_padding_end">
 
         <EditText
             android:id="@+id/wordEntryET"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/entry_wordET_height"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/background_word_entry_edittext"
-            android:hint="type word here"
+            android:hint="@string/type_word_here"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:textColorHint="#ffffff"
-            android:textSize="20sp"
+            android:textSize="@dimen/entry_word_text_size"
             app:layout_constraintEnd_toStartOf="@+id/searchSubmitBtn"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/searchSubmitBtn"
-            android:layout_marginEnd="4dp"/>
+            android:layout_marginEnd="@dimen/entry_wordET_margin_end"/>
 
         <Button
             android:id="@+id/searchSubmitBtn"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/entry_submit_height"
             app:layout_constraintHorizontal_weight="1"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/background_entry_submit_button"
-            android:text="search"
+            android:text="@string/search"
             android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/wordEntryET"/>
@@ -44,14 +44,14 @@
             android:id="@+id/wordInfoContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/entry_infocontainer_margin"
+            android:layout_marginStart="@dimen/entry_infocontainer_margin"
+            android:layout_marginTop="@dimen/entry_infocontainer_margin"
             android:background="@drawable/background_output"
             android:orientation="vertical"
-            android:paddingEnd="4dp"
-            android:paddingStart="4dp"
-            android:paddingTop="4dp"
+            android:paddingEnd="@dimen/entry_infocontainer_padding"
+            android:paddingStart="@dimen/entry_infocontainer_padding"
+            android:paddingTop="@dimen/entry_infocontainer_padding"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,6 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:columnCount="4">
-
                        <TextView
                            android:id="@+id/titleText"
                            android:textColor="#000000"
@@ -71,13 +70,13 @@
                            android:background="@drawable/ic_action_sound"
                            android:layout_column="3"/>
                        <TextView
-                               android:id="@+id/titleTranscription"
+                           android:id="@+id/titleTranscription"
                            android:textColor="#000000"
-                           android:textSize="10sp"
+                           android:textSize="12sp"
                            android:layout_columnSpan="2"/>
                </GridLayout>
                 <android.support.v7.widget.RecyclerView
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/entry_recycler_margin_top"
                     android:id="@+id/definition_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

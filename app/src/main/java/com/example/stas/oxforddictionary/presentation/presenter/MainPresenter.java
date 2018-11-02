@@ -1,4 +1,6 @@
-package com.example.stas.oxforddictionary.ui;
+package com.example.stas.oxforddictionary.presentation.presenter;
+
+import com.example.stas.oxforddictionary.presentation.view.main.MainContract;
 
 public class MainPresenter implements MainContract.Presenter {
 

@@ -1,12 +1,13 @@
-package com.example.stas.oxforddictionary.ui;
+package com.example.stas.oxforddictionary.presentation.presenter;
 
 import com.example.stas.oxforddictionary.adapter.Item;
 import com.example.stas.oxforddictionary.domain.DictionaryInteractor;
 import com.example.stas.oxforddictionary.domain.Entity.LexicalEntryEntity;
 import com.example.stas.oxforddictionary.domain.Entity.PronunciationEntity;
 import com.example.stas.oxforddictionary.domain.Entity.SenseEntity;
-import com.example.stas.oxforddictionary.ui.base.BaseErrorHandler;
-import com.example.stas.oxforddictionary.ui.base.ErrorHandler;
+import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler;
+import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
+import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +18,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-class EntryPresenter implements EntryContract.Presenter {
+public class EntryPresenter implements EntryContract.Presenter {
     private EntryContract.View view;
     private DictionaryInteractor interactor = new DictionaryInteractor();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private ErrorHandler errorHandler = new BaseErrorHandler();
 
-    EntryPresenter(EntryContract.View view) {
+    public EntryPresenter(EntryContract.View view) {
         this.view = view;
         errorHandler.attachView(this.view);
     }

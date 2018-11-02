@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.ui;
+package com.example.stas.oxforddictionary.presentation.view.main;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,6 +13,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.stas.oxforddictionary.R;
+import com.example.stas.oxforddictionary.presentation.presenter.MainPresenter;
+import com.example.stas.oxforddictionary.presentation.view.entry.EntryFragment;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

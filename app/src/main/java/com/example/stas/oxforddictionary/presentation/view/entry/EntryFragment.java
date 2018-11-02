@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.ui;
+package com.example.stas.oxforddictionary.presentation.view.entry;
 
 
 import android.media.AudioManager;
@@ -19,14 +19,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.adapter.DefinitionAdapter;
 import com.example.stas.oxforddictionary.adapter.Item;
-
+import com.example.stas.oxforddictionary.presentation.presenter.EntryPresenter;
 import java.io.IOException;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -44,9 +42,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     private EntryContract.Presenter presenter;
     private RecyclerView.LayoutManager layoutManager;
     private DefinitionAdapter definitionAdapter;
-
-    Animation moveUp;
-
+    private Animation moveUp;
 
     public EntryFragment() {
 
@@ -58,10 +54,8 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         View view = inflater.inflate(R.layout.fragment_entry, container, false);
         unbinder = ButterKnife.bind(this, view);
         presenter = new EntryPresenter(this);
-
         moveUp = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.move_up);
-
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,19 +66,16 @@ public class EntryFragment extends Fragment implements EntryContract.View {
                 }
             }
         });
-
         soundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.getSound(word.getText().toString());
             }
         });
-
         layoutManager = new LinearLayoutManager(getContext());
         definitionAdapter = new DefinitionAdapter();
         definitionRecyclerView.setLayoutManager(layoutManager);
         definitionRecyclerView.setAdapter(definitionAdapter);
-
         return view;
     }
 
@@ -119,11 +110,6 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @Override
     public void showError(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showToast(String word){
-        Toast.makeText(getContext(), word, Toast.LENGTH_SHORT).show();
     }
 
     @Override
