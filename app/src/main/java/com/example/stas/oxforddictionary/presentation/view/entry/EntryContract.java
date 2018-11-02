@@ -10,11 +10,13 @@ public interface EntryContract {
     interface View extends CanShowError {
         void showDefinition(List<Item> definitions, List<String> titleSet);
         void playSound(String soundURL);
+        void hideProgressBar();
     }
     interface Presenter{
         void detachView();
         void getDefinition(String word);
         void getSound(String word);
+
 
     }
 }

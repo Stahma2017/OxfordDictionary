@@ -69,8 +69,6 @@ public class SenseEntity implements Item {
         this.thesaurusLinks = thesaurusLinks;
     }*/
 
-
-
     @Override
     public List<String> accept(Visitor visitor) {
         return visitor.visitSense(this);

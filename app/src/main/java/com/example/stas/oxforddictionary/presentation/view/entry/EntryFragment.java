@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.stas.oxforddictionary.R;
@@ -38,6 +40,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @BindView(R.id.titleText) TextView word;
     @BindView(R.id.titleTranscription) TextView transcription;
     @BindView(R.id.titleSound) ImageButton soundBtn;
+    @BindView(R.id.entryProgressBar) ProgressBar progressBar;
     private Unbinder unbinder;
     private EntryContract.Presenter presenter;
     private RecyclerView.LayoutManager layoutManager;
@@ -60,7 +63,9 @@ public class EntryFragment extends Fragment implements EntryContract.View {
             @Override
             public void onClick(View v) {
                 if (wordEntry.length() > 0){
-                   presenter.getDefinition(wordEntry.getText().toString());
+                    presenter.getDefinition(wordEntry.getText().toString());
+                    infoContainer.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
                 }else {
                     Toast.makeText(getContext(), "word is missing", Toast.LENGTH_SHORT).show();
                 }
@@ -69,6 +74,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         soundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 presenter.getSound(word.getText().toString());
             }
         });
@@ -81,6 +87,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
 
     @Override
     public void showDefinition(List<Item> definitions, List<String> titleSet) {
+        progressBar.setVisibility(View.GONE);
         word.setText(titleSet.get(0));
         transcription.setText(titleSet.get(1));
         infoContainer.setVisibility(View.VISIBLE);
@@ -91,7 +98,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
 
     @Override
     public void playSound(String soundURL) {
-         MediaPlayer mediaPlayer = new MediaPlayer();
+        MediaPlayer mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(soundURL);
@@ -108,8 +115,13 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     }
 
     @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
     public void showError(String errorMessage) {
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+        Snackbar.make(infoContainer, errorMessage, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

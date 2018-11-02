@@ -49,6 +49,7 @@ public class EntryPresenter implements EntryContract.Presenter {
               }, new Consumer<Throwable>() {
                   @Override
                   public void accept(Throwable throwable) throws Exception {
+                      view.hideProgressBar();
                       errorHandler.proceed(throwable);
                   }
               });
@@ -65,6 +66,11 @@ public class EntryPresenter implements EntryContract.Presenter {
                     public void accept(LexicalEntryEntity lexicalEntryEntity) throws Exception {
                         view.playSound(lexicalEntryEntity.getPronunciationEntities().get(0).getAudioFile());
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        errorHandler.proceed(throwable);
+                    }
                 });
         compositeDisposable.add(soundDisp);
     }
@@ -72,8 +78,10 @@ public class EntryPresenter implements EntryContract.Presenter {
     private List<Item> extractDefinitions(LexicalEntryEntity lexicalEntry){
         List<Item> definitions = new ArrayList<>();
         for(SenseEntity sense : lexicalEntry.getEntries().get(0).getSense()){
-            definitions.add(sense);
-            definitions.addAll(sense.getSubsens());
+            if(!sense.getDefinitions().isEmpty()){
+                definitions.add(sense);
+                definitions.addAll(sense.getSubsens());
+            }
         }
         return definitions;
     }
@@ -87,6 +95,4 @@ public class EntryPresenter implements EntryContract.Presenter {
         }
         return titleSet;
     }
-
-
 }

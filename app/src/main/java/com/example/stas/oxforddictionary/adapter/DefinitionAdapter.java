@@ -71,7 +71,7 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         void bindSense(Item item){
             List<String> definition = definitionExporter.export(item);
-            this.sense.setText(definition.get(0));
+            sense.setText(definition.get(0));
             if (definition.size()>1){
                 this.example.setText(definition.get(1));
             }
