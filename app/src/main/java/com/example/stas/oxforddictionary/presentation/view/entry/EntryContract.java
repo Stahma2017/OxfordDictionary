@@ -1,7 +1,7 @@
 package com.example.stas.oxforddictionary.presentation.view.entry;
 
 
-import com.example.stas.oxforddictionary.adapter.Item;
+import com.example.stas.oxforddictionary.presentation.adapter.Item;
 import com.example.stas.oxforddictionary.presentation.view.base.CanShowError;
 
 import java.util.List;

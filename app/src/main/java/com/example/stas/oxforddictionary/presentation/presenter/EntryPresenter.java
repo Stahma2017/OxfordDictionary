@@ -1,10 +1,10 @@
 package com.example.stas.oxforddictionary.presentation.presenter;
 
-import com.example.stas.oxforddictionary.adapter.Item;
-import com.example.stas.oxforddictionary.domain.DictionaryInteractor;
-import com.example.stas.oxforddictionary.domain.Entity.LexicalEntryEntity;
-import com.example.stas.oxforddictionary.domain.Entity.PronunciationEntity;
-import com.example.stas.oxforddictionary.domain.Entity.SenseEntity;
+import com.example.stas.oxforddictionary.presentation.adapter.Item;
+import com.example.stas.oxforddictionary.domain.interactor.DictionaryInteractor;
+import com.example.stas.oxforddictionary.domain.model.definition.LexicalEntry;
+import com.example.stas.oxforddictionary.domain.model.definition.Pronunciation;
+import com.example.stas.oxforddictionary.domain.model.definition.Sense;
 import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract;
@@ -41,9 +41,9 @@ public class EntryPresenter implements EntryContract.Presenter {
       Disposable definitionDisp = interactor.loadDefinition(word)
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(new Consumer<LexicalEntryEntity>() {
+              .subscribe(new Consumer<LexicalEntry>() {
                   @Override
-                  public void accept(LexicalEntryEntity lexicalEntry) throws Exception {
+                  public void accept(LexicalEntry lexicalEntry) throws Exception {
                       view.showDefinition(extractDefinitions(lexicalEntry), extractTitle(lexicalEntry));
                   }
               }, new Consumer<Throwable>() {
@@ -61,9 +61,9 @@ public class EntryPresenter implements EntryContract.Presenter {
         Disposable soundDisp = interactor.loadDefinition(word)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<LexicalEntryEntity>() {
+                .subscribe(new Consumer<LexicalEntry>() {
                     @Override
-                    public void accept(LexicalEntryEntity lexicalEntryEntity) throws Exception {
+                    public void accept(LexicalEntry lexicalEntryEntity) throws Exception {
                         view.playSound(lexicalEntryEntity.getPronunciationEntities().get(0).getAudioFile());
                     }
                 }, new Consumer<Throwable>() {
@@ -75,9 +75,9 @@ public class EntryPresenter implements EntryContract.Presenter {
         compositeDisposable.add(soundDisp);
     }
 
-    private List<Item> extractDefinitions(LexicalEntryEntity lexicalEntry){
+    private List<Item> extractDefinitions(LexicalEntry lexicalEntry){
         List<Item> definitions = new ArrayList<>();
-        for(SenseEntity sense : lexicalEntry.getEntries().get(0).getSense()){
+        for(Sense sense : lexicalEntry.getEntries().get(0).getSense()){
             if(!sense.getDefinitions().isEmpty()){
                 definitions.add(sense);
                 definitions.addAll(sense.getSubsens());
@@ -85,10 +85,10 @@ public class EntryPresenter implements EntryContract.Presenter {
         }
         return definitions;
     }
-    private List<String> extractTitle(LexicalEntryEntity lexicalEntry){
+    private List<String> extractTitle(LexicalEntry lexicalEntry){
         List<String> titleSet = new ArrayList<>();
         titleSet.add(lexicalEntry.getText());
-        for (PronunciationEntity pronunciation: lexicalEntry.getPronunciationEntities()){
+        for (Pronunciation pronunciation: lexicalEntry.getPronunciationEntities()){
             if (pronunciation.getAudioFile() != null){
                 titleSet.add("[" + pronunciation.getPhoneticSpelling()+ "]");
             }
