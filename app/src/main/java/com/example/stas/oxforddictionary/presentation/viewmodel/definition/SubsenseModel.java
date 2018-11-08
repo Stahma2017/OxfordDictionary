@@ -1,12 +1,14 @@
-package com.example.stas.oxforddictionary.domain.model.definition;
+package com.example.stas.oxforddictionary.presentation.viewmodel.definition;
+
+import com.example.stas.oxforddictionary.presentation.adapter.Item;
+import com.example.stas.oxforddictionary.presentation.adapter.Visitor;
 
 import java.util.List;
 
-public class  Subsense {
-
+public class SubsenseModel implements Item {
     private List<String> definitions = null;
 
-    private List<SubExample> examples = null;
+    private List<SubexampleModel> examples = null;
 
     private String id;
 
@@ -25,11 +27,11 @@ public class  Subsense {
         this.definitions = definitions;
     }
 
-    public List<SubExample> getExamples() {
+    public List<SubexampleModel> getExamples() {
         return examples;
     }
 
-    public void setExamples(List<SubExample> examples) {
+    public void setExamples(List<SubexampleModel> examples) {
         this.examples = examples;
     }
 
@@ -63,5 +65,15 @@ public class  Subsense {
 
     public void setDomains(List<String> domains) {
         this.domains = domains;
+    }
+
+    @Override
+    public int getType() {
+        return Item.TYPE_SUBSENSE;
+    }
+
+    @Override
+    public List<String> accept(Visitor visitor) {
+        return visitor.visitSubsense(this);
     }
 }

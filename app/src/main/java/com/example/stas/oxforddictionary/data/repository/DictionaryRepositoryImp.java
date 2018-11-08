@@ -1,7 +1,7 @@
 package com.example.stas.oxforddictionary.data.repository;
 
 import com.example.stas.oxforddictionary.data.entity.definition.EntryResponseEntity;
-import com.example.stas.oxforddictionary.data.mapper.LexicalEntryEntityMapper;
+import com.example.stas.oxforddictionary.data.mapper.DefinitionEntityDataMapper;
 import com.example.stas.oxforddictionary.data.network.ApiClient;
 import com.example.stas.oxforddictionary.data.network.OxfordApi;
 import com.example.stas.oxforddictionary.domain.DictionaryRepository;
@@ -11,7 +11,7 @@ import io.reactivex.functions.Function;
 
 public class DictionaryRepositoryImp implements DictionaryRepository {
     private final OxfordApi oxfordApi = ApiClient.getRetrofit().create(OxfordApi.class);
-    private LexicalEntryEntityMapper entityDataMapper = new LexicalEntryEntityMapper();
+    private DefinitionEntityDataMapper definitionEntityDataMapper = new DefinitionEntityDataMapper();
 
     @Override
     public Observable<LexicalEntry> loadDefinition(String word) {
@@ -20,7 +20,7 @@ public class DictionaryRepositoryImp implements DictionaryRepository {
                 .map(new Function<EntryResponseEntity, LexicalEntry>() {
                     @Override
                     public LexicalEntry apply(EntryResponseEntity entryResponseEntity) throws Exception {
-                        return  entityDataMapper.mapLexicalEntry(entryResponseEntity);
+                        return  definitionEntityDataMapper.transform(entryResponseEntity);
                     }
                 });
     }

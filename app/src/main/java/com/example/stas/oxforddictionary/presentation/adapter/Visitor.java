@@ -1,11 +1,11 @@
 package com.example.stas.oxforddictionary.presentation.adapter;
 
-import com.example.stas.oxforddictionary.domain.model.definition.Sense;
-import com.example.stas.oxforddictionary.domain.model.definition.Subsense;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SenseModel;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SubsenseModel;
 
 import java.util.List;
 
 public interface Visitor {
-    public List<String> visitSense(Sense sense);
-    public List<String> visitSubsense(Subsense subsense);
+    public List<String> visitSense(SenseModel sense);
+    public List<String> visitSubsense(SubsenseModel subsense);
 }

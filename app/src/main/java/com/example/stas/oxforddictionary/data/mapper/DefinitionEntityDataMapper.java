@@ -5,12 +5,12 @@ import com.example.stas.oxforddictionary.data.entity.definition.LexicalEntryEnti
 import com.example.stas.oxforddictionary.domain.model.definition.LexicalEntry;
 
 
-public class LexicalEntryEntityMapper {
+public class DefinitionEntityDataMapper {
 
     private EntryEntityMapper entryEntityMapper = new EntryEntityMapper();
     private PronunciationEntityMapper pronunciationEntityMapper = new PronunciationEntityMapper();
 
-    public LexicalEntry mapLexicalEntry(EntryResponseEntity entryResponseEntity){
+    public LexicalEntry transform(EntryResponseEntity entryResponseEntity){
         LexicalEntryEntity from = entryResponseEntity.getResultEntities().get(0).getLexicalEntries().get(0);
         LexicalEntry lexicalEntry = new LexicalEntry();
         lexicalEntry.setLanguage(from.getLanguage());

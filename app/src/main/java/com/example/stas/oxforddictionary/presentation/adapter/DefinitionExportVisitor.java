@@ -1,7 +1,7 @@
 package com.example.stas.oxforddictionary.presentation.adapter;
 
-import com.example.stas.oxforddictionary.domain.model.definition.Sense;
-import com.example.stas.oxforddictionary.domain.model.definition.Subsense;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SenseModel;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SubsenseModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class DefinitionExportVisitor implements Visitor {
     }
 
     @Override
-    public List<String> visitSense(Sense sense) {
+    public List<String> visitSense(SenseModel sense) {
         StringBuilder totalDefinition = new StringBuilder();
         StringBuilder totalExample = new StringBuilder();
         List<String> definitions = new ArrayList<>();
@@ -30,7 +30,7 @@ public class DefinitionExportVisitor implements Visitor {
     }
 
     @Override
-    public List<String> visitSubsense(Subsense subsense) {
+    public List<String> visitSubsense(SubsenseModel subsense) {
         StringBuilder totalDefinition = new StringBuilder();
         StringBuilder totalExample = new StringBuilder();
         List<String> definitions = new ArrayList<>();

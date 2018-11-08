@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.domain.model.definition;
+package com.example.stas.oxforddictionary.presentation.viewmodel.definition;
 
 import com.example.stas.oxforddictionary.presentation.adapter.Item;
 import com.example.stas.oxforddictionary.presentation.adapter.Visitor;
@@ -6,17 +6,16 @@ import com.example.stas.oxforddictionary.presentation.adapter.Visitor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sense {
-
+public class SenseModel implements Item {
     private List<String> definitions = new ArrayList<>();
 
-      private List<Example> examples = new ArrayList<>();
+    private List<ExampleModel> examples = new ArrayList<>();
 
     private String id;
 
     private List<String> shortDefinitions = new ArrayList<>();
 
-    private List<Subsense> subsens = new ArrayList<>();
+    private List<SubsenseModel> subsens = new ArrayList<>();
     /*@SerializedName("thesaurusLinks")
     @Expose
     private List<ThesaurusLink_> thesaurusLinks = null;*/
@@ -29,11 +28,11 @@ public class Sense {
         this.definitions = definitions;
     }
 
-    public List<Example> getExamples() {
+    public List<ExampleModel> getExamples() {
         return examples;
     }
 
-    public void setExamples(List<Example> examples) {
+    public void setExamples(List<ExampleModel> examples) {
         this.examples = examples;
     }
 
@@ -53,11 +52,11 @@ public class Sense {
         this.shortDefinitions = shortDefinitions;
     }
 
-    public List<Subsense> getSubsens() {
+    public List<SubsenseModel> getSubsens() {
         return subsens;
     }
 
-    public void setSubsens(List<Subsense> subsens) {
+    public void setSubsens(List<SubsenseModel> subsens) {
         this.subsens = subsens;
     }
 
@@ -69,4 +68,13 @@ public class Sense {
         this.thesaurusLinks = thesaurusLinks;
     }*/
 
+    @Override
+    public List<String> accept(Visitor visitor) {
+        return visitor.visitSense(this);
+    }
+
+    @Override
+    public int getType() {
+        return Item.TYPE_SENSE;
+    }
 }
