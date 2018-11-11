@@ -4,12 +4,12 @@ import com.example.stas.oxforddictionary.data.entity.definition.EntryResponseEnt
 import com.example.stas.oxforddictionary.data.mapper.DefinitionEntityDataMapper;
 import com.example.stas.oxforddictionary.data.network.ApiClient;
 import com.example.stas.oxforddictionary.data.network.OxfordApi;
-import com.example.stas.oxforddictionary.domain.DictionaryRepository;
+import com.example.stas.oxforddictionary.domain.DefinitionRepository;
 import com.example.stas.oxforddictionary.domain.model.definition.LexicalEntry;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
-public class DictionaryRepositoryImp implements DictionaryRepository {
+public class DefinitionRepositoryImp implements DefinitionRepository {
     private final OxfordApi oxfordApi = ApiClient.getRetrofit().create(OxfordApi.class);
     private DefinitionEntityDataMapper definitionEntityDataMapper = new DefinitionEntityDataMapper();
 

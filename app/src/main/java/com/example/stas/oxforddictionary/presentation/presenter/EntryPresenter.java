@@ -1,17 +1,17 @@
 package com.example.stas.oxforddictionary.presentation.presenter;
 
 import com.example.stas.oxforddictionary.presentation.adapter.Item;
-import com.example.stas.oxforddictionary.domain.interactor.DictionaryInteractor;
+import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
 import com.example.stas.oxforddictionary.domain.model.definition.LexicalEntry;
-import com.example.stas.oxforddictionary.domain.model.definition.Pronunciation;
-import com.example.stas.oxforddictionary.domain.model.definition.Sense;
+import com.example.stas.oxforddictionary.presentation.mapper.DefinitionModelDataMapper;
 import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract;
-
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.LexicalEntryModel;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.PronunciationModel;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SenseModel;
 import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -20,9 +20,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class EntryPresenter implements EntryContract.Presenter {
     private EntryContract.View view;
-    private DictionaryInteractor interactor = new DictionaryInteractor();
+    private DefinitonInteractor interactor = new DefinitonInteractor();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private ErrorHandler errorHandler = new BaseErrorHandler();
+    private DefinitionModelDataMapper definitionModelDataMapper = new DefinitionModelDataMapper();
 
     public EntryPresenter(EntryContract.View view) {
         this.view = view;
@@ -44,7 +45,8 @@ public class EntryPresenter implements EntryContract.Presenter {
               .subscribe(new Consumer<LexicalEntry>() {
                   @Override
                   public void accept(LexicalEntry lexicalEntry) throws Exception {
-                      view.showDefinition(extractDefinitions(lexicalEntry), extractTitle(lexicalEntry));
+                      LexicalEntryModel entry = definitionModelDataMapper.transform(lexicalEntry);
+                      view.showDefinition(extractDefinitions(entry), extractTitle(entry));
                   }
               }, new Consumer<Throwable>() {
                   @Override
@@ -75,9 +77,9 @@ public class EntryPresenter implements EntryContract.Presenter {
         compositeDisposable.add(soundDisp);
     }
 
-    private List<Item> extractDefinitions(LexicalEntry lexicalEntry){
+    private List<Item> extractDefinitions(LexicalEntryModel lexicalEntry){
         List<Item> definitions = new ArrayList<>();
-        for(Sense sense : lexicalEntry.getEntries().get(0).getSense()){
+        for(SenseModel sense : lexicalEntry.getEntries().get(0).getSense()){
             if(!sense.getDefinitions().isEmpty()){
                 definitions.add(sense);
                 definitions.addAll(sense.getSubsens());
@@ -85,10 +87,10 @@ public class EntryPresenter implements EntryContract.Presenter {
         }
         return definitions;
     }
-    private List<String> extractTitle(LexicalEntry lexicalEntry){
+    private List<String> extractTitle(LexicalEntryModel lexicalEntry){
         List<String> titleSet = new ArrayList<>();
         titleSet.add(lexicalEntry.getText());
-        for (Pronunciation pronunciation: lexicalEntry.getPronunciationEntities()){
+        for (PronunciationModel pronunciation: lexicalEntry.getPronunciationEntities()){
             if (pronunciation.getAudioFile() != null){
                 titleSet.add("[" + pronunciation.getPhoneticSpelling()+ "]");
             }
