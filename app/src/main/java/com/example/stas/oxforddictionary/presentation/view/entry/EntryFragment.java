@@ -41,6 +41,8 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @BindView(R.id.titleTranscription) TextView transcription;
     @BindView(R.id.titleSound) ImageButton soundBtn;
     @BindView(R.id.entryProgressBar) ProgressBar progressBar;
+    @BindView(R.id.synonymsBtn) Button synonymsBtn;
+    @BindView(R.id.examplesBtn) Button examplesBtn;
     private Unbinder unbinder;
     private EntryContract.Presenter presenter;
     private RecyclerView.LayoutManager layoutManager;
@@ -59,6 +61,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         presenter = new EntryPresenter(this);
         moveUp = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.move_up);
+
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +81,21 @@ public class EntryFragment extends Fragment implements EntryContract.View {
                 presenter.getSound(word.getText().toString());
             }
         });
+
+        synonymsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        examplesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         layoutManager = new LinearLayoutManager(getContext());
         definitionAdapter = new DefinitionAdapter();
         definitionRecyclerView.setLayoutManager(layoutManager);
@@ -87,6 +105,8 @@ public class EntryFragment extends Fragment implements EntryContract.View {
 
     @Override
     public void showDefinition(List<Item> definitions, List<String> titleSet) {
+        synonymsBtn.setVisibility(View.VISIBLE);
+        examplesBtn.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         word.setText(titleSet.get(0));
         transcription.setText(titleSet.get(1));

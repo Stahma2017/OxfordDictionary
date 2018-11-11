@@ -5,7 +5,7 @@
     <dimen name="entry_constraint_padding_end">10dp</dimen>
     <dimen name="entry_wordET_height">50dp</dimen>
     <dimen name="entry_word_text_size">20sp</dimen>
-    <dimen name="entry_wordET_margin_end">4dp</dimen>
+    <dimen name="entry_wordET_margin_end">8dp</dimen>
     <dimen name="entry_submit_height">50dp</dimen>
     <dimen name="entry_infocontainer_margin">8dp</dimen>
     <dimen name="entry_infocontainer_padding">4dp</dimen>
