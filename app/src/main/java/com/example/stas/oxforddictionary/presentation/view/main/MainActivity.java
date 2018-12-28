@@ -1,26 +1,26 @@
 package com.example.stas.oxforddictionary.presentation.view.main;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.presentation.presenter.MainPresenter;
+import com.example.stas.oxforddictionary.presentation.view.base.BaseActivity;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryFragment;
-
+import com.example.stas.oxforddictionary.presentation.view.synonym.SynonymFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-public class MainActivity extends AppCompatActivity implements MainContract.View{
+public class MainActivity extends BaseActivity implements MainContract.View, IMainActivity{
 
 
     @BindView(R.id.nav_view) NavigationView navigationView;
@@ -38,11 +38,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         presenter = new MainPresenter(this);
+        init();
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        //todo delete this shit
+       /* FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         EntryFragment entryFragment = new EntryFragment();
         fragmentTransaction.add(R.id.content_frame, entryFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
 
         //todo find way of casting with butterknife
         View headerLayout = navigationView.getHeaderView(0);
@@ -61,8 +63,34 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void showWord(String word) {
+    public void inflateFragment(String fragmentTag, String word) {
+        if (fragmentTag.equals(getString(R.string.fragment_synonym))){
+            SynonymFragment synonymFragment = new SynonymFragment();
+            doFragmentTransaction(synonymFragment, fragmentTag, true, word);
+        }
+    }
 
+    private void init(){
+        EntryFragment entryFragment = new EntryFragment();
+        doFragmentTransaction(entryFragment, getString(R.string.fragment_entry), false, "");
+    }
+    private void doFragmentTransaction(Fragment fragment, String tag, boolean addToBackStack, String message){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if(!message.equals("")){
+            Bundle bundle = new Bundle();
+            bundle.putString(getString(R.string.intent_message), message);
+            fragment.setArguments(bundle);
+        }
+        transaction.replace(R.id.content_frame, fragment, tag);
+        if(addToBackStack){
+            transaction.addToBackStack(tag);
+        }
+        transaction.commit();
+    }
+
+    @Override
+    public void navigateToSynonyms(Context context, String wordId) {
+        this.navigator.navigateToSynonyms(context, wordId);
     }
 
     public void openDrawer(View view) {

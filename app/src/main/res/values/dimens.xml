@@ -10,4 +10,5 @@
     <dimen name="entry_infocontainer_margin">8dp</dimen>
     <dimen name="entry_infocontainer_padding">4dp</dimen>
     <dimen name="entry_recycler_margin_top">4dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

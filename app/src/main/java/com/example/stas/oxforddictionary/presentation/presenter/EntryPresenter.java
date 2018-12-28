@@ -3,7 +3,7 @@ package com.example.stas.oxforddictionary.presentation.presenter;
 import com.example.stas.oxforddictionary.presentation.adapter.Item;
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
 import com.example.stas.oxforddictionary.domain.model.definition.LexicalEntry;
-import com.example.stas.oxforddictionary.presentation.mapper.DefinitionModelDataMapper;
+import com.example.stas.oxforddictionary.presentation.mapper.definition.DefinitionModelDataMapper;
 import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract;

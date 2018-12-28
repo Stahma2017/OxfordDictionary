@@ -1,7 +1,7 @@
 package com.example.stas.oxforddictionary.data.repository;
 
 import com.example.stas.oxforddictionary.data.entity.definition.EntryResponseEntity;
-import com.example.stas.oxforddictionary.data.mapper.DefinitionEntityDataMapper;
+import com.example.stas.oxforddictionary.data.mapper.definition.DefinitionEntityDataMapper;
 import com.example.stas.oxforddictionary.data.network.ApiClient;
 import com.example.stas.oxforddictionary.data.network.OxfordApi;
 import com.example.stas.oxforddictionary.domain.DefinitionRepository;

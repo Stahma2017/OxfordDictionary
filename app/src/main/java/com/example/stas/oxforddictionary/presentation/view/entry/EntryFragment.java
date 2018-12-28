@@ -1,6 +1,7 @@
 package com.example.stas.oxforddictionary.presentation.view.entry;
 
 
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.presentation.adapter.DefinitionAdapter;
 import com.example.stas.oxforddictionary.presentation.adapter.Item;
 import com.example.stas.oxforddictionary.presentation.presenter.EntryPresenter;
+import com.example.stas.oxforddictionary.presentation.view.main.IMainActivity;
 import java.io.IOException;
 import java.util.List;
 import butterknife.BindView;
@@ -48,6 +50,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     private RecyclerView.LayoutManager layoutManager;
     private DefinitionAdapter definitionAdapter;
     private Animation moveUp;
+    private IMainActivity mainActivity;
 
     public EntryFragment() {
 
@@ -85,7 +88,8 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         synonymsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            String wordId = word.getText().toString();
+            mainActivity.navigateToSynonyms(getContext(), wordId);
             }
         });
 
@@ -142,6 +146,12 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @Override
     public void showError(String errorMessage) {
         Snackbar.make(infoContainer, errorMessage, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (IMainActivity) getActivity();
     }
 
     @Override
