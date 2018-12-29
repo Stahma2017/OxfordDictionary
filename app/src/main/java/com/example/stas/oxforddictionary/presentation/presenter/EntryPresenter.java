@@ -1,15 +1,18 @@
 package com.example.stas.oxforddictionary.presentation.presenter;
 
+import com.example.stas.oxforddictionary.domain.model.definition.Result;
 import com.example.stas.oxforddictionary.presentation.adapter.Item;
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
-import com.example.stas.oxforddictionary.domain.model.definition.LexicalEntry;
 import com.example.stas.oxforddictionary.presentation.mapper.definition.DefinitionModelDataMapper;
 import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract;
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.LexicalEntryModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.PronunciationModel;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.ResultModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SenseModel;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SubsenseModel;
+
 import java.util.ArrayList;
 import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,15 +45,15 @@ public class EntryPresenter implements EntryContract.Presenter {
       Disposable definitionDisp = interactor.loadDefinition(word)
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(new Consumer<LexicalEntry>() {
+              .subscribe(new Consumer<Result>() {
                   @Override
-                  public void accept(LexicalEntry lexicalEntry) throws Exception {
-                      LexicalEntryModel entry = definitionModelDataMapper.transform(lexicalEntry);
-                      view.showDefinition(extractDefinitions(entry), extractTitle(entry));
+                  public void accept(Result result){
+                      ResultModel resultModel = definitionModelDataMapper.transform(result);
+                      view.showDefinition(extractDefinitions(resultModel), extractTitle(resultModel));
                   }
               }, new Consumer<Throwable>() {
                   @Override
-                  public void accept(Throwable throwable) throws Exception {
+                  public void accept(Throwable throwable) {
                       view.hideProgressBar();
                       errorHandler.proceed(throwable);
                   }
@@ -63,31 +66,39 @@ public class EntryPresenter implements EntryContract.Presenter {
         Disposable soundDisp = interactor.loadDefinition(word)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<LexicalEntry>() {
+                .subscribe(new Consumer<Result>() {
                     @Override
-                    public void accept(LexicalEntry lexicalEntryEntity) throws Exception {
-                        view.playSound(lexicalEntryEntity.getPronunciationEntities().get(0).getAudioFile());
+                    public void accept(Result result){
+                        view.playSound(result.getLexicalEntries().get(0).getPronunciationEntities().get(0).getAudioFile());
                     }
                 }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
+                    public void accept(Throwable throwable) {
                         errorHandler.proceed(throwable);
                     }
                 });
         compositeDisposable.add(soundDisp);
     }
 
-    private List<Item> extractDefinitions(LexicalEntryModel lexicalEntry){
+    private List<Item> extractDefinitions(ResultModel result){
         List<Item> definitions = new ArrayList<>();
-        for(SenseModel sense : lexicalEntry.getEntries().get(0).getSense()){
-            if(!sense.getDefinitions().isEmpty()){
-                definitions.add(sense);
-                definitions.addAll(sense.getSubsens());
+        for (LexicalEntryModel lexicalEntry : result.getLexicalEntries()) {
+            definitions.add(lexicalEntry);
+            for(SenseModel sense : lexicalEntry.getEntries().get(0).getSense()){
+                if(!sense.getDefinitions().isEmpty()){
+                    definitions.add(sense);
+                    for (SubsenseModel subsense :sense.getSubsens()) {
+                        if(!subsense.getDefinitions().isEmpty()){
+                            definitions.add(subsense);
+                        }
+                    }
+                }
             }
         }
         return definitions;
     }
-    private List<String> extractTitle(LexicalEntryModel lexicalEntry){
+    private List<String> extractTitle(ResultModel result){
+        LexicalEntryModel lexicalEntry = result.getLexicalEntries().get(0);
         List<String> titleSet = new ArrayList<>();
         titleSet.add(lexicalEntry.getText());
         for (PronunciationModel pronunciation: lexicalEntry.getPronunciationEntities()){

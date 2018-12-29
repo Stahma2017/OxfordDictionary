@@ -2,6 +2,7 @@ package com.example.stas.oxforddictionary.presentation.adapter;
 
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SenseModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SubsenseModel;
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.LexicalEntryModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +45,12 @@ public class DefinitionExportVisitor implements Visitor {
             }
         }
         return definitions;
+    }
+
+    @Override
+    public List<String> visitLexicalEntry(LexicalEntryModel lexicalEntry){
+        List<String> categories = new ArrayList<>();
+        categories.add(lexicalEntry.getLexicalCategory());
+        return categories;
     }
 }

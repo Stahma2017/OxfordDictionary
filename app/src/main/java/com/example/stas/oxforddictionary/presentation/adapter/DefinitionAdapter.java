@@ -35,6 +35,9 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case Item.TYPE_SUBSENSE:
                 View subsenseView = inflater.inflate(R.layout.recycler_subsense_item, viewGroup, false);
                 return new SubsenseViewHolder(subsenseView);
+            case Item.TYPE_HEADER:
+                View headerView = inflater.inflate(R.layout.recycler_header_item, viewGroup, false);
+                return new HeaderViewHolder(headerView);
             default:
                 throw new RuntimeException("Unknown type");
         }
@@ -51,12 +54,32 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 SubsenseViewHolder subsenseHolder = (SubsenseViewHolder) viewHolder;
                 subsenseHolder.bindSubsense(definitions.get(i));
                 break;
+            case Item.TYPE_HEADER:
+                HeaderViewHolder headerHolder = (HeaderViewHolder) viewHolder;
+                headerHolder.bindLexicalCategory(definitions.get(i));
+                break;
         }
     }
 
     @Override
     public int getItemCount() {
         return definitions.size();
+    }
+
+    public class HeaderViewHolder extends RecyclerView.ViewHolder{
+        private TextView lexicalHeader;
+
+        public HeaderViewHolder(@NonNull View itemView) {
+            super(itemView);
+            lexicalHeader = (TextView)itemView.findViewById(R.id.lexicalHeader);
+        }
+
+        void bindLexicalCategory(Item item){
+            List<String> lexicalCategory = definitionExporter.export(item);
+            if (!lexicalCategory.isEmpty()){
+                lexicalHeader.setText(lexicalCategory.get(0));
+            }
+        }
     }
 
     public class SenseViewHolder extends RecyclerView.ViewHolder{

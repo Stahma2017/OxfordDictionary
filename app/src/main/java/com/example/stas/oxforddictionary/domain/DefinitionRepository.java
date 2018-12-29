@@ -1,9 +1,9 @@
 package com.example.stas.oxforddictionary.domain;
 
-import com.example.stas.oxforddictionary.domain.model.definition.LexicalEntry;
+import com.example.stas.oxforddictionary.domain.model.definition.Result;
 
 import io.reactivex.Observable;
 
 public interface DefinitionRepository {
-    Observable<LexicalEntry> loadDefinition(String word);
+    Observable<Result> loadDefinition(String word);
 }

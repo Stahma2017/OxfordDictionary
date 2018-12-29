@@ -9,40 +9,20 @@ import com.example.stas.oxforddictionary.domain.model.definition.Result;
 
 public class DefinitionEntityDataMapper {
 
-    private EntryEntityMapper entryEntityMapper = new EntryEntityMapper();
-    private PronunciationEntityMapper pronunciationEntityMapper = new PronunciationEntityMapper();
+    private LexicalEntryEntityMapper lexicalEntryEntityMapper = new LexicalEntryEntityMapper();
 
-    public LexicalEntry transform(EntryResponseEntity entryResponseEntity){
+    public Result transform(EntryResponseEntity entryResponseEntity){
         ResultEntity from = entryResponseEntity.getResultEntities().get(0);
-
-       // LexicalEntryEntity from = entryResponseEntity.getResultEntities().get(0).getLexicalEntries().get(0);
         Result result = new Result();
-
-        LexicalEntry lexicalEntry = new LexicalEntry();
-        lexicalEntry.setLanguage(from.getLanguage());
-        lexicalEntry.setLexicalCategory(from.getLexicalCategory());
-        lexicalEntry.setText(from.getText());
-        lexicalEntry.setEntries(entryEntityMapper.mapEntries(from.getEntries()));
-        lexicalEntry.setPronunciationEntities(pronunciationEntityMapper.mapPronunciations(from.getPronunciationEntities()));
-        return lexicalEntry;
+        result.setId(from.getId());
+        result.setLanguage(from.getLanguage());
+        result.setType(from.getType());
+        result.setWord(from.getWord());
+        result.setLexicalEntries(lexicalEntryEntityMapper.mapLexicalEntries(from.getLexicalEntries()));
+        return result;
     }
 
 
 
-/*
-    private EntryEntityMapper entryEntityMapper = new EntryEntityMapper();
-    private PronunciationEntityMapper pronunciationEntityMapper = new PronunciationEntityMapper();
 
-    public LexicalEntry transform(EntryResponseEntity entryResponseEntity){
-        LexicalEntryEntity from = entryResponseEntity.getResultEntities().get(0).getLexicalEntries().get(0);
-        Result result = new Result();
-
-        LexicalEntry lexicalEntry = new LexicalEntry();
-        lexicalEntry.setLanguage(from.getLanguage());
-        lexicalEntry.setLexicalCategory(from.getLexicalCategory());
-        lexicalEntry.setText(from.getText());
-        lexicalEntry.setEntries(entryEntityMapper.mapEntries(from.getEntries()));
-        lexicalEntry.setPronunciationEntities(pronunciationEntityMapper.mapPronunciations(from.getPronunciationEntities()));
-        return lexicalEntry;
-    }*/
 }

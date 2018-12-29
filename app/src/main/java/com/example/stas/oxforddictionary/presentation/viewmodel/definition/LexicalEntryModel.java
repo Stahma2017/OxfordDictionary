@@ -58,12 +58,14 @@ public class LexicalEntryModel implements Item {
     }
 
     @Override
+    public List<String> accept(Visitor visitor) {
+        return visitor.visitLexicalEntry(this);
+    }
+
+    @Override
     public int getType() {
         return Item.TYPE_HEADER;
     }
 
-    @Override
-    public List<String> accept(Visitor visitor) {
-        return null;
-    }
+
 }
