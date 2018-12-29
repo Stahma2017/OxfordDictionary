@@ -1,9 +1,12 @@
 package com.example.stas.oxforddictionary.presentation.viewmodel.definition;
 
 
+import com.example.stas.oxforddictionary.presentation.adapter.Item;
+import com.example.stas.oxforddictionary.presentation.adapter.Visitor;
+
 import java.util.List;
 
-public class LexicalEntryModel {
+public class LexicalEntryModel implements Item {
     private List<EntryModel> entries = null;
 
     private String language;
@@ -52,5 +55,15 @@ public class LexicalEntryModel {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public int getType() {
+        return Item.TYPE_HEADER;
+    }
+
+    @Override
+    public List<String> accept(Visitor visitor) {
+        return null;
     }
 }

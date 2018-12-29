@@ -96,7 +96,7 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         examplesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // implement moving to examplesActivity
             }
         });
 
