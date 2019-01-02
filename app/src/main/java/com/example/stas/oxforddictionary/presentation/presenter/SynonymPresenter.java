@@ -19,6 +19,7 @@ public class SynonymPresenter implements SynonymConrtact.Presenter {
         errorHandler.attachView(this.view);
     }
 
+    //todo start request to interactor for synonyms
     @Override
     public void detachView() {
         errorHandler.detachView();

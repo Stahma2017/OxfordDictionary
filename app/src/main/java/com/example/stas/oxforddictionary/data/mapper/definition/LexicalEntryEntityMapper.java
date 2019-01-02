@@ -16,7 +16,8 @@ class LexicalEntryEntityMapper {
         lexicalEntry.setText(from.getText());
         lexicalEntry.setLexicalCategory(from.getLexicalCategory());
         lexicalEntry.setEntries(entryEntityMapper.mapEntries(from.getEntries()));
-        lexicalEntry.setPronunciationEntities(pronunciationEntityMapper.mapPronunciations(from.getPronunciationEntities()));
+            lexicalEntry.setPronunciationEntities(pronunciationEntityMapper.mapPronunciations(from.getPronunciationEntities()));
+
         return lexicalEntry;
     }
 

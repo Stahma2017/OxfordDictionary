@@ -18,13 +18,13 @@ public class SubsenseEntity {
     private String id;
     @SerializedName("short_definitions")
     @Expose
-    private List<String> shortDefinitions = null;
+    private List<String> shortDefinitions = new ArrayList<>();;
     /*@SerializedName("thesaurusLinks")
     @Expose
     private List<ThesaurusLink> thesaurusLinks = null;*/
     @SerializedName("domains")
     @Expose
-    private List<String> domains = null;
+    private List<String> domains = new ArrayList<>();;
 
     public List<String> getDefinitions() {
         return definitions;

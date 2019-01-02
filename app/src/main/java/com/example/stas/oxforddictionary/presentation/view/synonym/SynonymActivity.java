@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.stas.oxforddictionary.R;
@@ -19,6 +20,7 @@ public class SynonymActivity extends BaseActivity implements SynonymConrtact.Vie
     private SynonymConrtact.Presenter presenter;
 
     @BindView(R.id.synonymsWord) TextView word;
+    @BindView(R.id.synonymsList) RecyclerView synonymList;
 
     public static Intent getCallingIntent(Context context, String wordId){
         Intent callingIntent = new Intent(context, SynonymActivity.class);

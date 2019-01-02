@@ -9,7 +9,7 @@ import java.util.List;
 public class EntryEntity {
     @SerializedName("etymologies")
     @Expose
-    private List<String> etymologies = null;
+    private List<String> etymologies = new ArrayList<>();;
     /*@SerializedName("grammaticalFeatures")
     @Expose
     private List<GrammaticalFeature> grammaticalFeatures = null;*/

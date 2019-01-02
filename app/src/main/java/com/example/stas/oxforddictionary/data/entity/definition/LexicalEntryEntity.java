@@ -18,7 +18,7 @@ public class LexicalEntryEntity {
     private String lexicalCategory;
     @SerializedName("pronunciations")
     @Expose
-    private List<PronunciationEntity> pronunciationEntities = null;
+    private List<PronunciationEntity> pronunciationEntities = new ArrayList<>();;
     @SerializedName("text")
     @Expose
     private String text;

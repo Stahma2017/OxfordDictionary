@@ -1,9 +1,12 @@
 package com.example.stas.oxforddictionary.domain;
 
-import com.example.stas.oxforddictionary.domain.model.definition.Result;
+import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResult;
+import com.example.stas.oxforddictionary.domain.model.synonym.SynonymResult;
+
 
 import io.reactivex.Observable;
 
 public interface DefinitionRepository {
-    Observable<Result> loadDefinition(String word);
+    Observable<DefinitionResult> loadDefinition(String word);
+    Observable<SynonymResult> loadSynonyms(String word);
 }

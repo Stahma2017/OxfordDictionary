@@ -1,8 +1,8 @@
-package com.example.stas.oxforddictionary.domain.model.synonym;
+package com.example.stas.oxforddictionary.domain.model.definition;
 
 import java.util.List;
 
-public class Result {
+public class DefinitionResult {
 
     private String id;
 

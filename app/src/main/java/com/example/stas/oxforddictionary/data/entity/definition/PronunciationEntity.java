@@ -3,6 +3,7 @@ package com.example.stas.oxforddictionary.data.entity.definition;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PronunciationEntity {
@@ -11,7 +12,7 @@ public class PronunciationEntity {
     private String audioFile;
     @SerializedName("dialects")
     @Expose
-    private List<String> dialects = null;
+    private List<String> dialects = new ArrayList<>();
     @SerializedName("phoneticNotation")
     @Expose
     private String phoneticNotation;

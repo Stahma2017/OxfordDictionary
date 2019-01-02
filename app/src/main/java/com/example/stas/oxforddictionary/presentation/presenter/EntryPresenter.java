@@ -1,6 +1,6 @@
 package com.example.stas.oxforddictionary.presentation.presenter;
 
-import com.example.stas.oxforddictionary.domain.model.definition.Result;
+import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResult;
 import com.example.stas.oxforddictionary.presentation.adapter.Item;
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
 import com.example.stas.oxforddictionary.presentation.mapper.definition.DefinitionModelDataMapper;
@@ -45,9 +45,9 @@ public class EntryPresenter implements EntryContract.Presenter {
       Disposable definitionDisp = interactor.loadDefinition(word)
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(new Consumer<Result>() {
+              .subscribe(new Consumer<DefinitionResult>() {
                   @Override
-                  public void accept(Result result){
+                  public void accept(DefinitionResult result){
                       ResultModel resultModel = definitionModelDataMapper.transform(result);
                       view.showDefinition(extractDefinitions(resultModel), extractTitle(resultModel));
                   }
@@ -66,9 +66,9 @@ public class EntryPresenter implements EntryContract.Presenter {
         Disposable soundDisp = interactor.loadDefinition(word)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Result>() {
+                .subscribe(new Consumer<DefinitionResult>() {
                     @Override
-                    public void accept(Result result){
+                    public void accept(DefinitionResult result){
                         view.playSound(result.getLexicalEntries().get(0).getPronunciationEntities().get(0).getAudioFile());
                     }
                 }, new Consumer<Throwable>() {

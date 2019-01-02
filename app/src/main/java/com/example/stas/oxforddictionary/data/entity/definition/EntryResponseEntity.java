@@ -3,6 +3,7 @@ package com.example.stas.oxforddictionary.data.entity.definition;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntryResponseEntity {
@@ -11,7 +12,7 @@ public class EntryResponseEntity {
     private MetadataEntity metadataEntity;
     @SerializedName("results")
     @Expose
-    private List<ResultEntity> resultEntities = null;
+    private List<ResultEntity> resultEntities = new ArrayList<>();;
 
     public MetadataEntity getMetadataEntity() {
         return metadataEntity;
