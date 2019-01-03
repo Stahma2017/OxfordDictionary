@@ -3,6 +3,7 @@ package com.example.stas.oxforddictionary.data.entity.synonym;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntryEntity {
@@ -11,7 +12,7 @@ public class EntryEntity {
     private String homographNumber;
     @SerializedName("senses")
     @Expose
-    private List<SenseEntity> senses = null;
+    private List<SenseEntity> senses = new ArrayList<>();;
 
     public String getHomographNumber() {
         return homographNumber;

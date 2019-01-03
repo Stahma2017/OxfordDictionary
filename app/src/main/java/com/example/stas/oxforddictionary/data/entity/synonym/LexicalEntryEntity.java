@@ -3,12 +3,13 @@ package com.example.stas.oxforddictionary.data.entity.synonym;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LexicalEntryEntity {
     @SerializedName("entries")
     @Expose
-    private List<EntryEntity> entries = null;
+    private List<EntryEntity> entries = new ArrayList<>();;
     @SerializedName("language")
     @Expose
     private String language;

@@ -1,8 +1,11 @@
 package com.example.stas.oxforddictionary.presentation.viewmodel.synonym;
 
+
+import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsItem;
+
 import java.util.List;
 
-public class LexicalEntryModel {
+public class LexicalEntryModel implements SynonymsItem {
     private List<EntryModel> entries = null;
 
     private String language;
@@ -41,5 +44,10 @@ public class LexicalEntryModel {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public int getType() {
+        return SynonymsItem.TYPE_CATEGORY;
     }
 }

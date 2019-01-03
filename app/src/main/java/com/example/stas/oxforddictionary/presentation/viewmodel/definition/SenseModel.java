@@ -1,7 +1,7 @@
 package com.example.stas.oxforddictionary.presentation.viewmodel.definition;
 
-import com.example.stas.oxforddictionary.presentation.adapter.Item;
-import com.example.stas.oxforddictionary.presentation.adapter.Visitor;
+import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item;
+import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;

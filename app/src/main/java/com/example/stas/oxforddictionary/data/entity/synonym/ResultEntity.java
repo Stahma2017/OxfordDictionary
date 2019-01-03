@@ -3,6 +3,7 @@ package com.example.stas.oxforddictionary.data.entity.synonym;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResultEntity {
@@ -14,7 +15,7 @@ public class ResultEntity {
     private String language;
     @SerializedName("lexicalEntries")
     @Expose
-    private List<LexicalEntryEntity> lexicalEntries = null;
+    private List<LexicalEntryEntity> lexicalEntries = new ArrayList<>();;
     @SerializedName("type")
     @Expose
     private String type;

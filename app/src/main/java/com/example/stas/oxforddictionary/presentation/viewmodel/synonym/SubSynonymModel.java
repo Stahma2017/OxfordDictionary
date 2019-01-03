@@ -1,6 +1,8 @@
 package com.example.stas.oxforddictionary.presentation.viewmodel.synonym;
 
-public class SubSynonymModel {
+import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsItem;
+
+public class SubSynonymModel implements SynonymsItem {
     private String id;
 
     private String language;
@@ -29,5 +31,10 @@ public class SubSynonymModel {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public int getType() {
+        return SynonymsItem.TYPE_SUBSYNONYM;
     }
 }

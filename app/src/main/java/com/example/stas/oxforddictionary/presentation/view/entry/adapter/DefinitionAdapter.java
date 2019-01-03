@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.presentation.adapter;
+package com.example.stas.oxforddictionary.presentation.view.entry.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -35,8 +35,8 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case Item.TYPE_SUBSENSE:
                 View subsenseView = inflater.inflate(R.layout.recycler_subsense_item, viewGroup, false);
                 return new SubsenseViewHolder(subsenseView);
-            case Item.TYPE_HEADER:
-                View headerView = inflater.inflate(R.layout.recycler_header_item, viewGroup, false);
+            case Item.TYPE_WORD:
+                View headerView = inflater.inflate(R.layout.recycler_category_item, viewGroup, false);
                 return new HeaderViewHolder(headerView);
             default:
                 throw new RuntimeException("Unknown type");
@@ -54,7 +54,7 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 SubsenseViewHolder subsenseHolder = (SubsenseViewHolder) viewHolder;
                 subsenseHolder.bindSubsense(definitions.get(i));
                 break;
-            case Item.TYPE_HEADER:
+            case Item.TYPE_WORD:
                 HeaderViewHolder headerHolder = (HeaderViewHolder) viewHolder;
                 headerHolder.bindLexicalCategory(definitions.get(i));
                 break;

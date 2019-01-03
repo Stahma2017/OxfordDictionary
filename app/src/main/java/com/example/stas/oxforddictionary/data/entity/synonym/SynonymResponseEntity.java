@@ -4,6 +4,7 @@ import com.example.stas.oxforddictionary.data.entity.definition.MetadataEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SynonymResponseEntity {
@@ -12,7 +13,7 @@ public class SynonymResponseEntity {
     private MetadataEntity metadata;
     @SerializedName("results")
     @Expose
-    private List<ResultEntity> results = null;
+    private List<ResultEntity> results = new ArrayList<>();
 
     public MetadataEntity getMetadata() {
         return metadata;

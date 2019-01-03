@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.presentation.adapter;
+package com.example.stas.oxforddictionary.presentation.view.entry.adapter;
 
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SenseModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SubsenseModel;

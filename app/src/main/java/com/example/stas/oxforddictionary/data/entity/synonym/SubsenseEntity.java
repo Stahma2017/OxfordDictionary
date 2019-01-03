@@ -3,6 +3,7 @@ package com.example.stas.oxforddictionary.data.entity.synonym;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubsenseEntity {
@@ -11,13 +12,13 @@ public class SubsenseEntity {
     private String id;
     @SerializedName("synonyms")
     @Expose
-    private List<SubSynonymEntity> synonyms = null;
+    private List<SubSynonymEntity> synonyms = new ArrayList<>();;
     @SerializedName("registers")
     @Expose
-    private List<String> registers = null;
+    private List<String> registers = new ArrayList<>();;
     @SerializedName("regions")
     @Expose
-    private List<String> regions = null;
+    private List<String> regions = new ArrayList<>();;
 
     public String getId() {
         return id;

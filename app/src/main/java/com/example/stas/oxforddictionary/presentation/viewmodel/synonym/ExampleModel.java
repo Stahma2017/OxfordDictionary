@@ -1,6 +1,8 @@
 package com.example.stas.oxforddictionary.presentation.viewmodel.synonym;
 
-public class ExampleModel {
+import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsItem;
+
+public class ExampleModel implements SynonymsItem {
     private String text;
 
     public String getText() {
@@ -9,5 +11,10 @@ public class ExampleModel {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public int getType() {
+        return SynonymsItem.TYPE_EXAMPLE;
     }
 }

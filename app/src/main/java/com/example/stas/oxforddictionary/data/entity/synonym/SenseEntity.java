@@ -3,21 +3,22 @@ package com.example.stas.oxforddictionary.data.entity.synonym;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SenseEntity {
     @SerializedName("examples")
     @Expose
-    private List<ExampleEntity> examples = null;
+    private List<ExampleEntity> examples = new ArrayList<>();;
     @SerializedName("id")
     @Expose
     private String id;
     @SerializedName("subsenses")
     @Expose
-    private List<SubsenseEntity> subsenses = null;
+    private List<SubsenseEntity> subsenses = new ArrayList<>();;
     @SerializedName("synonyms")
     @Expose
-    private List<SynonymEntity> synonyms = null;
+    private List<SynonymEntity> synonyms = new ArrayList<>();;
 
     public List<ExampleEntity> getExamples() {
         return examples;
