@@ -1,13 +1,16 @@
 package com.example.stas.oxforddictionary.data.repository;
 
 import com.example.stas.oxforddictionary.data.entity.definition.EntryResponseEntity;
+import com.example.stas.oxforddictionary.data.entity.example.ExampleResponseEntity;
 import com.example.stas.oxforddictionary.data.entity.synonym.SynonymResponseEntity;
 import com.example.stas.oxforddictionary.data.mapper.definition.DefinitionEntityDataMapper;
+import com.example.stas.oxforddictionary.data.mapper.example.ExampleEntityDataMapper;
 import com.example.stas.oxforddictionary.data.mapper.synonym.SynonymEntityDataMapper;
 import com.example.stas.oxforddictionary.data.network.ApiClient;
 import com.example.stas.oxforddictionary.data.network.OxfordApi;
 import com.example.stas.oxforddictionary.domain.DefinitionRepository;
 import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResult;
+import com.example.stas.oxforddictionary.domain.model.example.ExampleResult;
 import com.example.stas.oxforddictionary.domain.model.synonym.SynonymResult;
 
 import io.reactivex.Observable;
@@ -17,6 +20,7 @@ public class DefinitionRepositoryImp implements DefinitionRepository {
     private final OxfordApi oxfordApi = ApiClient.getRetrofit().create(OxfordApi.class);
     private DefinitionEntityDataMapper definitionEntityDataMapper = new DefinitionEntityDataMapper();
     private SynonymEntityDataMapper synonymEntityDataMapper = new SynonymEntityDataMapper();
+    private ExampleEntityDataMapper exampleEntityDataMapper = new ExampleEntityDataMapper();
 
     @Override
     public Observable<DefinitionResult> loadDefinition(String word) {
@@ -36,6 +40,17 @@ public class DefinitionRepositoryImp implements DefinitionRepository {
                     @Override
                     public SynonymResult apply(SynonymResponseEntity synonymResponseEntity) throws Exception {
                         return synonymEntityDataMapper.transform(synonymResponseEntity);
+                    }
+                });
+    }
+
+    @Override
+    public Observable<ExampleResult> loadExamples(String word){
+        return oxfordApi.searchForExamples(word)
+                .map(new Function<ExampleResponseEntity, ExampleResult>() {
+                    @Override
+                    public ExampleResult apply(ExampleResponseEntity exampleResponseEntity) throws Exception {
+                        return exampleEntityDataMapper.transform(exampleResponseEntity);
                     }
                 });
     }

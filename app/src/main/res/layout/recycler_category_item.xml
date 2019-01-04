@@ -6,12 +6,20 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:layout_marginTop="4dp"
         android:id="@+id/lexicalHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textColor="#ffab2e"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/headerLine" />
+
+    <ImageButton
+        android:id="@+id/headerLine"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:foreground="#302b2b"/>
 
 </android.support.constraint.ConstraintLayout>

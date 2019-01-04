@@ -86,7 +86,8 @@ public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHo
         }
         @Override
         public void bindType(SynonymsItem item) {
-            example.setText(((ExampleModel)item).getText());
+            //todo replace the quotation mark
+            example.setText("\""+((ExampleModel)item).getText()+"\"");
         }
     }
 

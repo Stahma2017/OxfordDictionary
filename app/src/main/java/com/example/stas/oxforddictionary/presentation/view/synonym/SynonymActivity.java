@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.stas.oxforddictionary.R;
@@ -53,7 +54,6 @@ public class SynonymActivity extends BaseActivity implements SynonymConrtact.Vie
         synonymList.setAdapter(synonymsAdapter);
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -63,5 +63,9 @@ public class SynonymActivity extends BaseActivity implements SynonymConrtact.Vie
     @Override
     public void showError(String errorMessage) {
 
+    }
+
+    public void CloseSynonymList(View view) {
+        finish();
     }
 }
