@@ -34,13 +34,13 @@ public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHo
                 View categoryView = layoutInflater.inflate(R.layout.recycler_category_item, viewGroup, false);
                 return new CategoryViewHolder(categoryView);
             case SynonymsItem.TYPE_EXAMPLE:
-                View exampleView = layoutInflater.inflate(R.layout.recycler_example_item, viewGroup, false);
+                View exampleView = layoutInflater.inflate(R.layout.recycler_synonyms_example_item, viewGroup, false);
                 return new ExampleViewHolder(exampleView);
             case SynonymsItem.TYPE_SYNONYM:
-                View synonymView = layoutInflater.inflate(R.layout.recycler_synonym_item, viewGroup, false);
+                View synonymView = layoutInflater.inflate(R.layout.recycler_synonyms_synonym_item, viewGroup, false);
                 return new SynonymViewHolder(synonymView);
             case SynonymsItem.TYPE_SUBSYNONYM:
-                View subsynonymView = layoutInflater.inflate(R.layout.recycler_synonym_item, viewGroup, false);
+                View subsynonymView = layoutInflater.inflate(R.layout.recycler_synonyms_synonym_item, viewGroup, false);
                 return new SubsynonymViewHolder(subsynonymView);
             default:
                 throw new RuntimeException("Unknown type");

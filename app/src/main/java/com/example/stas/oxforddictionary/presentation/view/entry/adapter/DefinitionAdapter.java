@@ -30,10 +30,10 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         switch(viewType){
             case Item.TYPE_SENSE:
-                View senseView = inflater.inflate(R.layout.recycler_sense_item, viewGroup, false);
+                View senseView = inflater.inflate(R.layout.recycler_definitions_sense_item, viewGroup, false);
                 return new SenseViewHolder(senseView);
             case Item.TYPE_SUBSENSE:
-                View subsenseView = inflater.inflate(R.layout.recycler_subsense_item, viewGroup, false);
+                View subsenseView = inflater.inflate(R.layout.recycler_definitions_subsense_item, viewGroup, false);
                 return new SubsenseViewHolder(subsenseView);
             case Item.TYPE_WORD:
                 View headerView = inflater.inflate(R.layout.recycler_category_item, viewGroup, false);

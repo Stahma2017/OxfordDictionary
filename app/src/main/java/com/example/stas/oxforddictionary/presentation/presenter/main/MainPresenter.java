@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.presentation.presenter;
+package com.example.stas.oxforddictionary.presentation.presenter.main;
 
 import com.example.stas.oxforddictionary.presentation.view.main.MainContract;
 

@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.stas.oxforddictionary.R;
-import com.example.stas.oxforddictionary.presentation.presenter.MainPresenter;
+import com.example.stas.oxforddictionary.presentation.presenter.main.MainPresenter;
 import com.example.stas.oxforddictionary.presentation.view.base.BaseActivity;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryFragment;
 import com.example.stas.oxforddictionary.presentation.view.synonym.SynonymFragment;
@@ -89,8 +89,13 @@ public class MainActivity extends BaseActivity implements MainContract.View, IMa
     }
 
     @Override
-    public void navigateToSynonyms(Context context, String wordId) {
+    public void navigateToSynonyms(Context context, String wordId){
         this.navigator.navigateToSynonyms(context, wordId);
+    }
+
+    @Override
+    public void navigateToExamples(Context context, String wordId){
+        this.navigator.navigateToExamples(context, wordId);
     }
 
     public void openDrawer(View view) {

@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.presentation.presenter;
+package com.example.stas.oxforddictionary.presentation.presenter.entry;
 
 import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResult;
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item;

@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.presentation.presenter;
+package com.example.stas.oxforddictionary.presentation.presenter.synonym;
 
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
 import com.example.stas.oxforddictionary.domain.model.synonym.SynonymResult;

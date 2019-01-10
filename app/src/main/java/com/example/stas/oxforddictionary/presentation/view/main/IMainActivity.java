@@ -5,4 +5,5 @@ import android.content.Context;
 public interface IMainActivity {
     void inflateFragment(String fragmentTag, String word);
     void navigateToSynonyms(Context context, String wordId);
+    void navigateToExamples(Context context, String wordId);
 }

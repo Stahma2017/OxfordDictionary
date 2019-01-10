@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionAdapter;
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item;
-import com.example.stas.oxforddictionary.presentation.presenter.EntryPresenter;
+import com.example.stas.oxforddictionary.presentation.presenter.entry.EntryPresenter;
 import com.example.stas.oxforddictionary.presentation.view.main.IMainActivity;
 import java.io.IOException;
 import java.util.List;
@@ -88,15 +88,16 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         synonymsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            String wordId = word.getText().toString();
-            mainActivity.navigateToSynonyms(getContext(), wordId);
+                String wordId = word.getText().toString();
+                mainActivity.navigateToSynonyms(getContext(), wordId);
             }
         });
 
         examplesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // implement moving to examplesActivity
+                String wordId = word.getText().toString();
+                mainActivity.navigateToExamples(getContext(), wordId);
             }
         });
 
