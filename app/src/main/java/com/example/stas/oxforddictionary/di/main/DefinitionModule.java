@@ -28,7 +28,7 @@ public class DefinitionModule {
                 exampleEntityDataMapper);
     }
 
-    //todo get sure about mapping inner classes of mapper
+    //todo get sure about injecting inner classes of mapper
     @Provides
     DefinitionEntityDataMapper provideDefinitionMapper(){
         return new DefinitionEntityDataMapper();

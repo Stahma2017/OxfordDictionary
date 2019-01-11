@@ -3,7 +3,6 @@ package com.example.stas.oxforddictionary.presentation.presenter.synonym;
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
 import com.example.stas.oxforddictionary.domain.model.synonym.SynonymResult;
 import com.example.stas.oxforddictionary.presentation.mapper.synonym.SynonymModelDataMapper;
-import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.synonym.SynonymConrtact;
 import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsItem;
@@ -11,7 +10,6 @@ import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.LexicalE
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.ResultModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SenseModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SubsenseModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,33 +22,44 @@ import io.reactivex.schedulers.Schedulers;
 public class SynonymPresenter implements SynonymConrtact.Presenter {
 
     private SynonymConrtact.View view;
-    //private DefinitonInteractor interactor = new DefinitonInteractor();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    //private ErrorHandler errorHandler = new BaseErrorHandler();
-    private SynonymModelDataMapper synonymModelDataMapper = new SynonymModelDataMapper();
+    private final DefinitonInteractor interactor;
+    private final CompositeDisposable compositeDisposable;
+    private final ErrorHandler errorHandler;
+    private final SynonymModelDataMapper synonymModelDataMapper;
 
-    public SynonymPresenter(SynonymConrtact.View view) {
-        this.view = view;
-      //  errorHandler.attachView(this.view);
+    public SynonymPresenter(DefinitonInteractor interactor,
+                            CompositeDisposable compositeDisposable,
+                            ErrorHandler errorHandler,
+                            SynonymModelDataMapper synonymModelDataMapper) {
+        this.interactor = interactor;
+        this.compositeDisposable = compositeDisposable;
+        this.errorHandler = errorHandler;
+        this.synonymModelDataMapper = synonymModelDataMapper;
     }
     @Override
     public void getSynonyms(String word){
-    /* Disposable synonymsDisp = interactor.loadSynonyms(word)
+     Disposable synonymsDisp = interactor.loadSynonyms(word)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SynonymResult>() {
                     @Override
-                    public void accept(SynonymResult synonymResult) throws Exception {
+                    public void accept(SynonymResult synonymResult){
                         ResultModel resultModel = synonymModelDataMapper.transform(synonymResult);
                         view.showSynonyms(extractSynonyms(resultModel));
                     }
                 });
-     compositeDisposable.add(synonymsDisp);*/
+     compositeDisposable.add(synonymsDisp);
+    }
+
+    @Override
+    public void attachView(SynonymConrtact.View view) {
+        this.view = view;
+        errorHandler.attachView(this.view);
     }
 
     @Override
     public void detachView() {
-     //   errorHandler.detachView();
+        errorHandler.detachView();
         view = null;
         compositeDisposable.dispose();
     }

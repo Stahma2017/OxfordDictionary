@@ -10,6 +10,7 @@ public interface ExampleContract {
     }
 
     interface Presenter{
+        void attachView(ExampleContract.View view);
         void getExamples(String word);
         void detachView();
     }

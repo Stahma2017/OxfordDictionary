@@ -6,7 +6,9 @@ import com.example.stas.oxforddictionary.di.app.AppComponent;
 import com.example.stas.oxforddictionary.di.app.AppModule;
 import com.example.stas.oxforddictionary.di.app.DaggerAppComponent;
 import com.example.stas.oxforddictionary.di.entry.EntryComponent;
+import com.example.stas.oxforddictionary.di.example.ExampleComponent;
 import com.example.stas.oxforddictionary.di.main.MainComponent;
+import com.example.stas.oxforddictionary.di.synonym.SynonymComponent;
 import com.squareup.leakcanary.LeakCanary;
 
 public class App extends Application {
@@ -15,6 +17,8 @@ public class App extends Application {
     private AppComponent component;
     private MainComponent mainComponent;
     private EntryComponent entryComponent;
+    private ExampleComponent exampleComponent;
+    private SynonymComponent synonymComponent;
 
     public static App getInstance(){
         return instance;
@@ -26,8 +30,6 @@ public class App extends Application {
         component = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
-
-
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
@@ -52,7 +54,19 @@ public class App extends Application {
         return entryComponent;
     }
 
-    public void clearMainComponent(){
-        mainComponent = null;
+    public ExampleComponent getExampleComponent(){
+        if(exampleComponent == null){
+            exampleComponent = mainComponent.addExampleComponent();
+        }
+        return exampleComponent;
     }
+
+    public SynonymComponent getSynonymComponent(){
+        if(synonymComponent == null){
+            synonymComponent = mainComponent.addSynonymComponent();
+        }
+        return synonymComponent;
+    }
+
+
 }

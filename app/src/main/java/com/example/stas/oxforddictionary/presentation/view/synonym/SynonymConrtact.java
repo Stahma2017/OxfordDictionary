@@ -10,6 +10,7 @@ public interface SynonymConrtact {
         void showSynonyms(List<SynonymsItem> synonyms);
     }
     interface Presenter {
+        void attachView(SynonymConrtact.View view);
         void detachView();
         void getSynonyms(String word);
     }

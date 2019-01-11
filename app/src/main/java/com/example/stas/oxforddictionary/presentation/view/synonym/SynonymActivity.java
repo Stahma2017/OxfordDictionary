@@ -7,23 +7,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
+import com.example.stas.oxforddictionary.App;
 import com.example.stas.oxforddictionary.R;
-import com.example.stas.oxforddictionary.presentation.presenter.synonym.SynonymPresenter;
 import com.example.stas.oxforddictionary.presentation.view.base.BaseActivity;
 import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsAdapter;
 import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsItem;
-
 import java.util.List;
-
+import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SynonymActivity extends BaseActivity implements SynonymConrtact.View {
 
     private static final String SYNONYM_WORD_ID = "SYNONYM_WORD_ID";
-    private SynonymConrtact.Presenter presenter;
-
+    @Inject
+    SynonymConrtact.Presenter presenter;
     @BindView(R.id.synonymsWord) TextView word;
     @BindView(R.id.synonymsList) RecyclerView synonymList;
 
@@ -37,8 +35,9 @@ public class SynonymActivity extends BaseActivity implements SynonymConrtact.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_synonym);
+        App.getInstance().getSynonymComponent().injectSynonymActivity(this);
         ButterKnife.bind(this);
-        presenter = new SynonymPresenter(this);
+        presenter.attachView(this);
         Intent intent = getIntent();
         String wordId = intent.getStringExtra(SYNONYM_WORD_ID);
         word.setText(wordId);

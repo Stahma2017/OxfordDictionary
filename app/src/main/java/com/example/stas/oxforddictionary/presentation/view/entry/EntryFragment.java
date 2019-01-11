@@ -1,6 +1,5 @@
 package com.example.stas.oxforddictionary.presentation.view.entry;
 
-
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;

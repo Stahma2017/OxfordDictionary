@@ -4,7 +4,6 @@ import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResul
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item;
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
 import com.example.stas.oxforddictionary.presentation.mapper.definition.DefinitionModelDataMapper;
-import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract;
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.LexicalEntryModel;
@@ -39,35 +38,35 @@ public class EntryPresenter implements EntryContract.Presenter {
     @Override
     public void attachView(EntryContract.View view) {
         this.view = view;
-        //   errorHandler.attachView(this.view);
+        errorHandler.attachView(this.view);
     }
 
     @Override
-   public void detachView(){
-     //   errorHandler.detachView();
+    public void detachView(){
+        errorHandler.detachView();
         view = null;
         compositeDisposable.dispose();
     }
 
     @Override
     public void getDefinition(String word) {
-      Disposable definitionDisp = interactor.loadDefinition(word)
-              .subscribeOn(Schedulers.io())
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(new Consumer<DefinitionResult>() {
-                  @Override
-                  public void accept(DefinitionResult result){
-                      ResultModel resultModel = definitionModelDataMapper.transform(result);
-                      view.showDefinition(extractDefinitions(resultModel), extractTitle(resultModel));
-                  }
-              }, new Consumer<Throwable>() {
-                  @Override
-                  public void accept(Throwable throwable) {
-                      view.hideProgressBar();
-                 //     errorHandler.proceed(throwable);
-                  }
-              });
-                      compositeDisposable.add(definitionDisp);
+        Disposable definitionDisp = interactor.loadDefinition(word)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<DefinitionResult>() {
+                    @Override
+                    public void accept(DefinitionResult result){
+                        ResultModel resultModel = definitionModelDataMapper.transform(result);
+                        view.showDefinition(extractDefinitions(resultModel), extractTitle(resultModel));
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) {
+                        view.hideProgressBar();
+                        errorHandler.proceed(throwable);
+                    }
+                });
+        compositeDisposable.add(definitionDisp);
     }
 
     @Override
@@ -83,7 +82,7 @@ public class EntryPresenter implements EntryContract.Presenter {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) {
-                    //    errorHandler.proceed(throwable);
+                        errorHandler.proceed(throwable);
                     }
                 });
         compositeDisposable.add(soundDisp);

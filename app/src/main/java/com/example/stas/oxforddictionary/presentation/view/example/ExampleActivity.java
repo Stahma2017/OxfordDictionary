@@ -8,20 +8,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
+import com.example.stas.oxforddictionary.App;
 import com.example.stas.oxforddictionary.R;
-import com.example.stas.oxforddictionary.presentation.presenter.example.ExamplePresenter;
 import com.example.stas.oxforddictionary.presentation.view.example.adapter.ExampleAdapter;
-
 import java.util.List;
-
+import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ExampleActivity extends AppCompatActivity implements ExampleContract.View {
 
     private static final String EXAMPLE_WORD_ID = "EXAMPLE_WORD_ID";
-    private ExampleContract.Presenter presenter;
+    @Inject
+    ExampleContract.Presenter presenter;
     @BindView(R.id.exampleWord) TextView word;
     @BindView(R.id.exampleList) RecyclerView exampleList;
 
@@ -35,8 +34,9 @@ public class ExampleActivity extends AppCompatActivity implements ExampleContrac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example);
+        App.getInstance().getExampleComponent().injectExampleActivity(this);
         ButterKnife.bind(this);
-        presenter = new ExamplePresenter(this);
+        presenter.attachView(this);
         Intent intent = getIntent();
         String wordId = intent.getStringExtra(EXAMPLE_WORD_ID);
         word.setText(wordId);
