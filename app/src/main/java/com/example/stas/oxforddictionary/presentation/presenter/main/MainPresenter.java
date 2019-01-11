@@ -4,11 +4,19 @@ import com.example.stas.oxforddictionary.presentation.view.main.MainContract;
 
 public class MainPresenter implements MainContract.Presenter {
 
-    MainContract.View view;
+   private MainContract.View view;
 
 
-    public MainPresenter(MainContract.View view) {
+    public MainPresenter() {
+    }
+
+    @Override
+    public void attachView(MainContract.View view) {
         this.view = view;
     }
 
+    @Override
+    public void dettachView() {
+        view = null;
+    }
 }

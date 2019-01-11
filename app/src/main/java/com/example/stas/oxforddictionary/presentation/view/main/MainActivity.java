@@ -12,11 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.stas.oxforddictionary.App;
 import com.example.stas.oxforddictionary.R;
-import com.example.stas.oxforddictionary.presentation.presenter.main.MainPresenter;
 import com.example.stas.oxforddictionary.presentation.view.base.BaseActivity;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryFragment;
 import com.example.stas.oxforddictionary.presentation.view.synonym.SynonymFragment;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -29,15 +33,16 @@ public class MainActivity extends BaseActivity implements MainContract.View, IMa
     //@BindView(R.id.allWordsCount) TextView allWordsCount;
     //@BindView(R.id.learnedWordsCount) TextView learnedWordsCount;
 
-
-    private MainContract.Presenter presenter;
+    @Inject
+    MainContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        presenter = new MainPresenter(this);
+        App.getInstance().getMainComponent().injectMainActivity(this);
+        presenter.attachView(this);
         init();
 
         //todo delete this shit
@@ -96,6 +101,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, IMa
     @Override
     public void navigateToExamples(Context context, String wordId){
         this.navigator.navigateToExamples(context, wordId);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.dettachView();
     }
 
     public void openDrawer(View view) {

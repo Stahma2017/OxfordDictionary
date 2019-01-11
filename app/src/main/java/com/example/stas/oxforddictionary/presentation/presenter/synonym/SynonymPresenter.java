@@ -24,18 +24,18 @@ import io.reactivex.schedulers.Schedulers;
 public class SynonymPresenter implements SynonymConrtact.Presenter {
 
     private SynonymConrtact.View view;
-    private DefinitonInteractor interactor = new DefinitonInteractor();
+    //private DefinitonInteractor interactor = new DefinitonInteractor();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private ErrorHandler errorHandler = new BaseErrorHandler();
+    //private ErrorHandler errorHandler = new BaseErrorHandler();
     private SynonymModelDataMapper synonymModelDataMapper = new SynonymModelDataMapper();
 
     public SynonymPresenter(SynonymConrtact.View view) {
         this.view = view;
-        errorHandler.attachView(this.view);
+      //  errorHandler.attachView(this.view);
     }
     @Override
     public void getSynonyms(String word){
-     Disposable synonymsDisp = interactor.loadSynonyms(word)
+    /* Disposable synonymsDisp = interactor.loadSynonyms(word)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SynonymResult>() {
@@ -45,12 +45,12 @@ public class SynonymPresenter implements SynonymConrtact.Presenter {
                         view.showSynonyms(extractSynonyms(resultModel));
                     }
                 });
-     compositeDisposable.add(synonymsDisp);
+     compositeDisposable.add(synonymsDisp);*/
     }
 
     @Override
     public void detachView() {
-        errorHandler.detachView();
+     //   errorHandler.detachView();
         view = null;
         compositeDisposable.dispose();
     }

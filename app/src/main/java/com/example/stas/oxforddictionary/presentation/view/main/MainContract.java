@@ -6,6 +6,7 @@ public interface MainContract {
 
     }
     interface Presenter{
-
+        void attachView(MainContract.View view);
+        void dettachView();
     }
 }

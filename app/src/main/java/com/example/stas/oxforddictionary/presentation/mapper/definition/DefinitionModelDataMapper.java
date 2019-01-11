@@ -5,7 +5,6 @@ import com.example.stas.oxforddictionary.presentation.viewmodel.definition.Resul
 
 public class DefinitionModelDataMapper {
 
-
     private LexicalEntryModelMapper lexicalEntryModelMapper = new LexicalEntryModelMapper();
 
     public ResultModel transform(DefinitionResult from){

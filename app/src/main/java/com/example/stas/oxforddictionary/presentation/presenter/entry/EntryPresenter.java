@@ -23,19 +23,28 @@ import io.reactivex.schedulers.Schedulers;
 
 public class EntryPresenter implements EntryContract.Presenter {
     private EntryContract.View view;
-    private DefinitonInteractor interactor = new DefinitonInteractor();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private ErrorHandler errorHandler = new BaseErrorHandler();
-    private DefinitionModelDataMapper definitionModelDataMapper = new DefinitionModelDataMapper();
+    private final DefinitonInteractor interactor;
+    private final CompositeDisposable compositeDisposable;
+    private final ErrorHandler errorHandler;
+    private final DefinitionModelDataMapper definitionModelDataMapper;
 
-    public EntryPresenter(EntryContract.View view) {
-        this.view = view;
-        errorHandler.attachView(this.view);
+    public EntryPresenter(DefinitonInteractor interactor, CompositeDisposable compositeDisposable,
+                          ErrorHandler errorHandler, DefinitionModelDataMapper definitionModelDataMapper) {
+        this.interactor = interactor;
+        this.compositeDisposable = compositeDisposable;
+        this.errorHandler = errorHandler;
+        this.definitionModelDataMapper = definitionModelDataMapper;
     }
 
-   @Override
+    @Override
+    public void attachView(EntryContract.View view) {
+        this.view = view;
+        //   errorHandler.attachView(this.view);
+    }
+
+    @Override
    public void detachView(){
-        errorHandler.detachView();
+     //   errorHandler.detachView();
         view = null;
         compositeDisposable.dispose();
     }
@@ -55,7 +64,7 @@ public class EntryPresenter implements EntryContract.Presenter {
                   @Override
                   public void accept(Throwable throwable) {
                       view.hideProgressBar();
-                      errorHandler.proceed(throwable);
+                 //     errorHandler.proceed(throwable);
                   }
               });
                       compositeDisposable.add(definitionDisp);
@@ -74,7 +83,7 @@ public class EntryPresenter implements EntryContract.Presenter {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) {
-                        errorHandler.proceed(throwable);
+                    //    errorHandler.proceed(throwable);
                     }
                 });
         compositeDisposable.add(soundDisp);

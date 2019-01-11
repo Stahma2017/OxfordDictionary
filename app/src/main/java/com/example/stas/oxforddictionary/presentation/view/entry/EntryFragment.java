@@ -22,13 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.stas.oxforddictionary.App;
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionAdapter;
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item;
-import com.example.stas.oxforddictionary.presentation.presenter.entry.EntryPresenter;
 import com.example.stas.oxforddictionary.presentation.view.main.IMainActivity;
 import java.io.IOException;
 import java.util.List;
+import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -46,22 +47,23 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     @BindView(R.id.synonymsBtn) Button synonymsBtn;
     @BindView(R.id.examplesBtn) Button examplesBtn;
     private Unbinder unbinder;
-    private EntryContract.Presenter presenter;
-    private RecyclerView.LayoutManager layoutManager;
-    private DefinitionAdapter definitionAdapter;
+    @Inject
+    EntryContract.Presenter presenter;
+    @Inject
+    DefinitionAdapter definitionAdapter;
     private Animation moveUp;
     private IMainActivity mainActivity;
 
     public EntryFragment() {
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entry, container, false);
+        App.getInstance().getEntryComonent().injectEntryFragment(this);
         unbinder = ButterKnife.bind(this, view);
-        presenter = new EntryPresenter(this);
+        presenter.attachView(this);
         moveUp = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.move_up);
 
@@ -101,9 +103,8 @@ public class EntryFragment extends Fragment implements EntryContract.View {
             }
         });
 
-        layoutManager = new LinearLayoutManager(getContext());
         definitionAdapter = new DefinitionAdapter();
-        definitionRecyclerView.setLayoutManager(layoutManager);
+        definitionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         definitionRecyclerView.setAdapter(definitionAdapter);
         return view;
     }

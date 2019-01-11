@@ -14,6 +14,7 @@ public interface EntryContract {
     }
     interface Presenter{
         void detachView();
+        void attachView(EntryContract.View view);
         void getDefinition(String word);
         void getSound(String word);
 

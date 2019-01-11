@@ -13,6 +13,17 @@
     <!-- intent keys -->
     <string name="intent_message">intent_message</string>
     <string name="title_activity_synonym">SynonymActivity</string>
+    <string name="bad_request_error">Bad Request</string>
+    <string name="authentication_failed_error">Authentication failed</string>
+    <string name="not_found_error">Not Found</string>
+    <string name="request_uri_too_long_error">Request URI Too Long</string>
+    <string name="internal_server_error">Internal Server Error</string>
+    <string name="bad_gateway_error">Bad Gateway</string>
+    <string name="service_unavailable_error">Service Unavailable</string>
+    <string name="gateway_timeout_error">Gateway timeout</string>
+    <string name="server_is_currently_experiencing_issues_error">Server is currently experiencing issues</string>
+    <string name="network_connection_lost_error">Network connection lost</string>
+    <string name="unknown_error">unknown error</string>
 
 
 </resources>

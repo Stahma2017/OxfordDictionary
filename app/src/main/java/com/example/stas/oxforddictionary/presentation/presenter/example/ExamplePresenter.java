@@ -22,19 +22,19 @@ import io.reactivex.schedulers.Schedulers;
 public class ExamplePresenter implements ExampleContract.Presenter {
 
     private ExampleContract.View view;
-    private DefinitonInteractor interactor = new DefinitonInteractor();
+    //private DefinitonInteractor interactor = new DefinitonInteractor();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private ErrorHandler errorHandler = new BaseErrorHandler();
+    //private ErrorHandler errorHandler = new BaseErrorHandler();
     private ExampleModelDataMapper exampleModelDataMapper = new ExampleModelDataMapper();
 
     public ExamplePresenter(ExampleContract.View view) {
         this.view = view;
-        errorHandler.attachView(this.view);
+      //  errorHandler.attachView(this.view);
     }
 
     @Override
     public void getExamples(String word){
-        Disposable exampleDisp = interactor.loadExamples(word)
+       /* Disposable exampleDisp = interactor.loadExamples(word)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ExampleResult>() {
@@ -45,12 +45,12 @@ public class ExamplePresenter implements ExampleContract.Presenter {
                     }
                 });
 
-        compositeDisposable.add(exampleDisp);
+        compositeDisposable.add(exampleDisp);*/
     }
 
     @Override
     public void detachView() {
-        errorHandler.detachView();
+     //   errorHandler.detachView();
         view = null;
         compositeDisposable.dispose();
     }

@@ -6,7 +6,6 @@ import com.example.stas.oxforddictionary.data.entity.synonym.SynonymResponseEnti
 import com.example.stas.oxforddictionary.data.mapper.definition.DefinitionEntityDataMapper;
 import com.example.stas.oxforddictionary.data.mapper.example.ExampleEntityDataMapper;
 import com.example.stas.oxforddictionary.data.mapper.synonym.SynonymEntityDataMapper;
-import com.example.stas.oxforddictionary.data.network.ApiClient;
 import com.example.stas.oxforddictionary.data.network.OxfordApi;
 import com.example.stas.oxforddictionary.domain.DefinitionRepository;
 import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResult;
@@ -17,10 +16,20 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
 public class DefinitionRepositoryImp implements DefinitionRepository {
-    private final OxfordApi oxfordApi = ApiClient.getRetrofit().create(OxfordApi.class);
-    private DefinitionEntityDataMapper definitionEntityDataMapper = new DefinitionEntityDataMapper();
-    private SynonymEntityDataMapper synonymEntityDataMapper = new SynonymEntityDataMapper();
-    private ExampleEntityDataMapper exampleEntityDataMapper = new ExampleEntityDataMapper();
+    private final OxfordApi oxfordApi;
+    private final DefinitionEntityDataMapper definitionEntityDataMapper;
+    private final SynonymEntityDataMapper synonymEntityDataMapper;
+    private final ExampleEntityDataMapper exampleEntityDataMapper;
+
+    public DefinitionRepositoryImp(OxfordApi oxfordApi,
+            DefinitionEntityDataMapper definitionEntityDataMapper,
+                                   SynonymEntityDataMapper synonymEntityDataMapper,
+                                   ExampleEntityDataMapper exampleEntityDataMapper) {
+        this.oxfordApi = oxfordApi;
+        this.definitionEntityDataMapper = definitionEntityDataMapper;
+        this.synonymEntityDataMapper = synonymEntityDataMapper;
+        this.exampleEntityDataMapper = exampleEntityDataMapper;
+    }
 
     @Override
     public Observable<DefinitionResult> loadDefinition(String word) {

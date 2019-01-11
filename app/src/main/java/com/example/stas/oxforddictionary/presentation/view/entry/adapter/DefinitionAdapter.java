@@ -68,6 +68,7 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder{
         private TextView lexicalHeader;
+        //todo bind with butterknife and other adapters too
 
         public HeaderViewHolder(@NonNull View itemView) {
             super(itemView);

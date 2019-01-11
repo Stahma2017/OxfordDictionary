@@ -2,18 +2,57 @@ package com.example.stas.oxforddictionary;
 
 import android.app.Application;
 
+import com.example.stas.oxforddictionary.di.app.AppComponent;
+import com.example.stas.oxforddictionary.di.app.AppModule;
+import com.example.stas.oxforddictionary.di.app.DaggerAppComponent;
+import com.example.stas.oxforddictionary.di.entry.EntryComponent;
+import com.example.stas.oxforddictionary.di.main.MainComponent;
 import com.squareup.leakcanary.LeakCanary;
 
 public class App extends Application {
 
+    protected static App instance;
+    private AppComponent component;
+    private MainComponent mainComponent;
+    private EntryComponent entryComponent;
+
+    public static App getInstance(){
+        return instance;
+    }
+
     @Override public void onCreate() {
         super.onCreate();
+        instance = this;
+        component = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
+
+
         if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
             return;
         }
         LeakCanary.install(this);
-        // Normal app init code...
+    }
+
+    public AppComponent getComponent() {
+        return component;
+    }
+
+    public MainComponent getMainComponent(){
+        if (mainComponent == null){
+            mainComponent = component.addMainComponent();
+        }
+        return mainComponent;
+    }
+
+    public EntryComponent getEntryComonent(){
+        if(entryComponent == null){
+            entryComponent = mainComponent.addEntryComponent();
+        }
+        return entryComponent;
+    }
+
+    public void clearMainComponent(){
+        mainComponent = null;
     }
 }
