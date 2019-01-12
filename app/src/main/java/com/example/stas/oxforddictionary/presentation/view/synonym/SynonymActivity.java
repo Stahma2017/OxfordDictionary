@@ -47,7 +47,7 @@ public class SynonymActivity extends BaseActivity implements SynonymConrtact.Vie
     @Override
     public void showSynonyms(List<SynonymsItem> synonyms) {
        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        SynonymsAdapter synonymsAdapter = new SynonymsAdapter(synonyms);
+        SynonymsAdapter synonymsAdapter = new SynonymsAdapter(synonyms, this);
         synonymList.setLayoutManager(layoutManager);
         synonymList.setAdapter(synonymsAdapter);
     }

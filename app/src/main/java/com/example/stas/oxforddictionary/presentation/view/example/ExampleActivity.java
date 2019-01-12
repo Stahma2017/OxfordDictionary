@@ -46,7 +46,7 @@ public class ExampleActivity extends AppCompatActivity implements ExampleContrac
     @Override
     public void showExamples(List<String> examples) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        ExampleAdapter exampleAdapter = new ExampleAdapter(examples);
+        ExampleAdapter exampleAdapter = new ExampleAdapter(examples, this);
         exampleList.setLayoutManager(layoutManager);
         exampleList.setAdapter(exampleAdapter);
     }

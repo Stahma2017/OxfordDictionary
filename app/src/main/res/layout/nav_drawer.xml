@@ -5,12 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".presentation.view.main.MainActivity">
+    tools:context=".presentation.view.main.MainActivity"
+    android:id="@+id/headerLayout">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menu"
+        android:text="@string/menu"
         android:textSize="25sp"/>
     <GridLayout
         android:layout_marginTop="20dp"
@@ -20,19 +21,19 @@
         android:orientation="horizontal">
         <TextView
             android:layout_gravity="fill"
-            android:text="Learned"
+            android:text="@string/learned"
             android:gravity="center"/>
         <TextView
             android:layout_gravity="center"
-            android:text="All"/>
+            android:text="@string/all"/>
         <TextView
             android:layout_gravity="center"
             android:id="@+id/learnedWordsCount"
-            android:text="0"/>
+            android:text="@string/_0"/>
         <TextView
             android:layout_gravity="center"
             android:id="@+id/allWordsCount"
-            android:text="0"/>
+            android:text="@string/_0"/>
     </GridLayout>
 
 </LinearLayout>

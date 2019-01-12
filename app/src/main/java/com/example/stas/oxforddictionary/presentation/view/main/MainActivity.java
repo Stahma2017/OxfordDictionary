@@ -17,7 +17,6 @@ import com.example.stas.oxforddictionary.App;
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.presentation.view.base.BaseActivity;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryFragment;
-import com.example.stas.oxforddictionary.presentation.view.synonym.SynonymFragment;
 
 import javax.inject.Inject;
 
@@ -25,14 +24,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements MainContract.View, IMainActivity{
-
-
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.hamburgerBtn)ImageButton hamburgerBtn;
-    //@BindView(R.id.allWordsCount) TextView allWordsCount;
-    //@BindView(R.id.learnedWordsCount) TextView learnedWordsCount;
-
+    private TextView allWordsCount;
     @Inject
     MainContract.Presenter presenter;
 
@@ -45,23 +40,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, IMa
         presenter.attachView(this);
         init();
 
-        //todo delete this shit
-       /* FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        EntryFragment entryFragment = new EntryFragment();
-        fragmentTransaction.add(R.id.content_frame, entryFragment);
-        fragmentTransaction.commit();*/
-
-        //todo find way of casting with butterknife
-        View headerLayout = navigationView.getHeaderView(0);
-        TextView allWordsCount = headerLayout.findViewById(R.id.allWordsCount);
-        allWordsCount.setText("157");
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 menuItem.setChecked(true);
                 drawerLayout.closeDrawers();
-                //todo implement swaping fragments
+                //implement swaping fragments here
                 return true;
             }
         });
@@ -69,15 +53,16 @@ public class MainActivity extends BaseActivity implements MainContract.View, IMa
 
     @Override
     public void inflateFragment(String fragmentTag, String word) {
-        if (fragmentTag.equals(getString(R.string.fragment_synonym))){
+        /*if (fragmentTag.equals(getString(R.string.fragment_synonym))){
             SynonymFragment synonymFragment = new SynonymFragment();
             doFragmentTransaction(synonymFragment, fragmentTag, true, word);
-        }
+        }*/
     }
 
     private void init(){
         EntryFragment entryFragment = new EntryFragment();
         doFragmentTransaction(entryFragment, getString(R.string.fragment_entry), false, "");
+       allWordsCount =  navigationView.getHeaderView(0).findViewById(R.id.allWordsCount);
     }
     private void doFragmentTransaction(Fragment fragment, String tag, boolean addToBackStack, String message){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

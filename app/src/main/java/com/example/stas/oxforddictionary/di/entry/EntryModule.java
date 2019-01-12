@@ -7,6 +7,8 @@ import com.example.stas.oxforddictionary.presentation.presenter.entry.EntryPrese
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract;
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionAdapter;
+import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionExportVisitor;
+
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
@@ -14,8 +16,12 @@ import io.reactivex.disposables.CompositeDisposable;
 @Module
 public class EntryModule {
     @Provides
-    DefinitionAdapter provideDefinitionAdapter(){
-        return new DefinitionAdapter();
+    DefinitionAdapter provideDefinitionAdapter(DefinitionExportVisitor definitionExporter){
+        return new DefinitionAdapter(definitionExporter);
+    }
+    @Provides
+    DefinitionExportVisitor provideDefinitionVisitor(){
+        return new DefinitionExportVisitor();
     }
     @Provides
     EntryContract.Presenter provideEntryPresenter(DefinitonInteractor interactor, CompositeDisposable compositeDisposable,

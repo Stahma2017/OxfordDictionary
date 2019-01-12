@@ -7,7 +7,7 @@ import com.example.stas.oxforddictionary.presentation.viewmodel.definition.Subse
 import java.util.List;
 
 public interface Visitor {
-    public List<String> visitSense(SenseModel sense);
-    public List<String> visitSubsense(SubsenseModel subsense);
-    public List<String> visitLexicalEntry(LexicalEntryModel lexicalEntry);
+    List<String> visitSense(SenseModel sense);
+    List<String> visitSubsense(SubsenseModel subsense);
+    List<String> visitLexicalEntry(LexicalEntryModel lexicalEntry);
 }

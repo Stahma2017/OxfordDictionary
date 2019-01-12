@@ -1,5 +1,6 @@
 package com.example.stas.oxforddictionary.presentation.view.synonym.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,13 +13,16 @@ import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.LexicalE
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SubSynonymModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SynonymModel;
 import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHolder> {
-
     private final List<SynonymsItem> synonyms;
+    private final Context context;
 
-    public SynonymsAdapter(List<SynonymsItem> synonyms) {
+    public SynonymsAdapter(List<SynonymsItem> synonyms, Context context) {
         this.synonyms = synonyms;
+        this.context = context;
     }
     @Override
     public int getItemViewType(int position) {
@@ -46,20 +50,18 @@ public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHo
                 throw new RuntimeException("Unknown type");
         }
     }
-
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int pos) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int pos) {
         SynonymsItem item = synonyms.get(pos);
         viewHolder.bindType(item);
     }
-
     @Override
     public int getItemCount() {
         return synonyms.size();
     }
 
     public abstract class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
         }
 
@@ -67,10 +69,11 @@ public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHo
     }
 
     public class CategoryViewHolder extends ViewHolder{
-        private final TextView category;
-        public CategoryViewHolder(@NonNull View itemView) {
+        @BindView(R.id.lexicalHeader) TextView category;
+
+        CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            category = (TextView) itemView.findViewById(R.id.lexicalHeader);
+            ButterKnife.bind(this, itemView);
         }
         @Override
         public void bindType(SynonymsItem item) {
@@ -79,25 +82,23 @@ public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHo
     }
 
     public class ExampleViewHolder extends ViewHolder{
-        private final TextView example;
-        public ExampleViewHolder(@NonNull View itemView) {
+        @BindView(R.id.synonymExample) TextView example;
+        ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
-            example = itemView.findViewById(R.id.synonymExample);
+            ButterKnife.bind(this, itemView);
         }
         @Override
         public void bindType(SynonymsItem item) {
-            //todo replace the quotation mark
-            example.setText("\""+((ExampleModel)item).getText()+"\"");
+            example.setText(context.getString(R.string.example_quotes,((ExampleModel)item).getText()));
         }
     }
 
     public class SynonymViewHolder extends ViewHolder{
-        private final TextView synonym;
-        public SynonymViewHolder(@NonNull View itemView) {
+        @BindView(R.id.synonym) TextView synonym;
+        SynonymViewHolder(@NonNull View itemView) {
             super(itemView);
-            synonym = itemView.findViewById(R.id.synonym);
+            ButterKnife.bind(this, itemView);
         }
-
         @Override
         public void bindType(SynonymsItem item) {
             synonym.setText(((SynonymModel)item).getText());
@@ -105,19 +106,14 @@ public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHo
     }
 
     public class SubsynonymViewHolder extends ViewHolder{
-        private final TextView synonym;
-        public SubsynonymViewHolder(View itemView) {
+        @BindView(R.id.synonym) TextView synonym;
+        SubsynonymViewHolder(View itemView) {
             super(itemView);
-            synonym = itemView.findViewById(R.id.synonym);
+            ButterKnife.bind(this, itemView);
         }
-
         @Override
         public void bindType(SynonymsItem item) {
             synonym.setText(((SubSynonymModel)item).getText());
         }
     }
-
-
-
-
 }

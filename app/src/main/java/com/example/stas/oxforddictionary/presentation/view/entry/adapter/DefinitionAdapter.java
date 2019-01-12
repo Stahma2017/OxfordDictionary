@@ -10,10 +10,16 @@ import com.example.stas.oxforddictionary.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
+public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Item> definitions = new ArrayList<>();
-    private DefinitionExportVisitor definitionExporter = new DefinitionExportVisitor();
+    private final DefinitionExportVisitor definitionExporter;
+
+    public DefinitionAdapter(DefinitionExportVisitor definitionExporter) {
+        this.definitionExporter = definitionExporter;
+    }
 
     public void setItems(List<Item> definitions) {
         this.definitions = definitions;
@@ -35,14 +41,13 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case Item.TYPE_SUBSENSE:
                 View subsenseView = inflater.inflate(R.layout.recycler_definitions_subsense_item, viewGroup, false);
                 return new SubsenseViewHolder(subsenseView);
-            case Item.TYPE_WORD:
+            case Item.TYPE_CATEGORY:
                 View headerView = inflater.inflate(R.layout.recycler_category_item, viewGroup, false);
                 return new HeaderViewHolder(headerView);
             default:
                 throw new RuntimeException("Unknown type");
         }
     }
-
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         switch (viewHolder.getItemViewType()){
@@ -54,27 +59,24 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 SubsenseViewHolder subsenseHolder = (SubsenseViewHolder) viewHolder;
                 subsenseHolder.bindSubsense(definitions.get(i));
                 break;
-            case Item.TYPE_WORD:
+            case Item.TYPE_CATEGORY:
                 HeaderViewHolder headerHolder = (HeaderViewHolder) viewHolder;
                 headerHolder.bindLexicalCategory(definitions.get(i));
                 break;
         }
     }
-
     @Override
     public int getItemCount() {
         return definitions.size();
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder{
-        private TextView lexicalHeader;
-        //todo bind with butterknife and other adapters too
+    class HeaderViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.lexicalHeader) TextView lexicalHeader;
 
-        public HeaderViewHolder(@NonNull View itemView) {
+        HeaderViewHolder(@NonNull View itemView) {
             super(itemView);
-            lexicalHeader = (TextView)itemView.findViewById(R.id.lexicalHeader);
+            ButterKnife.bind(this, itemView);
         }
-
         void bindLexicalCategory(Item item){
             List<String> lexicalCategory = definitionExporter.export(item);
             if (!lexicalCategory.isEmpty()){
@@ -82,16 +84,14 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
         }
     }
+    class SenseViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.senseTW)TextView sense;
+        @BindView(R.id.senseExampleTW) TextView example;
 
-    public class SenseViewHolder extends RecyclerView.ViewHolder{
-        private TextView sense, example;
-
-        public SenseViewHolder(@NonNull View itemView) {
+        SenseViewHolder(@NonNull View itemView) {
             super(itemView);
-            sense = (TextView)itemView.findViewById(R.id.senseTW);
-            example = (TextView)itemView.findViewById(R.id.senseExampleTW);
+            ButterKnife.bind(this, itemView);
         }
-
         void bindSense(Item item){
             List<String> definition = definitionExporter.export(item);
             sense.setText(definition.get(0));
@@ -100,23 +100,21 @@ public class DefinitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
         }
     }
+    class SubsenseViewHolder extends RecyclerView.ViewHolder{
 
-    public class SubsenseViewHolder extends RecyclerView.ViewHolder{
-        private TextView subsense, example;
+        @BindView(R.id.subsenseTW) TextView subsense;
+        @BindView(R.id.subsenseExampleTW) TextView subExample;
 
-        public SubsenseViewHolder(@NonNull View itemView) {
+        SubsenseViewHolder(@NonNull View itemView) {
             super(itemView);
-            subsense = (TextView)itemView.findViewById(R.id.subsenseTW);
-            example = (TextView)itemView.findViewById(R.id.subsenseExampleTW);
+            ButterKnife.bind(this, itemView);
         }
-
         void bindSubsense(Item item){
             List<String> definition = definitionExporter.export(item);
             this.subsense.setText(definition.get(0));
             if (definition.size()>1){
-                this.example.setText(definition.get(1));
+                subExample.setText(definition.get(1));
             }
         }
-
     }
 }

@@ -34,7 +34,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class EntryFragment extends Fragment implements EntryContract.View {
-
     @BindView(R.id.wordEntryET) EditText wordEntry;
     @BindView(R.id.searchSubmitBtn) Button searchBtn;
     @BindView(R.id.definition_recycler_view) RecyclerView definitionRecyclerView;
@@ -101,8 +100,6 @@ public class EntryFragment extends Fragment implements EntryContract.View {
                 mainActivity.navigateToExamples(getContext(), wordId);
             }
         });
-
-        definitionAdapter = new DefinitionAdapter();
         definitionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         definitionRecyclerView.setAdapter(definitionAdapter);
         return view;
@@ -128,13 +125,12 @@ public class EntryFragment extends Fragment implements EntryContract.View {
         try {
             mediaPlayer.setDataSource(soundURL);
         } catch (IOException e) {
-            e.printStackTrace();
+            showError(getString(R.string.set_source_error));
         }
         try {
             mediaPlayer.prepare();
         } catch (IOException e) {
-            //todo handle error
-            e.printStackTrace();
+            showError(getString(R.string.player_error));
         }
         mediaPlayer.start();
     }

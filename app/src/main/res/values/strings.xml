@@ -24,6 +24,13 @@
     <string name="server_is_currently_experiencing_issues_error">Server is currently experiencing issues</string>
     <string name="network_connection_lost_error">Network connection lost</string>
     <string name="unknown_error">unknown error</string>
+    <string name="example_quotes">\'%1$s\'</string>
+    <string name="player_error">cannot prepare player for playback</string>
+    <string name="set_source_error">cannot set sourse to play</string>
+    <string name="menu">Menu</string>
+    <string name="learned">Learned</string>
+    <string name="all">All</string>
+    <string name="_0">0</string>
 
 
 </resources>

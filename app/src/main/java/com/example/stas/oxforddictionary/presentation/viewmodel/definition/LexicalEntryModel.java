@@ -64,7 +64,7 @@ public class LexicalEntryModel implements Item {
 
     @Override
     public int getType() {
-        return Item.TYPE_WORD;
+        return Item.TYPE_CATEGORY;
     }
 
 
