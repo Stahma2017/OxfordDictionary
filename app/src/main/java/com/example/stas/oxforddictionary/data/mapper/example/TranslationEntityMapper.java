@@ -9,19 +9,21 @@ import java.util.List;
 class TranslationEntityMapper {
 
     private Translation mapTranslation(TranslationEntity from){
-        Translation translation = new Translation();
-        translation.setDomains(from.getDomains());
-        translation.setLanguage(from.getLanguage());
-        translation.setRegions(from.getRegisters());
-        translation.setRegisters(from.getRegisters());
-        translation.setText(from.getText());
-        return translation;
+        return new Translation(
+                from.getDomains(),
+                from.getLanguage(),
+                from.getRegions(),
+                from.getRegisters(),
+                from.getText()
+        );
     }
 
    List<Translation> mapTranslations(List<TranslationEntity> fromList){
        List<Translation> translations = new ArrayList<>();
-       for (TranslationEntity translation :fromList) {
-           translations.add(mapTranslation(translation));
+       if (fromList!= null){
+           for (TranslationEntity translation :fromList) {
+               translations.add(mapTranslation(translation));
+           }
        }
        return translations;
     }

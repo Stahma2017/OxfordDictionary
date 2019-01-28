@@ -10,12 +10,10 @@ public class ExampleEntityDataMapper {
 
     public ExampleResult transform(ExampleResponseEntity exampleResponseEntity){
         ExampleResultEntity from = exampleResponseEntity.getResults().get(0);
-        ExampleResult result = new ExampleResult();
-        result.setId(from.getId());
-        result.setLanguage(from.getLanguage());
-        result.setType(from.getType());
-        result.setWord(from.getWord());
-        result.setLexicalEntries(lexicalEntryEntityMapper.mapLexicalEntries(from.getLexicalEntries()));
-        return result;
+        return new ExampleResult(from.getId(),
+                from.getLanguage(),
+                lexicalEntryEntityMapper.mapLexicalEntries(from.getLexicalEntries()),
+                from.getType(),
+                from.getWord());
     }
 }

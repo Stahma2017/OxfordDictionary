@@ -1,5 +1,6 @@
 package com.example.stas.oxforddictionary.data.mapper.synonym;
 
+
 import com.example.stas.oxforddictionary.data.entity.synonym.LexicalEntryEntity;
 import com.example.stas.oxforddictionary.domain.model.synonym.LexicalEntry;
 

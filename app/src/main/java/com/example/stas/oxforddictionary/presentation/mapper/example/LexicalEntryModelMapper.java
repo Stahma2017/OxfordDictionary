@@ -14,7 +14,7 @@ class LexicalEntryModelMapper {
         lexicalEntry.setLanguage(from.getLanguage());
         lexicalEntry.setLexicalCategory(from.getLexicalCategory());
         lexicalEntry.setText(from.getText());
-        lexicalEntry.setSentences(sentenceModelMapper.mapSentences(from.getSentences()));
+        lexicalEntry.setSentences(sentenceModelMapper.mapSentences(from.getSenteces()));
         return lexicalEntry;
     }
 

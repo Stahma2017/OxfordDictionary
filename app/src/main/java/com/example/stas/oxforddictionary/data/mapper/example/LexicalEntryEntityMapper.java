@@ -11,12 +11,12 @@ class LexicalEntryEntityMapper {
     private SentenceEntityMapper sentenceEntityMapper = new SentenceEntityMapper();
 
     private LexicalEntry mapLexicalEntry(LexicalEntryEntity from){
-        LexicalEntry lexicalEntry = new LexicalEntry();
-        lexicalEntry.setLanguage(from.getLanguage());
-        lexicalEntry.setLexicalCategory(from.getLexicalCategory());
-        lexicalEntry.setText(from.getText());
-        lexicalEntry.setSentences(sentenceEntityMapper.mapSentences(from.getSentences()));
-        return lexicalEntry;
+        return new LexicalEntry(
+                from.getLanguage(),
+                from.getLexicalCategory(),
+                sentenceEntityMapper.mapSentences(from.getSentences()),
+                from.getText()
+        );
     }
 
    List<LexicalEntry> mapLexicalEntries(List<LexicalEntryEntity> fromList){

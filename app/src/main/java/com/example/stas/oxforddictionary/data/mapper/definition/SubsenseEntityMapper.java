@@ -16,7 +16,7 @@ class SubsenseEntityMapper {
         subsense.setDefinitions(from.getDefinitions());
         subsense.setDomains(from.getDomains());
         subsense.setId(from.getId());
-        subsense.setShortDefinitions(from.getShortDefinitions());
+        subsense.setShortDefinitions(from.getShort_definitions());
         subsense.setExamples(subExampleEntityMapper.mapSubexamples(from.getExamples()));
         return subsense;
     }

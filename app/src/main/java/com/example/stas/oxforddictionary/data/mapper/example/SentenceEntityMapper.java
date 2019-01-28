@@ -11,15 +11,15 @@ class SentenceEntityMapper {
     private TranslationEntityMapper translationEntityMapper = new TranslationEntityMapper();
 
     private Sentence mapSentence(SentenceEntity from){
-        Sentence sentence = new Sentence();
-        sentence.setDefinitions(from.getDefinitions());
-        sentence.setDomains(from.getDomains());
-        sentence.setRegions(from.getRegions());
-        sentence.setRegisters(from.getRegisters());
-        sentence.setSenseIds(from.getSenseIds());
-        sentence.setText(from.getText());
-        sentence.setTranslations(translationEntityMapper.mapTranslations(from.getTranslations()));
-        return sentence;
+        return new Sentence(
+                from.getDefinitions(),
+                from.getDomains(),
+                from.getRegions(),
+                from.getRegisters(),
+                from.getSenseIds(),
+                from.getText(),
+                translationEntityMapper.mapTranslations(from.getTranslations())
+        );
     }
 
   List<Sentence> mapSentences(List<SentenceEntity> fromList){

@@ -15,7 +15,7 @@ class SenseEntityMapper {
         Sense sense = new Sense();
         sense.setId(from.getId());
         sense.setDefinitions(from.getDefinitions());
-        sense.setShortDefinitions(from.getShortDefinitions());
+        sense.setShortDefinitions(from.getShort_definitions());
         sense.setSubsens(subSenseEntityMapper.mapSubsenses(from.getSubsenses()));
         sense.setExamples(exampleEntityMapper.mapExamples(from.getExamples()));
         return sense;

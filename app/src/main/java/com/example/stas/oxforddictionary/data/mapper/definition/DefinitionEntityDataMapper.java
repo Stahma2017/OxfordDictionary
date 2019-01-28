@@ -10,7 +10,7 @@ public class DefinitionEntityDataMapper {
     private LexicalEntryEntityMapper lexicalEntryEntityMapper = new LexicalEntryEntityMapper();
 
     public DefinitionResult transform(EntryResponseEntity entryResponseEntity){
-        ResultEntity from = entryResponseEntity.getResultEntities().get(0);
+        ResultEntity from = entryResponseEntity.getResults().get(0);
         DefinitionResult result = new DefinitionResult();
         result.setId(from.getId());
         result.setLanguage(from.getLanguage());
