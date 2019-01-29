@@ -16,8 +16,10 @@ class SubExampleEntityMapper {
 
     List<SubExample> mapSubexamples(List<SubExampleEntity> fromList){
         List<SubExample> subexamples = new ArrayList<>();
-        for (SubExampleEntity subexample: fromList) {
-            subexamples.add(mapSubexample(subexample));
+        if(fromList != null){
+            for (SubExampleEntity subexample: fromList) {
+                subexamples.add(mapSubexample(subexample));
+            }
         }
         return subexamples;
     }

@@ -23,8 +23,10 @@ class SenseEntityMapper {
 
     List<Sense> mapSenses(List<SenseEntity> fromList){
         List<Sense> senses = new ArrayList<>();
-        for (SenseEntity senseEntity : fromList) {
-            senses.add(mapSense(senseEntity));
+        if (fromList != null){
+            for (SenseEntity senseEntity : fromList) {
+                senses.add(mapSense(senseEntity));
+            }
         }
         return senses;
     }

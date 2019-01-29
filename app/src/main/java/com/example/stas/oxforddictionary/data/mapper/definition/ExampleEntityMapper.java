@@ -16,8 +16,10 @@ class ExampleEntityMapper {
 
     List<Example> mapExamples(List<ExampleEntity> fromList){
         List<Example> examples = new ArrayList<>();
-        for (ExampleEntity example: fromList) {
-            examples.add(mapExample(example));
+        if (fromList != null){
+            for (ExampleEntity example: fromList) {
+                examples.add(mapExample(example));
+            }
         }
         return examples;
     }

@@ -19,8 +19,10 @@ class EntryEntityMapper {
     }
     List<Entry> mapEntries(List<EntryEntity> fromList){
         List<Entry> entries = new ArrayList<>();
-        for (EntryEntity entry:fromList) {
-            entries.add(mapEntry(entry));
+        if (fromList!=null){
+            for (EntryEntity entry:fromList) {
+                entries.add(mapEntry(entry));
+            }
         }
         return entries;
     }

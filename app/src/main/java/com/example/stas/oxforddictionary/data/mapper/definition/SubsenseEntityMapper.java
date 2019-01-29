@@ -23,8 +23,10 @@ class SubsenseEntityMapper {
 
     List<Subsense> mapSubsenses(List<SubsenseEntity> fromList){
         List<Subsense> subsenses = new ArrayList<>();
-        for (SubsenseEntity subsenseEntity : fromList) {
-            subsenses.add(mapSubsense(subsenseEntity));
+        if (fromList != null){
+            for (SubsenseEntity subsenseEntity : fromList) {
+                subsenses.add(mapSubsense(subsenseEntity));
+            }
         }
         return subsenses;
     }

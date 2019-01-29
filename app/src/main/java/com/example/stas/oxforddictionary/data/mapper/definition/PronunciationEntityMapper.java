@@ -19,8 +19,10 @@ class PronunciationEntityMapper {
 
     List<Pronunciation> mapPronunciations(List<PronunciationEntity> fromList){
             List<Pronunciation> pronunciations = new ArrayList<>();
-            for (PronunciationEntity pronunciationEntity : fromList) {
-                pronunciations.add(mapPronunciation(pronunciationEntity));
+            if (fromList != null){
+                for (PronunciationEntity pronunciationEntity : fromList) {
+                    pronunciations.add(mapPronunciation(pronunciationEntity));
+                }
             }
             return pronunciations;
     }

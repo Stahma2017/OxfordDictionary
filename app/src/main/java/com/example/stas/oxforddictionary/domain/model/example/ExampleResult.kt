@@ -32,3 +32,5 @@ data class Translation(
         var registers: List<String>,
         var text: String
 )
+
+
