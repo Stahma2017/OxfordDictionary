@@ -10,8 +10,9 @@ import android.widget.TextView;
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.ExampleModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.LexicalEntryModel;
-import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SubSynonymModel;
+import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SubsynonymModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SynonymModel;
+
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +51,7 @@ public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHo
                 throw new RuntimeException("Unknown type");
         }
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int pos) {
         SynonymsItem item = synonyms.get(pos);
@@ -113,7 +115,7 @@ public class SynonymsAdapter extends RecyclerView.Adapter<SynonymsAdapter.ViewHo
         }
         @Override
         public void bindType(SynonymsItem item) {
-            synonym.setText(((SubSynonymModel)item).getText());
+            synonym.setText(((SubsynonymModel)item).getText());
         }
     }
 }

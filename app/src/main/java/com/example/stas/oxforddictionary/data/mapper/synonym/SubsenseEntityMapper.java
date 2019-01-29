@@ -6,23 +6,25 @@ import com.example.stas.oxforddictionary.domain.model.synonym.Subsense;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubsenseEntityMapper {
+class SubsenseEntityMapper {
 
     private SubSynonymEntityMapper subSynonymEntityMapper = new SubSynonymEntityMapper();
 
     private Subsense mapSubsense(SubsenseEntity from){
-        Subsense subsense = new Subsense();
-        subsense.setId(from.getId());
-        subsense.setRegions(from.getRegions());
-        subsense.setRegisters(from.getRegisters());
-        subsense.setSynonyms(subSynonymEntityMapper.mapSynonyms(from.getSynonyms()));
-        return subsense ;
+        return new Subsense(
+                from.getId(),
+                subSynonymEntityMapper.mapSynonyms(from.getSynonyms()),
+                from.getRegisters(),
+                from.getRegions()
+        );
     }
 
     List<Subsense> mapSubsenses(List<SubsenseEntity> fromList){
         List<Subsense> subsenses = new ArrayList<>();
-        for (SubsenseEntity subsense: fromList) {
-            subsenses.add(mapSubsense(subsense));
+        if (fromList != null) {
+            for (SubsenseEntity subsense: fromList) {
+                subsenses.add(mapSubsense(subsense));
+            }
         }
         return subsenses;
     }

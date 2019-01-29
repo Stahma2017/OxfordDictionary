@@ -11,14 +11,13 @@ class LexicalEntryModelMapper {
         private EntryModelMapper entryModelMapper = new EntryModelMapper();
 
     private LexicalEntryModel mapLexicalEntry(LexicalEntry from){
-        LexicalEntryModel lexicalEntryModel = new LexicalEntryModel();
-        lexicalEntryModel.setLanguage(from.getLanguage());
-        lexicalEntryModel.setLexicalCategory(from.getLexicalCategory());
-        lexicalEntryModel.setText(from.getText());
-        lexicalEntryModel.setEntries(entryModelMapper.mapEntries(from.getEntries()));
-        return  lexicalEntryModel;
+        return new LexicalEntryModel(
+                entryModelMapper.mapEntries(from.getEntries()),
+                from.getLanguage(),
+                from.getLexicalCategory(),
+                from.getText()
+        );
     }
-
 
     List<LexicalEntryModel> mapLexicalEntries(List<LexicalEntry> fromList){
         List<LexicalEntryModel> lexicalEntries = new ArrayList<>();

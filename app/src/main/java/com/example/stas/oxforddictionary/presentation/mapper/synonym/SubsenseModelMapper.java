@@ -10,14 +10,13 @@ class SubsenseModelMapper {
     private SubsynonymModelMapper subsynonymModelMapper = new SubsynonymModelMapper();
 
     private SubsenseModel mapSubsense(Subsense from){
-        SubsenseModel subsenseModel = new SubsenseModel();
-        subsenseModel.setId(from.getId());
-        subsenseModel.setRegions(from.getRegions());
-        subsenseModel.setRegisters(from.getRegisters());
-        subsenseModel.setSynonyms(subsynonymModelMapper.mapSubsynonyms(from.getSynonyms()));
-        return subsenseModel;
+        return new SubsenseModel(
+                from.getId(),
+                subsynonymModelMapper.mapSubsynonyms(from.getSynonyms()),
+                from.getRegisters(),
+                from.getRegions()
+        );
     }
-
 
     List<SubsenseModel> mapSubsenses(List<Subsense> fromList){
         List<SubsenseModel> subsenses = new ArrayList<>();

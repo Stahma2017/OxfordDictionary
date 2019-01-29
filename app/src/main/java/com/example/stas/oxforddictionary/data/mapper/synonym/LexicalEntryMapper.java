@@ -13,18 +13,20 @@ class LexicalEntryMapper {
 
 
     private LexicalEntry mapLexicalEntry(LexicalEntryEntity from){
-        LexicalEntry lexicalEntry = new LexicalEntry();
-        lexicalEntry.setLanguage(from.getLanguage());
-        lexicalEntry.setLexicalCategory(from.getLexicalCategory());
-        lexicalEntry.setText(from.getText());
-        lexicalEntry.setEntries(entryEntityMapper.mapEntries(from.getEntries()));
-        return lexicalEntry;
+        return new LexicalEntry(
+                entryEntityMapper.mapEntries(from.getEntries()),
+                from.getLanguage(),
+                from.getLexicalCategory(),
+                from.getText()
+        );
     }
 
     List<LexicalEntry> mapLexicalEntries(List<LexicalEntryEntity> fromList){
         List<LexicalEntry> entries = new ArrayList<>();
-        for (LexicalEntryEntity lexicalEntry: fromList) {
-            entries.add(mapLexicalEntry(lexicalEntry));
+        if(fromList != null){
+            for (LexicalEntryEntity lexicalEntry: fromList) {
+                entries.add(mapLexicalEntry(lexicalEntry));
+            }
         }
         return entries;
     }

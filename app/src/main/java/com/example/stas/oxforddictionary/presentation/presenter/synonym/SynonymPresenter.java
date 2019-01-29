@@ -10,6 +10,7 @@ import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.LexicalE
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.ResultModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SenseModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SubsenseModel;
+
 import java.util.ArrayList;
 import java.util.List;
 

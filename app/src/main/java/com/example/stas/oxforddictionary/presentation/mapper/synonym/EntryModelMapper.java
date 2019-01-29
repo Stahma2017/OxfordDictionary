@@ -10,13 +10,11 @@ class EntryModelMapper {
 
     SenseModelMapper senseModelMapper = new SenseModelMapper();
     private EntryModel mapEntry(Entry from){
-        EntryModel entry = new EntryModel();
-        entry.setHomographNumber(from.getHomographNumber());
-        entry.setSenses(senseModelMapper.mapSenses(from.getSenses()));
-        return entry;
+        return new EntryModel(
+                from.getHomographNumber(),
+                senseModelMapper.mapSenses(from.getSenses())
+        );
     }
-
-
 
     List<EntryModel> mapEntries(List<Entry> fromList){
         List<EntryModel> entries = new ArrayList<>();

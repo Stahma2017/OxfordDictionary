@@ -9,13 +9,13 @@ public class SynonymEntityDataMapper {
 
    public SynonymResult transform(SynonymResponseEntity synonymResponseEntity){
        ResultEntity from = synonymResponseEntity.getResults().get(0);
-       SynonymResult result = new SynonymResult();
-       result.setId(from.getId());
-       result.setLanguage(from.getLanguage());
-       result.setType(from.getType());
-       result.setWord(from.getWord());
-       result.setLexicalEntries(lexicalEntryMapper.mapLexicalEntries(from.getLexicalEntries()));
-       return result;
-    };
+       return new SynonymResult(
+               from.getId(),
+               from.getLanguage(),
+               lexicalEntryMapper.mapLexicalEntries(from.getLexicalEntries()),
+               from.getType(),
+               from.getWord()
+       );
+    }
 
 }

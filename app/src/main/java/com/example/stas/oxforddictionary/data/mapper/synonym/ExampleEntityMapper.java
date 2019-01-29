@@ -6,18 +6,20 @@ import com.example.stas.oxforddictionary.domain.model.synonym.Example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExampleEntityMapper {
+class ExampleEntityMapper {
 
     private Example mapExample(ExampleEntity from){
-        Example example = new Example();
-        example.setText(from.getText());
-        return example;
+        return new Example(
+                from.getText()
+        );
     }
 
     List<Example> mapExamples(List<ExampleEntity> fromList){
         List<Example> examples = new ArrayList<>();
-        for (ExampleEntity example:fromList) {
-            examples.add(mapExample(example));
+        if(fromList != null){
+            for (ExampleEntity example:fromList) {
+                examples.add(mapExample(example));
+            }
         }
         return examples;
     }

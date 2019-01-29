@@ -12,12 +12,12 @@ class SenseModelMapper {
     private SubsenseModelMapper subsenseModelMapper = new SubsenseModelMapper();
 
     private SenseModel mapSense(Sense from){
-        SenseModel sense = new SenseModel();
-        sense.setId(from.getId());
-        sense.setExamples(exampleModelMapper.mapExamples(from.getExamples()));
-        sense.setSynonyms(synonymModelMapper.mapSynonyms(from.getSynonyms()));
-        sense.setSubsenses(subsenseModelMapper.mapSubsenses(from.getSubsenses()));
-        return sense;
+        return new SenseModel(
+                exampleModelMapper.mapExamples(from.getExamples()),
+                from.getId(),
+                subsenseModelMapper.mapSubsenses(from.getSubsenses()),
+                synonymModelMapper.mapSynonyms(from.getSynonyms())
+        );
     }
 
     List<SenseModel> mapSenses(List<Sense> fromList){

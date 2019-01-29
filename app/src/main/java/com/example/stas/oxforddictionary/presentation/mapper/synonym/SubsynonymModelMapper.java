@@ -1,24 +1,24 @@
 package com.example.stas.oxforddictionary.presentation.mapper.synonym;
 
-import com.example.stas.oxforddictionary.domain.model.synonym.SubSynonym;
-import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SubSynonymModel;
+import com.example.stas.oxforddictionary.domain.model.synonym.Subsynonym;
+import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SubsynonymModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class SubsynonymModelMapper {
 
-    private SubSynonymModel mapSubsynonym(SubSynonym from){
-        SubSynonymModel subSynonymModel = new SubSynonymModel();
-        subSynonymModel.setId(from.getId());
-        subSynonymModel.setLanguage(from.getLanguage());
-        subSynonymModel.setText(from.getText());
-        return subSynonymModel;
+    private SubsynonymModel mapSubsynonym(Subsynonym from){
+        return new SubsynonymModel(
+                from.getId(),
+                from.getLanguage(),
+                from.getText()
+        );
     }
 
-    List<SubSynonymModel> mapSubsynonyms(List<SubSynonym> fromList){
-        List<SubSynonymModel> subSynonyms = new ArrayList<>();
-        for (SubSynonym subSynonym: fromList) {
+    List<SubsynonymModel> mapSubsynonyms(List<Subsynonym> fromList){
+        List<SubsynonymModel> subSynonyms = new ArrayList<>();
+        for (Subsynonym subSynonym: fromList) {
             subSynonyms.add(mapSubsynonym(subSynonym));
         }
         return subSynonyms;

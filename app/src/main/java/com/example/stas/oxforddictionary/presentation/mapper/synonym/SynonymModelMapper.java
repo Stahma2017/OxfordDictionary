@@ -9,13 +9,12 @@ import java.util.List;
 class SynonymModelMapper {
 
     private SynonymModel mapSynonym(Synonym from){
-        SynonymModel synonymModel = new SynonymModel();
-        synonymModel.setId(from.getId());
-        synonymModel.setLanguage(from.getLanguage());
-        synonymModel.setText(from.getText());
-        return synonymModel;
+        return new SynonymModel(
+                from.getId(),
+                from.getLanguage(),
+                from.getText()
+        );
     }
-
 
     List<SynonymModel> mapSynonyms(List<Synonym> fromList){
         List<SynonymModel> synonyms = new ArrayList<>();

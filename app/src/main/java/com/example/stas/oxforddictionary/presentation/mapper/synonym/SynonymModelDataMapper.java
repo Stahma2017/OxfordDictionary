@@ -8,12 +8,12 @@ public class SynonymModelDataMapper {
     private LexicalEntryModelMapper lexicalEntryModelMapper = new LexicalEntryModelMapper();
 
     public ResultModel transform(SynonymResult from){
-        ResultModel resultModel = new ResultModel();
-        resultModel.setId(from.getId());
-        resultModel.setLanguage(from.getLanguage());
-        resultModel.setType(from.getType());
-        resultModel.setWord(from.getWord());
-        resultModel.setLexicalEntries(lexicalEntryModelMapper.mapLexicalEntries(from.getLexicalEntries()));
-        return resultModel;
+        return new ResultModel(
+                from.getId(),
+                from.getLanguage(),
+                lexicalEntryModelMapper.mapLexicalEntries(from.getLexicalEntries()),
+                from.getType(),
+                from.getWord()
+        );
     }
 }
