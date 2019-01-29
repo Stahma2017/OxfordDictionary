@@ -77,7 +77,7 @@ public class EntryPresenter implements EntryContract.Presenter {
                 .subscribe(new Consumer<DefinitionResult>() {
                     @Override
                     public void accept(DefinitionResult result){
-                        view.playSound(result.getLexicalEntries().get(0).getPronunciationEntities().get(0).getAudioFile());
+                        view.playSound(result.getLexicalEntries().get(0).getPronunciations().get(0).getAudioFile());
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -92,10 +92,10 @@ public class EntryPresenter implements EntryContract.Presenter {
         List<Item> definitions = new ArrayList<>();
         for (LexicalEntryModel lexicalEntry : result.getLexicalEntries()) {
             definitions.add(lexicalEntry);
-            for(SenseModel sense : lexicalEntry.getEntries().get(0).getSense()){
+            for(SenseModel sense : lexicalEntry.getEntries().get(0).getSenses()){
                 if(!sense.getDefinitions().isEmpty()){
                     definitions.add(sense);
-                    for (SubsenseModel subsense :sense.getSubsens()) {
+                    for (SubsenseModel subsense :sense.getSubsenses()) {
                         if(!subsense.getDefinitions().isEmpty()){
                             definitions.add(subsense);
                         }
@@ -109,7 +109,7 @@ public class EntryPresenter implements EntryContract.Presenter {
         LexicalEntryModel lexicalEntry = result.getLexicalEntries().get(0);
         List<String> titleSet = new ArrayList<>();
         titleSet.add(lexicalEntry.getText());
-        for (PronunciationModel pronunciation: lexicalEntry.getPronunciationEntities()){
+        for (PronunciationModel pronunciation: lexicalEntry.getPronunciations()){
             if (pronunciation.getAudioFile() != null){
                 titleSet.add("[" + pronunciation.getPhoneticSpelling()+ "]");
             }

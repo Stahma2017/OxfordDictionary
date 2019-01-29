@@ -9,12 +9,12 @@ import java.util.List;
 class PronunciationEntityMapper {
 
     private Pronunciation mapPronunciation(PronunciationEntity from){
-        Pronunciation pronunciation = new Pronunciation();
-        pronunciation.setAudioFile(from.getAudioFile());
-        pronunciation.setDialects(from.getDialects());
-        pronunciation.setPhoneticNotation(from.getPhoneticNotation());
-        pronunciation.setPhoneticSpelling(from.getPhoneticSpelling());
-        return pronunciation;
+        return new Pronunciation(
+                from.getAudioFile(),
+                from.getDialects(),
+                from.getPhoneticNotation(),
+                from.getPhoneticSpelling()
+        );
     }
 
     List<Pronunciation> mapPronunciations(List<PronunciationEntity> fromList){

@@ -8,15 +8,17 @@ import java.util.List;
 
 class ExampleModelMapper {
     private ExampleModel mapExample(Example from){
-        ExampleModel example = new ExampleModel();
-        example.setText(from.getText());
-        return example;
+        return new ExampleModel(
+                from.getText()
+        );
     }
 
     List<ExampleModel> mapExamples(List<Example> fromList){
         List<ExampleModel> examples = new ArrayList<>();
-        for (Example example: fromList) {
-            examples.add(mapExample(example));
+        if (fromList != null){
+            for (Example example: fromList) {
+                examples.add(mapExample(example));
+            }
         }
         return examples;
     }

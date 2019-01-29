@@ -11,19 +11,21 @@ public class SubsenseModelMapper {
     private SubexampleModelMapper subexampleModelMapper = new SubexampleModelMapper();
 
     public SubsenseModel mapSubsense(Subsense from){
-        SubsenseModel subsense = new SubsenseModel();
-        subsense.setDefinitions(from.getDefinitions());
-        subsense.setDomains(from.getDomains());
-        subsense.setId(from.getId());
-        subsense.setShortDefinitions(from.getShortDefinitions());
-        subsense.setExamples(subexampleModelMapper.mapSubexamples(from.getExamples()));
-        return subsense;
+        return new SubsenseModel(
+                from.getDefinitions(),
+                subexampleModelMapper.mapSubexamples(from.getExamples()),
+                from.getId(),
+                from.getShortDefinitions(),
+                from.getDomains()
+        );
     }
 
     public List<SubsenseModel> mapSubsenses(List<Subsense> fromList){
         List<SubsenseModel> subsenses = new ArrayList<>();
-        for (Subsense subsense : fromList) {
-            subsenses.add(mapSubsense(subsense));
+        if (fromList != null){
+            for (Subsense subsense : fromList) {
+                subsenses.add(mapSubsense(subsense));
+            }
         }
         return subsenses;
     }

@@ -1,8 +1,8 @@
 package com.example.stas.oxforddictionary.presentation.view.entry.adapter;
 
+import com.example.stas.oxforddictionary.presentation.viewmodel.definition.LexicalEntryModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SenseModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.SubsenseModel;
-import com.example.stas.oxforddictionary.presentation.viewmodel.definition.LexicalEntryModel;
 
 import java.util.ArrayList;
 import java.util.List;

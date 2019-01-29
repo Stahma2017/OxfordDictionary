@@ -11,11 +11,11 @@ class EntryEntityMapper {
     private SenseEntityMapper senseEntityMapper = new SenseEntityMapper();
 
     private Entry mapEntry(EntryEntity from){
-        Entry entry = new Entry();
-        entry.setEtymologies(from.getEtymologies());
-        entry.setHomographNumber(from.getHomographNumber());
-        entry.setSens(senseEntityMapper.mapSenses(from.getSenses()));
-        return entry;
+        return new Entry(
+                from.getEtymologies(),
+                from.getHomographNumber(),
+                senseEntityMapper.mapSenses(from.getSenses())
+        );
     }
     List<Entry> mapEntries(List<EntryEntity> fromList){
         List<Entry> entries = new ArrayList<>();

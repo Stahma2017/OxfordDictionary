@@ -8,10 +8,10 @@ import java.util.List;
 
 class ExampleEntityMapper {
 
-    private Example mapExample(ExampleEntity from){
-        Example example = new Example();
-        example.setText(from.getText());
-        return example;
+    private Example mapExample(ExampleEntity from) {
+        return new Example(
+                from.getText()
+        );
     }
 
     List<Example> mapExamples(List<ExampleEntity> fromList){

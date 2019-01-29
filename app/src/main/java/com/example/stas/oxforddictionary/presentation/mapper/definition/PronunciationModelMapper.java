@@ -6,20 +6,22 @@ import com.example.stas.oxforddictionary.presentation.viewmodel.definition.Pronu
 import java.util.ArrayList;
 import java.util.List;
 
-public class PronunciationModelMapper {
-    public PronunciationModel mapPronunciation(Pronunciation from){
-        PronunciationModel pronunciation = new PronunciationModel();
-        pronunciation.setAudioFile(from.getAudioFile());
-        pronunciation.setDialects(from.getDialects());
-        pronunciation.setPhoneticNotation(from.getPhoneticNotation());
-        pronunciation.setPhoneticSpelling(from.getPhoneticSpelling());
-        return pronunciation;
+class PronunciationModelMapper {
+    private PronunciationModel mapPronunciation(Pronunciation from){
+        return new PronunciationModel(
+                from.getAudioFile(),
+                from.getDialects(),
+                from.getPhoneticNotation(),
+                from.getPhoneticSpelling()
+        );
     }
 
-    public List<PronunciationModel> mapPronunciations(List<Pronunciation> fromList){
+    List<PronunciationModel> mapPronunciations(List<Pronunciation> fromList){
         List<PronunciationModel> pronunciations = new ArrayList<>();
-        for (Pronunciation pronunciation : fromList) {
-            pronunciations.add(mapPronunciation(pronunciation));
+        if (fromList != null){
+            for (Pronunciation pronunciation : fromList) {
+                pronunciations.add(mapPronunciation(pronunciation));
+            }
         }
         return pronunciations;
     }

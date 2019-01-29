@@ -38,6 +38,7 @@ data class SenseEntity(
         val short_definitions: List<String>,
         val subsenses: List<SubsenseEntity>
 )
+
 data class ExampleEntity(
         val text: String
 )

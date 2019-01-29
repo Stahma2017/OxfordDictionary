@@ -3,6 +3,7 @@ package com.example.stas.oxforddictionary.data.mapper.definition;
 import com.example.stas.oxforddictionary.data.entity.definition.SubsenseEntity;
 import com.example.stas.oxforddictionary.domain.model.definition.Subsense;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,15 +11,14 @@ class SubsenseEntityMapper {
 
     private SubExampleEntityMapper subExampleEntityMapper = new SubExampleEntityMapper();
 
-
     private Subsense mapSubsense(SubsenseEntity from){
-        Subsense subsense = new Subsense();
-        subsense.setDefinitions(from.getDefinitions());
-        subsense.setDomains(from.getDomains());
-        subsense.setId(from.getId());
-        subsense.setShortDefinitions(from.getShort_definitions());
-        subsense.setExamples(subExampleEntityMapper.mapSubexamples(from.getExamples()));
-        return subsense;
+        return new Subsense(
+                from.getId(),
+                from.getDomains(),
+                from.getDefinitions(),
+                from.getShort_definitions(),
+                subExampleEntityMapper.mapSubexamples(from.getExamples())
+        );
     }
 
     List<Subsense> mapSubsenses(List<SubsenseEntity> fromList){

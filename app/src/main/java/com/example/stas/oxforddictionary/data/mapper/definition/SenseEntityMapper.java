@@ -12,13 +12,13 @@ class SenseEntityMapper {
     private ExampleEntityMapper exampleEntityMapper = new ExampleEntityMapper();
 
     private Sense mapSense(SenseEntity from){
-        Sense sense = new Sense();
-        sense.setId(from.getId());
-        sense.setDefinitions(from.getDefinitions());
-        sense.setShortDefinitions(from.getShort_definitions());
-        sense.setSubsens(subSenseEntityMapper.mapSubsenses(from.getSubsenses()));
-        sense.setExamples(exampleEntityMapper.mapExamples(from.getExamples()));
-        return sense;
+        return new Sense(
+                from.getDefinitions(),
+                exampleEntityMapper.mapExamples(from.getExamples()),
+                from.getId(),
+                from.getShort_definitions(),
+                subSenseEntityMapper.mapSubsenses(from.getSubsenses())
+        );
     }
 
     List<Sense> mapSenses(List<SenseEntity> fromList){

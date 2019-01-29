@@ -12,19 +12,21 @@ class LexicalEntryModelMapper {
     private PronunciationModelMapper pronunciationModelMapper = new PronunciationModelMapper();
 
     private LexicalEntryModel mapLexicalEntry(LexicalEntry from){
-        LexicalEntryModel lexicalEntryModel = new LexicalEntryModel();
-        lexicalEntryModel.setLanguage(from.getLanguage());
-        lexicalEntryModel.setLexicalCategory(from.getLexicalCategory());
-        lexicalEntryModel.setText(from.getText());
-        lexicalEntryModel.setEntries(entryModelMapper.mapEntries(from.getEntries()));
-        lexicalEntryModel.setPronunciationEntities(pronunciationModelMapper.mapPronunciations(from.getPronunciationEntities()));
-   return lexicalEntryModel;
+        return new LexicalEntryModel(
+                entryModelMapper.mapEntries(from.getEntries()),
+                from.getLanguage(),
+                from.getLexicalCategory(),
+                pronunciationModelMapper.mapPronunciations(from.getPronunciations()),
+                from.getText()
+        );
     }
 
     List<LexicalEntryModel> mapLexicalEntries(List<LexicalEntry> fromList){
         List<LexicalEntryModel> lexicalEntries = new ArrayList<>();
-        for (LexicalEntry lexicalEntry: fromList) {
-            lexicalEntries.add(mapLexicalEntry(lexicalEntry));
+        if(fromList != null){
+            for (LexicalEntry lexicalEntry: fromList) {
+                lexicalEntries.add(mapLexicalEntry(lexicalEntry));
+            }
         }
         return lexicalEntries;
     }

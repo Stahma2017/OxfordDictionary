@@ -2,6 +2,8 @@ package com.example.stas.oxforddictionary.presentation.view.entry.adapter;
 
 import java.util.List;
 
+import io.reactivex.annotations.Nullable;
+
 public interface Item {
   
     int TYPE_SENSE = 0;

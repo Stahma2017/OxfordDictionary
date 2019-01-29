@@ -11,16 +11,12 @@ public class DefinitionEntityDataMapper {
 
     public DefinitionResult transform(EntryResponseEntity entryResponseEntity){
         ResultEntity from = entryResponseEntity.getResults().get(0);
-        DefinitionResult result = new DefinitionResult();
-        result.setId(from.getId());
-        result.setLanguage(from.getLanguage());
-        result.setType(from.getType());
-        result.setWord(from.getWord());
-        result.setLexicalEntries(lexicalEntryEntityMapper.mapLexicalEntries(from.getLexicalEntries()));
-        return result;
+        return new DefinitionResult(
+                from.getId(),
+                from.getLanguage(),
+                lexicalEntryEntityMapper.mapLexicalEntries(from.getLexicalEntries()),
+                from.getType(),
+                from.getWord()
+        );
     }
-
-
-
-
 }

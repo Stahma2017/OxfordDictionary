@@ -11,20 +11,21 @@ class LexicalEntryEntityMapper {
     private PronunciationEntityMapper pronunciationEntityMapper = new PronunciationEntityMapper();
 
     private LexicalEntry mapLexicalEntry(LexicalEntryEntity from){
-        LexicalEntry lexicalEntry = new LexicalEntry();
-        lexicalEntry.setLanguage(from.getLanguage());
-        lexicalEntry.setText(from.getText());
-        lexicalEntry.setLexicalCategory(from.getLexicalCategory());
-        lexicalEntry.setEntries(entryEntityMapper.mapEntries(from.getEntries()));
-        lexicalEntry.setPronunciationEntities(pronunciationEntityMapper.mapPronunciations(from.getPronunciations()));
-        return lexicalEntry;
+        return new LexicalEntry(
+                entryEntityMapper.mapEntries(from.getEntries()),
+                from.getLanguage(),
+                from.getLexicalCategory(),
+                pronunciationEntityMapper.mapPronunciations(from.getPronunciations()),
+                from.getText()
+        );
     }
-
 
     List<LexicalEntry> mapLexicalEntries(List<LexicalEntryEntity> fromList){
         List<LexicalEntry> lexicalEntries = new ArrayList<>();
-        for (LexicalEntryEntity lexicalEntry: fromList) {
-            lexicalEntries.add(mapLexicalEntry(lexicalEntry));
+        if (fromList != null){
+            for (LexicalEntryEntity lexicalEntry: fromList) {
+                lexicalEntries.add(mapLexicalEntry(lexicalEntry));
+            }
         }
         return lexicalEntries;
     }
