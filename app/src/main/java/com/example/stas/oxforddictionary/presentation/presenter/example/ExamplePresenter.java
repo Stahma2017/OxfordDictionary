@@ -8,6 +8,7 @@ import com.example.stas.oxforddictionary.presentation.view.example.ExampleContra
 import com.example.stas.oxforddictionary.presentation.viewmodel.example.ExampleResultModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.example.LexicalEntryModel;
 import com.example.stas.oxforddictionary.presentation.viewmodel.example.SentenceModel;
+
 import java.util.ArrayList;
 import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;

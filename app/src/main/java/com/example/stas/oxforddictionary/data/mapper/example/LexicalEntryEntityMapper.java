@@ -21,8 +21,10 @@ class LexicalEntryEntityMapper {
 
    List<LexicalEntry> mapLexicalEntries(List<LexicalEntryEntity> fromList){
        List<LexicalEntry> lexicalEntries = new ArrayList<>();
-       for (LexicalEntryEntity lexicalEntry: fromList) {
-           lexicalEntries.add(mapLexicalEntry(lexicalEntry));
+       if(fromList != null){
+           for (LexicalEntryEntity lexicalEntry: fromList) {
+               lexicalEntries.add(mapLexicalEntry(lexicalEntry));
+           }
        }
        return lexicalEntries;
     }

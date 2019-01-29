@@ -6,21 +6,23 @@ import com.example.stas.oxforddictionary.presentation.viewmodel.example.Translat
 import java.util.ArrayList;
 import java.util.List;
 
-public class TranslationModelMapper {
+class TranslationModelMapper {
     private TranslationModel mapTranslation(Translation from){
-        TranslationModel translation = new TranslationModel();
-        translation.setDomains(from.getDomains());
-        translation.setLanguage(from.getLanguage());
-        translation.setRegions(from.getRegisters());
-        translation.setRegisters(from.getRegisters());
-        translation.setText(from.getText());
-        return translation;
+        return new TranslationModel(
+                from.getDomains(),
+                from.getLanguage(),
+                from.getRegions(),
+                from.getRegisters(),
+                from.getText()
+        );
     }
 
     List<TranslationModel> mapTranslations(List<Translation> fromList){
         List<TranslationModel> translations = new ArrayList<>();
-        for (Translation translation : fromList) {
-            translations.add(mapTranslation(translation));
+        if (fromList != null){
+            for (Translation translation : fromList) {
+                translations.add(mapTranslation(translation));
+            }
         }
         return translations;
     }

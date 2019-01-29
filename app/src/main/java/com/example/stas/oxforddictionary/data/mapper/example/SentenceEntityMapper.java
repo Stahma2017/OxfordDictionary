@@ -24,8 +24,10 @@ class SentenceEntityMapper {
 
   List<Sentence> mapSentences(List<SentenceEntity> fromList){
       List<Sentence> sentences = new ArrayList<>();
-      for (SentenceEntity sentence:fromList) {
-          sentences.add(mapSentence(sentence));
+      if (fromList != null){
+          for (SentenceEntity sentence:fromList) {
+              sentences.add(mapSentence(sentence));
+          }
       }
       return sentences;
   }

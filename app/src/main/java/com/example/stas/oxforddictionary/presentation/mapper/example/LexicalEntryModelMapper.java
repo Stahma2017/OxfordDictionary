@@ -10,18 +10,20 @@ class LexicalEntryModelMapper {
     private SentenceModelMapper sentenceModelMapper = new SentenceModelMapper();
 
     private LexicalEntryModel mapLexicalEntry(LexicalEntry from){
-        LexicalEntryModel lexicalEntry = new LexicalEntryModel();
-        lexicalEntry.setLanguage(from.getLanguage());
-        lexicalEntry.setLexicalCategory(from.getLexicalCategory());
-        lexicalEntry.setText(from.getText());
-        lexicalEntry.setSentences(sentenceModelMapper.mapSentences(from.getSenteces()));
-        return lexicalEntry;
+        return new LexicalEntryModel(
+                from.getLanguage(),
+                from.getLexicalCategory(),
+                sentenceModelMapper.mapSentences(from.getSenteces()),
+                from.getText()
+        );
     }
 
     List<LexicalEntryModel> mapLexicalEntries(List<LexicalEntry> fromList){
         List<LexicalEntryModel> lexicalEntries = new ArrayList<>();
-        for (LexicalEntry lexicalEntry: fromList) {
-            lexicalEntries.add(mapLexicalEntry(lexicalEntry));
+        if (fromList != null){
+            for (LexicalEntry lexicalEntry: fromList) {
+                lexicalEntries.add(mapLexicalEntry(lexicalEntry));
+            }
         }
         return lexicalEntries;
     }

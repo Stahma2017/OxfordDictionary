@@ -8,12 +8,12 @@ public class ExampleModelDataMapper {
     private LexicalEntryModelMapper lexicalEntryModelMapper = new LexicalEntryModelMapper();
 
     public ExampleResultModel transform(ExampleResult from){
-        ExampleResultModel resultModel = new ExampleResultModel();
-        resultModel.setId(from.getId());
-        resultModel.setLanguage(from.getLanguage());
-        resultModel.setType(from.getType());
-        resultModel.setWord(from.getWord());
-        resultModel.setLexicalEntries(lexicalEntryModelMapper.mapLexicalEntries(from.getLexicalEntries()));
-        return resultModel;
+        return new ExampleResultModel(
+                from.getId(),
+                from.getLanguage(),
+                lexicalEntryModelMapper.mapLexicalEntries(from.getLexicalEntries()),
+                from.getType(),
+                from.getWord()
+        );
     }
 }
