@@ -5,13 +5,13 @@ import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.Synon
 data class ResultModel(
         val id: String?,
         val language: String?,
-        val lexicalEntries: List<LexicalEntryModel>?,
+        val lexicalEntries: List<LexicalEntryModel>,
         val type: String?,
         val word: String?
 )
 
 data class LexicalEntryModel(
-        val entries: List<EntryModel>?,
+        val entries: List<EntryModel>,
         val language: String?,
         val lexicalCategory: String?,
         val text: String?
@@ -21,14 +21,14 @@ data class LexicalEntryModel(
 
 data class EntryModel(
         val homographNumber: String?,
-        val senses: List<SenseModel>?
+        val senses: List<SenseModel>
 )
 
 data class SenseModel(
-        val examples: List<ExampleModel>?,
+        val examples: List<ExampleModel>,
         val id: String?,
-        val subsenses: List<SubsenseModel>?,
-        val synonyms: List<SynonymModel>?
+        val subsenses: List<SubsenseModel>,
+        val synonyms: List<SynonymModel>
 )
 
 data class ExampleModel(
@@ -47,7 +47,7 @@ data class SynonymModel(
 
 data class SubsenseModel(
         val id: String?,
-        val synonyms: List<SubsynonymModel>?,
+        val synonyms: List<SubsynonymModel>,
         val registers: List<String>?,
         val regions: List<String>?
 )

@@ -3,13 +3,13 @@ package com.example.stas.oxforddictionary.domain.model.synonym
 data class SynonymResult(
         val id: String?,
         val language: String?,
-        val lexicalEntries: List<LexicalEntry>?,
+        val lexicalEntries: List<LexicalEntry>,
         val type: String?,
         val word: String?
 )
 
 data class LexicalEntry(
-        val entries: List<Entry>?,
+        val entries: List<Entry>,
         val language: String?,
         val lexicalCategory: String?,
         val text: String?
@@ -17,14 +17,14 @@ data class LexicalEntry(
 
 data class Entry(
         val homographNumber: String?,
-        val senses: List<Sense>?
+        val senses: List<Sense>
 )
 
 data class Sense(
-        val examples: List<Example>?,
+        val examples: List<Example>,
         val id: String?,
-        val subsenses: List<Subsense>?,
-        val synonyms: List<Synonym>?
+        val subsenses: List<Subsense>,
+        val synonyms: List<Synonym>
 )
 
 data class Synonym(
@@ -45,7 +45,7 @@ data class Subsynonym(
 
 data class Subsense(
         val id: String?,
-        val synonyms: List<Subsynonym>?,
+        val synonyms: List<Subsynonym>,
         val registers: List<String>?,
         val regions: List<String>?
 )

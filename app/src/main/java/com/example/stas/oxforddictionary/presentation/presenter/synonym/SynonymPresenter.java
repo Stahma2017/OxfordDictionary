@@ -3,6 +3,7 @@ package com.example.stas.oxforddictionary.presentation.presenter.synonym;
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
 import com.example.stas.oxforddictionary.domain.model.synonym.SynonymResult;
 import com.example.stas.oxforddictionary.presentation.mapper.synonym.SynonymModelDataMapper;
+import com.example.stas.oxforddictionary.presentation.mapper.synonym.SynonymModelMapperKt;
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.synonym.SynonymConrtact;
 import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsItem;
@@ -45,8 +46,8 @@ public class SynonymPresenter implements SynonymConrtact.Presenter {
                 .subscribe(new Consumer<SynonymResult>() {
                     @Override
                     public void accept(SynonymResult synonymResult){
-                        ResultModel resultModel = synonymModelDataMapper.transform(synonymResult);
-                        view.showSynonyms(extractSynonyms(resultModel));
+                        //ResultModel resultModel = synonymModelDataMapper.transform(synonymResult);
+                        view.showSynonyms(extractSynonyms(SynonymModelMapperKt.toViewModel(synonymResult)));
                     }
                 });
      compositeDisposable.add(synonymsDisp);
