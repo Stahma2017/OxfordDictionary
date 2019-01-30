@@ -3,6 +3,7 @@ package com.example.stas.oxforddictionary.presentation.presenter.example;
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor;
 import com.example.stas.oxforddictionary.domain.model.example.ExampleResult;
 import com.example.stas.oxforddictionary.presentation.mapper.example.ExampleModelDataMapper;
+import com.example.stas.oxforddictionary.presentation.mapper.example.ExampleModelMapperKt;
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler;
 import com.example.stas.oxforddictionary.presentation.view.example.ExampleContract;
 import com.example.stas.oxforddictionary.presentation.viewmodel.example.ExampleResultModel;
@@ -41,8 +42,8 @@ public class ExamplePresenter implements ExampleContract.Presenter {
                 .subscribe(new Consumer<ExampleResult>() {
                     @Override
                     public void accept(ExampleResult exampleResult){
-                        ExampleResultModel result = exampleModelDataMapper.transform(exampleResult);
-                        view.showExamples(extractExamples(result));
+                      //  ExampleResultModel result = exampleModelDataMapper.transform(exampleResult);
+                        view.showExamples(extractExamples(ExampleModelMapperKt.toViewModel(exampleResult)));
                     }
                 });
         compositeDisposable.add(exampleDisp);

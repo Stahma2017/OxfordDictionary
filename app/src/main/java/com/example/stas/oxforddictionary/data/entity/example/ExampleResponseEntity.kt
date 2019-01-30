@@ -5,7 +5,7 @@ data class ExampleResponseEntity(val results: List<ExampleResultEntity>)
 data class ExampleResultEntity(
         val id: String,
         val language: String,
-        val lexicalEntries: List<LexicalEntryEntity>,
+        val lexicalEntries: List<LexicalEntryEntity>?,
         val type: String,
         val word: String
 )
@@ -13,7 +13,7 @@ data class ExampleResultEntity(
 data class LexicalEntryEntity(
         val language: String,
         val lexicalCategory: String,
-        val sentences: List<SentenceEntity>,
+        val sentences: List<SentenceEntity>?,
         val text: String
 )
 

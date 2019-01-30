@@ -3,7 +3,7 @@ package com.example.stas.oxforddictionary.presentation.viewmodel.example
 data class ExampleResultModel(
         val id: String?,
         val language: String?,
-        val lexicalEntries: List<LexicalEntryModel>?,
+        val lexicalEntries: List<LexicalEntryModel>,
         val type: String?,
         val word: String?
 )
@@ -11,7 +11,7 @@ data class ExampleResultModel(
 data class LexicalEntryModel(
         val language: String?,
         val lexicalCategory:  String?,
-        val sentences: List<SentenceModel>?,
+        val sentences: List<SentenceModel>,
         val text: String?
 )
 

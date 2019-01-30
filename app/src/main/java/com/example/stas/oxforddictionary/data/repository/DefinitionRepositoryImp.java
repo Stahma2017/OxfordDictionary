@@ -5,6 +5,7 @@ import com.example.stas.oxforddictionary.data.entity.example.ExampleResponseEnti
 import com.example.stas.oxforddictionary.data.entity.synonym.SynonymResponseEntity;
 import com.example.stas.oxforddictionary.data.mapper.definition.DefinitionEntityDataMapper;
 import com.example.stas.oxforddictionary.data.mapper.example.ExampleEntityDataMapper;
+import com.example.stas.oxforddictionary.data.mapper.example.ExampleEntityMapperKt;
 import com.example.stas.oxforddictionary.data.mapper.synonym.SynonymEntityDataMapper;
 import com.example.stas.oxforddictionary.data.network.OxfordApi;
 import com.example.stas.oxforddictionary.domain.DefinitionRepository;
@@ -59,7 +60,8 @@ public class DefinitionRepositoryImp implements DefinitionRepository {
                 .map(new Function<ExampleResponseEntity, ExampleResult>() {
                     @Override
                     public ExampleResult apply(ExampleResponseEntity exampleResponseEntity) throws Exception {
-                        return exampleEntityDataMapper.transform(exampleResponseEntity);
+                        return ExampleEntityMapperKt.toModel(exampleResponseEntity);
+                     //   return exampleEntityDataMapper.transform(exampleResponseEntity);
                     }
                 });
     }
