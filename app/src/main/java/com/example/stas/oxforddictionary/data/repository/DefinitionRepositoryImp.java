@@ -25,7 +25,7 @@ public class DefinitionRepositoryImp implements DefinitionRepository {
     private final ExampleEntityDataMapper exampleEntityDataMapper;
 
     public DefinitionRepositoryImp(OxfordApi oxfordApi,
-            DefinitionEntityDataMapper definitionEntityDataMapper,
+                                   DefinitionEntityDataMapper definitionEntityDataMapper,
                                    SynonymEntityDataMapper synonymEntityDataMapper,
                                    ExampleEntityDataMapper exampleEntityDataMapper) {
         this.oxfordApi = oxfordApi;

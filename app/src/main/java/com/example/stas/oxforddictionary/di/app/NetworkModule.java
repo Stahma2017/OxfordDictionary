@@ -18,7 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class NetworkModule {
+class NetworkModule {
     private static String API_BASE_URL = "https://od-api.oxforddictionaries.com/";
 
     private static final String APP_ID = "app_id";
@@ -50,7 +50,6 @@ public class NetworkModule {
             }
         };
     }
-
 
     @Provides
     OkHttpClient provideHttpClient(@Named("Logging") Interceptor loggingInterceptor,
