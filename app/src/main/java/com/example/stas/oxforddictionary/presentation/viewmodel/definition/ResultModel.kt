@@ -4,17 +4,17 @@ import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Visitor
 
 data class ResultModel(
-        val id: String,
-        val language: String,
+        val id: String?,
+        val language: String?,
         val lexicalEntries: List<LexicalEntryModel>,
-        val type: String,
-        val word: String
+        val type: String?,
+        val word: String?
 )
 
 data class LexicalEntryModel(
         val entries: List<EntryModel>,
-        val language: String,
-        val lexicalCategory: String,
+        val language: String?,
+        val lexicalCategory: String?,
         val pronunciations: List<PronunciationModel>,
         val text: String?
 ): Item{
@@ -24,23 +24,23 @@ data class LexicalEntryModel(
 }
 
 data class PronunciationModel(
-        val audioFile: String,
-        val dialects: List<String>,
-        val phoneticNotation: String,
-        val phoneticSpelling: String
+        val audioFile: String?,
+        val dialects: List<String>?,
+        val phoneticNotation: String?,
+        val phoneticSpelling: String?
 )
 
 data class EntryModel(
-        val etymologies : List<String>,
-        val homographNumber: String,
+        val etymologies : List<String>?,
+        val homographNumber: String?,
         val senses: List<SenseModel>
 )
 
 data class SenseModel(
-        val definitions: List<String>,
+        val definitions: List<String>?,
         val examples: List<ExampleModel>,
-        val id: String,
-        val shortDefinitions: List<String>,
+        val id: String?,
+        val shortDefinitions: List<String>?,
         val subsenses: List<SubsenseModel>
 ):Item{
     override fun getType(): Int = Item.TYPE_SENSE
@@ -49,15 +49,15 @@ data class SenseModel(
 }
 
 data  class ExampleModel(
-        val text: String
+        val text: String?
 )
 
 data class SubsenseModel(
-        val definitions: List<String>,
+        val definitions: List<String>?,
         val examples: List<SubexampleModel>,
-        val id: String,
-        val shortDefinitions: List<String>,
-        val domains: List<String>
+        val id: String?,
+        val shortDefinitions: List<String>?,
+        val domains: List<String>?
 ):Item{
     override fun getType(): Int = Item.TYPE_SUBSENSE
 
