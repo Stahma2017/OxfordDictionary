@@ -67,6 +67,4 @@ public class App extends Application {
         }
         return synonymComponent;
     }
-
-
 }
