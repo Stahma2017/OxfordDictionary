@@ -5,13 +5,13 @@ data class SynonymResponseEntity(val results: List<ResultEntity>)
 data class ResultEntity(
         val id: String,
         val language: String,
-        val lexicalEntries: List<LexicalEntryEntity>,
+        val lexicalEntries: List<LexicalEntryEntity>?,
         val type: String,
         val word: String
 )
 
 data class LexicalEntryEntity(
-        val entries: List<EntryEntity>,
+        val entries: List<EntryEntity>?,
         val language: String,
         val lexicalCategory: String,
         val text: String
@@ -19,14 +19,14 @@ data class LexicalEntryEntity(
 
 data class EntryEntity(
         val homographNumber: String,
-        val senses: List<SenseEntity>
+        val senses: List<SenseEntity>?
 )
 
 data class SenseEntity(
-        val examples: List<ExampleEntity>,
+        val examples: List<ExampleEntity>?,
         val id: String,
-        val subsenses: List<SubsenseEntity>,
-        val synonyms: List<SynonymEntity>
+        val subsenses: List<SubsenseEntity>?,
+        val synonyms: List<SynonymEntity>?
 )
 
 data class ExampleEntity(
@@ -35,7 +35,7 @@ data class ExampleEntity(
 
 data class SubsenseEntity(
         val id: String,
-        val synonyms: List<SubSynonymEntity>,
+        val synonyms: List<SubSynonymEntity>?,
         val registers: List<String>,
         val regions: List<String>
 )

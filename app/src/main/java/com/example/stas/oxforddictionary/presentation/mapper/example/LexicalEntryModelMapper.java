@@ -13,7 +13,7 @@ class LexicalEntryModelMapper {
         return new LexicalEntryModel(
                 from.getLanguage(),
                 from.getLexicalCategory(),
-                sentenceModelMapper.mapSentences(from.getSenteces()),
+                sentenceModelMapper.mapSentences(from.getSentences()),
                 from.getText()
         );
     }

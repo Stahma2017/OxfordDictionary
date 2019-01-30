@@ -4,6 +4,7 @@ import com.example.stas.oxforddictionary.data.entity.definition.EntryResponseEnt
 import com.example.stas.oxforddictionary.data.entity.example.ExampleResponseEntity;
 import com.example.stas.oxforddictionary.data.entity.synonym.SynonymResponseEntity;
 import com.example.stas.oxforddictionary.data.mapper.definition.DefinitionEntityDataMapper;
+import com.example.stas.oxforddictionary.data.mapper.definition.DefinitionEntityMapperKt;
 import com.example.stas.oxforddictionary.data.mapper.example.ExampleEntityDataMapper;
 import com.example.stas.oxforddictionary.data.mapper.example.ExampleEntityMapperKt;
 import com.example.stas.oxforddictionary.data.mapper.synonym.SynonymEntityDataMapper;
@@ -38,7 +39,8 @@ public class DefinitionRepositoryImp implements DefinitionRepository {
                 .map(new Function<EntryResponseEntity, DefinitionResult>() {
                     @Override
                     public DefinitionResult apply(EntryResponseEntity entryResponseEntity) throws Exception {
-                        return  definitionEntityDataMapper.transform(entryResponseEntity);
+                        return DefinitionEntityMapperKt.toModel(entryResponseEntity);
+                      //  return  definitionEntityDataMapper.transform(entryResponseEntity);
                     }
                 });
     }

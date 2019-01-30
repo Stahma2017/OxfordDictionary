@@ -12,56 +12,56 @@ import com.example.stas.oxforddictionary.presentation.viewmodel.example.Translat
 
 fun ExampleResult.toViewModel() =
         ExampleResultModel(
-                id,
-                language,
-                mapLexicalEntriesModel(lexicalEntries),
-                type,
-                word
+                id = id,
+                language = language,
+                lexicalEntries = mapLexicalEntriesModel(lexicalEntries),
+                type = type,
+                word = word
         )
 
-fun mapLexicalEntriesModel(fromList: List<LexicalEntry>): List<LexicalEntryModel> {
+private fun mapLexicalEntriesModel(fromList: List<LexicalEntry>): List<LexicalEntryModel> {
     val intoList = mutableListOf<LexicalEntryModel>()
     fromList.forEach {
         intoList.add(
                 LexicalEntryModel(
-                        it.language,
-                        it.lexicalCategory,
-                        mapSentencesModel(it.sentences),
-                        it.text
+                        language = it.language,
+                        lexicalCategory = it.lexicalCategory,
+                        sentences = mapSentencesModel(it.sentences),
+                        text = it.text
                 )
         )
     }
     return intoList
 }
 
-fun mapSentencesModel(fromList: List<Sentence>): List<SentenceModel> {
+private fun mapSentencesModel(fromList: List<Sentence>): List<SentenceModel> {
     val intoList = mutableListOf<SentenceModel>()
     fromList.forEach {
         intoList.add(
                 SentenceModel(
-                        it.definitions,
-                        it.domains,
-                        it.regions,
-                        it.registers,
-                        it.senseIds,
-                        it.text,
-                        mapTranslationModel(it.translations)
+                        definitions = it.definitions,
+                        domains = it.domains,
+                        regions = it.regions,
+                        registers = it.registers,
+                        senseIds = it.senseIds,
+                        text = it.text,
+                        translations = mapTranslationModel(it.translations)
                 )
         )
     }
     return intoList
 }
 
-fun mapTranslationModel(fromList: List<Translation>): List<TranslationModel> {
+private fun mapTranslationModel(fromList: List<Translation>): List<TranslationModel> {
     val intoList = mutableListOf<TranslationModel>()
     fromList.forEach {
         intoList.add(
                 TranslationModel(
-                        it.domains,
-                        it.language,
-                        it.regions,
-                        it.registers,
-                        it.text
+                        domains = it.domains,
+                        language = it.language,
+                        regions = it.regions,
+                        registers = it.registers,
+                        text = it.text
                 )
         )
     }

@@ -11,7 +11,7 @@ import com.example.stas.oxforddictionary.domain.model.example.Translation
 
 fun ExampleResponseEntity.toModel(): ExampleResult {
     val from = results[0]
-   return ExampleResult(
+    return ExampleResult(
             id = from.id,
             language = from.language,
             lexicalEntries = mapLexicalEntriesEntitiy(from.lexicalEntries),
@@ -19,48 +19,48 @@ fun ExampleResponseEntity.toModel(): ExampleResult {
             word = from.word)
 }
 
-fun mapLexicalEntriesEntitiy(fromList: List<LexicalEntryEntity>?): List<LexicalEntry>{
+private fun mapLexicalEntriesEntitiy(fromList: List<LexicalEntryEntity>?): List<LexicalEntry> {
     val intoList = mutableListOf<LexicalEntry>()
     fromList?.forEach {
         intoList.add(
                 LexicalEntry(
-                        it.language,
-                        it.lexicalCategory,
-                        mapSentencesEntity(it.sentences),
-                        it.text)
+                        language = it.language,
+                        lexicalCategory = it.lexicalCategory,
+                        sentences = mapSentencesEntity(it.sentences),
+                        text = it.text)
         )
     }
     return intoList
 }
 
-fun mapSentencesEntity(fromList: List<SentenceEntity>?): List<Sentence>{
+private fun mapSentencesEntity(fromList: List<SentenceEntity>?): List<Sentence> {
     val intoList = mutableListOf<Sentence>()
     fromList?.forEach {
         intoList.add(
                 Sentence(
-                        it.definitions,
-                        it.domains,
-                        it.regions,
-                        it.registers,
-                        it.senseIds,
-                        it.text,
-                        mapTranslationEntity(it.translations)
+                        definitions = it.definitions,
+                        domains = it.domains,
+                        regions = it.regions,
+                        registers = it.registers,
+                        senseIds = it.senseIds,
+                        text = it.text,
+                        translations = mapTranslationEntity(it.translations)
                 )
         )
     }
     return intoList
 }
 
-fun mapTranslationEntity(fromList: List<TranslationEntity>?): List<Translation>{
+private fun mapTranslationEntity(fromList: List<TranslationEntity>?): List<Translation> {
     val intoList = mutableListOf<Translation>()
     fromList?.forEach {
         intoList.add(
                 Translation(
-                        it.domains,
-                        it.language,
-                        it.regions,
-                        it.registers,
-                        it.text
+                        domains = it.domains,
+                        language = it.language,
+                        regions = it.regions,
+                        registers = it.registers,
+                        text = it.text
                 ))
     }
     return intoList
