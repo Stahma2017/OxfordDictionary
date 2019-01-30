@@ -39,7 +39,7 @@ public class DefinitionRepositoryImp implements DefinitionRepository {
         return oxfordApi.searchForEntry(word)
                 .map(new Function<EntryResponseEntity, DefinitionResult>() {
                     @Override
-                    public DefinitionResult apply(EntryResponseEntity entryResponseEntity) throws Exception {
+                    public DefinitionResult apply(EntryResponseEntity entryResponseEntity) {
                         return DefinitionEntityMapperKt.toModel(entryResponseEntity);
                       //  return  definitionEntityDataMapper.transform(entryResponseEntity);
                     }
@@ -51,7 +51,7 @@ public class DefinitionRepositoryImp implements DefinitionRepository {
         return oxfordApi.searchForSynonyms(word)
                 .map(new Function<SynonymResponseEntity, SynonymResult>() {
                     @Override
-                    public SynonymResult apply(SynonymResponseEntity synonymResponseEntity) throws Exception {
+                    public SynonymResult apply(SynonymResponseEntity synonymResponseEntity) {
                        return SynonymEntityMapperKt.toModel(synonymResponseEntity);
                         // return synonymEntityDataMapper.transform(synonymResponseEntity);
                     }
@@ -63,7 +63,7 @@ public class DefinitionRepositoryImp implements DefinitionRepository {
         return oxfordApi.searchForExamples(word)
                 .map(new Function<ExampleResponseEntity, ExampleResult>() {
                     @Override
-                    public ExampleResult apply(ExampleResponseEntity exampleResponseEntity) throws Exception {
+                    public ExampleResult apply(ExampleResponseEntity exampleResponseEntity) {
                         return ExampleEntityMapperKt.toModel(exampleResponseEntity);
                      //   return exampleEntityDataMapper.transform(exampleResponseEntity);
                     }
