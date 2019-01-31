@@ -39,9 +39,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, IMa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        App.getInstance().getMainComponent().injectMainActivity(this);
+        ((App)getApplication()).createMaincomponent().injectMainActivity(this);
+      // ApplicationComponentKt.getMyApplication(this).createMaincomponent().injectMainActivity(this);
+     /*   App.getInstance().getMainComponent().injectMainActivity(this);*/
         presenter.attachView(this);
         init();
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

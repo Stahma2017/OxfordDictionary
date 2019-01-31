@@ -1,5 +1,6 @@
 package com.example.stas.oxforddictionary.di.main
 
+import com.example.stas.oxforddictionary.App
 import com.example.stas.oxforddictionary.data.mapper.definition.DefinitionEntityDataMapper
 import com.example.stas.oxforddictionary.data.mapper.example.ExampleEntityDataMapper
 import com.example.stas.oxforddictionary.data.mapper.synonym.SynonymEntityDataMapper
@@ -58,4 +59,5 @@ class DefinitionModule{
     fun provideExampleMapper(): ExampleEntityDataMapper =
             ExampleEntityDataMapper()
 }
+
 

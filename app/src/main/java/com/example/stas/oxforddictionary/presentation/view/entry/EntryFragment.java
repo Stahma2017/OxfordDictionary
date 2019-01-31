@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.stas.oxforddictionary.App;
 import com.example.stas.oxforddictionary.R;
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionAdapter;
@@ -59,7 +60,9 @@ public class EntryFragment extends Fragment implements EntryContract.View {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entry, container, false);
-        App.getInstance().getEntryComonent().injectEntryFragment(this);
+        ((App)getActivity().getApplication()).createEntryComponent().injectEntryFragment(this);
+       // ApplicationComponentKt.getMyApplication(this).createEntryComponent().injectEntryFragment(this);
+       // App.getInstance().getEntryComonent().injectEntryFragment(this);
         unbinder = ButterKnife.bind(this, view);
         presenter.attachView(this);
         moveUp = AnimationUtils.loadAnimation(getActivity(),
