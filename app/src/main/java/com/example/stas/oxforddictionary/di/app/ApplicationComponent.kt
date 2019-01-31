@@ -2,7 +2,6 @@ package com.example.stas.oxforddictionary.di.app
 
 import android.app.Application
 import android.content.Context
-import com.example.stas.oxforddictionary.App
 import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import dagger.Component
@@ -11,10 +10,8 @@ import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Named
-import javax.inject.Singleton
 import com.example.stas.oxforddictionary.data.network.OxfordApi
 import com.example.stas.oxforddictionary.di.main.MainComponent
-import com.example.stas.oxforddictionary.presentation.view.main.MainActivity
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.OkHttpClient
@@ -28,7 +25,7 @@ interface ApplicationComponent{
 }
 
 @Module
-class ApplicationModule constructor(val application: Application) {
+class ApplicationModule constructor(private val application: Application) {
     @Provides
     fun provideApp() : Context{
         return application
