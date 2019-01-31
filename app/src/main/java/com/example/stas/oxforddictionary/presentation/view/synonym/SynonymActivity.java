@@ -35,7 +35,8 @@ public class SynonymActivity extends BaseActivity implements SynonymConrtact.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_synonym);
-        App.getInstance().getSynonymComponent().injectSynonymActivity(this);
+        ((App)getApplication()).createSynonymComponent().injectSynonymActivity(this);
+        //App.getInstance().getSynonymComponent().injectSynonymActivity(this);
         ButterKnife.bind(this);
         presenter.attachView(this);
         Intent intent = getIntent();

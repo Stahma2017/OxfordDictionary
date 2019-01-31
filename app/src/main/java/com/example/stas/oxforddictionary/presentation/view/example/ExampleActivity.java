@@ -34,7 +34,8 @@ public class ExampleActivity extends AppCompatActivity implements ExampleContrac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example);
-        App.getInstance().getExampleComponent().injectExampleActivity(this);
+        ((App)getApplication()).createExampleComponent().injectExampleActivity(this);
+       // App.getInstance().getExampleComponent().injectExampleActivity(this);
         ButterKnife.bind(this);
         presenter.attachView(this);
         Intent intent = getIntent();
