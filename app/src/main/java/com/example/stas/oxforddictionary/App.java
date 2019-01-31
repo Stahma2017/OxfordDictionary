@@ -2,9 +2,9 @@ package com.example.stas.oxforddictionary;
 
 import android.app.Application;
 
-import com.example.stas.oxforddictionary.di.app.AppComponent;
-import com.example.stas.oxforddictionary.di.app.AppModule;
-import com.example.stas.oxforddictionary.di.app.DaggerAppComponent;
+import com.example.stas.oxforddictionary.di.app.ApplicationComponent;
+import com.example.stas.oxforddictionary.di.app.ApplicationModule;
+import com.example.stas.oxforddictionary.di.app.DaggerApplicationComponent;
 import com.example.stas.oxforddictionary.di.entry.EntryComponent;
 import com.example.stas.oxforddictionary.di.example.ExampleComponent;
 import com.example.stas.oxforddictionary.di.main.MainComponent;
@@ -14,7 +14,7 @@ import com.squareup.leakcanary.LeakCanary;
 public class App extends Application {
 
     protected static App instance;
-    private AppComponent component;
+    private ApplicationComponent component;
     private MainComponent mainComponent;
     private EntryComponent entryComponent;
     private ExampleComponent exampleComponent;
@@ -27,8 +27,8 @@ public class App extends Application {
     @Override public void onCreate() {
         super.onCreate();
         instance = this;
-        component = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
+        component = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
                 .build();
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
@@ -36,7 +36,7 @@ public class App extends Application {
         LeakCanary.install(this);
     }
 
-    public AppComponent getComponent() {
+    public ApplicationComponent getComponent() {
         return component;
     }
 

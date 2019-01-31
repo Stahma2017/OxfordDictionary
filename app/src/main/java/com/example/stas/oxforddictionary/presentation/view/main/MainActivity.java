@@ -23,10 +23,13 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainContract.View, IMainActivity{
-    @BindView(R.id.nav_view) NavigationView navigationView;
-    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @BindView(R.id.hamburgerBtn)ImageButton hamburgerBtn;
+public class MainActivity extends BaseActivity implements MainContract.View, IMainActivity {
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.hamburgerBtn)
+    ImageButton hamburgerBtn;
     private TextView allWordsCount;
     @Inject
     MainContract.Presenter presenter;
@@ -39,7 +42,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, IMa
         App.getInstance().getMainComponent().injectMainActivity(this);
         presenter.attachView(this);
         init();
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -59,32 +61,33 @@ public class MainActivity extends BaseActivity implements MainContract.View, IMa
         }*/
     }
 
-    private void init(){
+    private void init() {
         EntryFragment entryFragment = new EntryFragment();
         doFragmentTransaction(entryFragment, getString(R.string.fragment_entry), false, "");
-       allWordsCount =  navigationView.getHeaderView(0).findViewById(R.id.allWordsCount);
+        allWordsCount = navigationView.getHeaderView(0).findViewById(R.id.allWordsCount);
     }
-    private void doFragmentTransaction(Fragment fragment, String tag, boolean addToBackStack, String message){
+
+    private void doFragmentTransaction(Fragment fragment, String tag, boolean addToBackStack, String message) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if(!message.equals("")){
+        if (!message.equals("")) {
             Bundle bundle = new Bundle();
             bundle.putString(getString(R.string.intent_message), message);
             fragment.setArguments(bundle);
         }
         transaction.replace(R.id.content_frame, fragment, tag);
-        if(addToBackStack){
+        if (addToBackStack) {
             transaction.addToBackStack(tag);
         }
         transaction.commit();
     }
 
     @Override
-    public void navigateToSynonyms(Context context, String wordId){
+    public void navigateToSynonyms(Context context, String wordId) {
         this.navigator.navigateToSynonyms(context, wordId);
     }
 
     @Override
-    public void navigateToExamples(Context context, String wordId){
+    public void navigateToExamples(Context context, String wordId) {
         this.navigator.navigateToExamples(context, wordId);
     }
 
