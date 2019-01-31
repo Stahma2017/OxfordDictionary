@@ -8,7 +8,6 @@ import com.example.stas.oxforddictionary.di.entry.EntryComponent
 import com.example.stas.oxforddictionary.di.example.ExampleComponent
 import com.example.stas.oxforddictionary.di.main.MainComponent
 import com.example.stas.oxforddictionary.di.synonym.SynonymComponent
-import com.example.stas.oxforddictionary.domain.model.synonym.Example
 import com.squareup.leakcanary.LeakCanary
 
 class App : Application() {
@@ -59,10 +58,5 @@ class App : Application() {
             synonymComponent = mainComponent?.addSynonymComponent()
         }
         return synonymComponent!!
-    }
-
-
-    fun getApplicationComponent(): ApplicationComponent{
-        return applicationComponent
     }
 }
