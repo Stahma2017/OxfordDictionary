@@ -18,9 +18,11 @@ data class LexicalEntryModel(
         val pronunciations: List<PronunciationModel>,
         val text: String?
 ): Item{
-    override fun getType(): Int = Item.TYPE_CATEGORY
-    override fun accept(visitor: Visitor): MutableList<String> =
-            visitor.visitLexicalEntry(this)
+    override val type: Int
+        get() = Item.TYPE_CATEGORY
+
+    override fun accept(visitor: Visitor): List<String?> =
+        visitor.visitLexicalEntry(this)
 }
 
 data class PronunciationModel(
@@ -43,9 +45,11 @@ data class SenseModel(
         val shortDefinitions: List<String>?,
         val subsenses: List<SubsenseModel>
 ):Item{
-    override fun getType(): Int = Item.TYPE_SENSE
-    override fun accept(visitor: Visitor): MutableList<String> =
-            visitor.visitSense(this)
+    override val type: Int
+        get() = Item.TYPE_SENSE
+
+    override fun accept(visitor: Visitor): List<String> =
+        visitor.visitSense(this)
 }
 
 data  class ExampleModel(
@@ -59,9 +63,10 @@ data class SubsenseModel(
         val shortDefinitions: List<String>?,
         val domains: List<String>?
 ):Item{
-    override fun getType(): Int = Item.TYPE_SUBSENSE
+    override val type: Int
+        get() = Item.TYPE_SUBSENSE
 
-    override fun accept(visitor: Visitor): MutableList<String> =
+    override fun accept(visitor: Visitor): List<String> =
             visitor.visitSubsense(this)
 }
 

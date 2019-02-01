@@ -29,12 +29,8 @@ class EntryModule{
             DefinitionExportVisitor()
 
     @Provides
-    fun provideDefinitionMapper(): DefinitionModelDataMapper =
-            DefinitionModelDataMapper()
-
-    @Provides
     fun provideEntryPresenter(interactor: DefinitonInteractor, compositeDisposable: CompositeDisposable,
-                              errorHandler: ErrorHandler, definitionModelDataMapper: DefinitionModelDataMapper): EntryContract.Presenter{
-        return EntryPresenter(interactor, compositeDisposable, errorHandler, definitionModelDataMapper)
+                              errorHandler: ErrorHandler): EntryContract.Presenter{
+        return EntryPresenter(interactor, compositeDisposable, errorHandler)
     }
 }

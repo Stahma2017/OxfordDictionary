@@ -15,8 +15,9 @@ data class LexicalEntryModel(
         val language: String?,
         val lexicalCategory: String?,
         val text: String?
-): SynonymsItem {
-    override fun getType(): Int = SynonymsItem.TYPE_CATEGORY
+) : SynonymsItem {
+    override val type: Int
+        get() = SynonymsItem.TYPE_CATEGORY
 }
 
 data class EntryModel(
@@ -33,17 +34,20 @@ data class SenseModel(
 
 data class ExampleModel(
         val text: String?
-): SynonymsItem {
-    override fun getType(): Int = SynonymsItem.TYPE_EXAMPLE
+) : SynonymsItem {
+    override val type: Int
+        get() = SynonymsItem.TYPE_EXAMPLE
 }
 
 data class SynonymModel(
         val id: String?,
         val language: String?,
         val text: String?
-): SynonymsItem {
-    override fun getType(): Int = SynonymsItem.TYPE_SYNONYM
+) : SynonymsItem {
+    override val type: Int
+        get() = SynonymsItem.TYPE_SYNONYM
 }
+
 
 data class SubsenseModel(
         val id: String?,
@@ -56,6 +60,7 @@ data class SubsynonymModel(
         val id: String?,
         val language: String?,
         val text: String?
-): SynonymsItem{
-    override fun getType(): Int = SynonymsItem.TYPE_SUBSYNONYM
+) : SynonymsItem {
+    override val type: Int
+        get() = SynonymsItem.TYPE_SUBSYNONYM
 }

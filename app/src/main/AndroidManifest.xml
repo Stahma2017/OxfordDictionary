@@ -19,8 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.view.example.ExampleActivity" />
         <activity android:name=".presentation.view.synonym.SynonymActivity" />
-        <activity android:name=".presentation.view.example.ExampleActivity"></activity>
-    </application>
 
+    </application>
 </manifest>

@@ -1,7 +1,6 @@
 package com.example.stas.oxforddictionary.di.synonym
 
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor
-import com.example.stas.oxforddictionary.presentation.mapper.synonym.SynonymModelDataMapper
 import com.example.stas.oxforddictionary.presentation.presenter.synonym.SynonymPresenter
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.synonym.SynonymActivity
@@ -21,11 +20,8 @@ class SysnonymModule{
     @Provides
     fun provideSynonymPresenter(interactor: DefinitonInteractor,
                                 compositeDisposable: CompositeDisposable,
-                                errorHandler: ErrorHandler,
-                                synonymModelDataMapper: SynonymModelDataMapper): SynonymConrtact.Presenter{
-      return SynonymPresenter(interactor, compositeDisposable, errorHandler, synonymModelDataMapper)
+                                errorHandler: ErrorHandler): SynonymConrtact.Presenter{
+      return SynonymPresenter(interactor, compositeDisposable, errorHandler)
     }
 
-    @Provides
-    fun provideSynonyModelDataMapper(): SynonymModelDataMapper = SynonymModelDataMapper()
 }

@@ -1,7 +1,6 @@
 package com.example.stas.oxforddictionary.di.example
 
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor
-import com.example.stas.oxforddictionary.presentation.mapper.example.ExampleModelDataMapper
 import com.example.stas.oxforddictionary.presentation.presenter.example.ExamplePresenter
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.example.ExampleActivity
@@ -21,14 +20,9 @@ class ExampleModule {
     @Provides
     fun provideExamplePresenter(interactor: DefinitonInteractor,
                                 compositeDisposable: CompositeDisposable,
-                                errorHandler: ErrorHandler,
-                                exampleModelDataMapper: ExampleModelDataMapper
+                                errorHandler: ErrorHandler
     ): ExampleContract.Presenter  =
         ExamplePresenter(interactor, compositeDisposable,
-                errorHandler, exampleModelDataMapper)
-
-    @Provides
-    fun provideExampleModelDataMapper(): ExampleModelDataMapper =
-            ExampleModelDataMapper()
+                errorHandler)
 }
 

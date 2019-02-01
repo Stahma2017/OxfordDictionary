@@ -1,8 +1,5 @@
 package com.example.stas.oxforddictionary.di.main
 
-import com.example.stas.oxforddictionary.data.mapper.definition.DefinitionEntityDataMapper
-import com.example.stas.oxforddictionary.data.mapper.example.ExampleEntityDataMapper
-import com.example.stas.oxforddictionary.data.mapper.synonym.SynonymEntityDataMapper
 import com.example.stas.oxforddictionary.data.network.OxfordApi
 import com.example.stas.oxforddictionary.data.repository.DefinitionRepositoryImp
 import com.example.stas.oxforddictionary.di.entry.EntryComponent
@@ -38,25 +35,10 @@ class DefinitionModule{
         DefinitonInteractor(repository)
 
     @Provides
-    fun provideDefinitionRepository(oxfordApi: OxfordApi,
-                                    definitionEntityDataMapper: DefinitionEntityDataMapper,
-                                    synonymEntityDataMapper: SynonymEntityDataMapper,
-                                    exampleEntityDataMapper: ExampleEntityDataMapper): DefinitionRepository {
-       return DefinitionRepositoryImp(oxfordApi, definitionEntityDataMapper,
-                synonymEntityDataMapper, exampleEntityDataMapper)
+    fun provideDefinitionRepository(oxfordApi: OxfordApi): DefinitionRepository {
+       return DefinitionRepositoryImp(oxfordApi)
     }
 
-    @Provides
-    fun provideDefinitionMapper(): DefinitionEntityDataMapper =
-        DefinitionEntityDataMapper()
-
-    @Provides
-    fun provideSynonymMapper(): SynonymEntityDataMapper =
-       SynonymEntityDataMapper()
-
-    @Provides
-    fun provideExampleMapper(): ExampleEntityDataMapper =
-            ExampleEntityDataMapper()
 }
 
 

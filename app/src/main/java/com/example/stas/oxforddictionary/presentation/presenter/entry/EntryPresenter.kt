@@ -15,12 +15,12 @@ import java.util.ArrayList
 
 
 class EntryPresenter(private val interactor: DefinitonInteractor, private val compositeDisposable: CompositeDisposable,
-                     private val errorHandler: ErrorHandler, private val definitionModelDataMapper: DefinitionModelDataMapper) : EntryContract.Presenter {
+                     private val errorHandler: ErrorHandler) : EntryContract.Presenter {
     private var view: EntryContract.View? = null
 
     override fun attachView(view: EntryContract.View) {
         this.view = view
-        errorHandler.attachView(this.view)
+        errorHandler.attachView(view)
     }
 
     override fun detachView() {
@@ -69,9 +69,9 @@ class EntryPresenter(private val interactor: DefinitonInteractor, private val co
         return definitions
     }
 
-    private fun extractTitle(result: ResultModel): List<String> {
+    private fun extractTitle(result: ResultModel): List<String?> {
         val (_, _, _, pronunciations, text) = result.lexicalEntries[0]
-        val titleSet = ArrayList<String>()
+        val titleSet = ArrayList<String?>()
         titleSet.add(text)
         for ((audioFile, _, _, phoneticSpelling) in pronunciations) {
             if (audioFile != null) {
