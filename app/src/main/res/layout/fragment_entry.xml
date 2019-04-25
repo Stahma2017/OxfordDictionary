@@ -40,7 +40,7 @@
         app:layout_constraintStart_toEndOf="@+id/wordEntryET" />
 
     <ProgressBar
-        android:id="@+id/entryProgressBar"
+        android:id="@+id/progressBar"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:visibility="gone"
@@ -104,24 +104,24 @@
             android:columnCount="4">
 
             <TextView
-                android:id="@+id/titleText"
+                android:id="@+id/title"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
             <ImageButton
-                android:id="@+id/titleSound"
+                android:id="@+id/soundImBtn"
                 android:layout_column="3"
                 android:background="@drawable/ic_action_sound" />
 
             <TextView
-                android:id="@+id/titleTranscription"
+                android:id="@+id/transcription"
                 android:layout_columnSpan="2"
                 android:textColor="#000000"
                 android:textSize="12sp" />
         </GridLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/definition_recycler_view"
+            android:id="@+id/definitionRW"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/entry_recycler_margin_top" />

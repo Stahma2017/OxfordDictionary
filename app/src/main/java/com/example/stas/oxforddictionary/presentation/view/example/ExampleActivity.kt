@@ -5,29 +5,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.example.stas.oxforddictionary.App
 import com.example.stas.oxforddictionary.R
 import com.example.stas.oxforddictionary.presentation.view.example.adapter.ExampleAdapter
+import kotlinx.android.synthetic.main.activity_example.*
 import javax.inject.Inject
 
 class ExampleActivity : AppCompatActivity(), ExampleContract.View {
     @Inject
     lateinit var presenter: ExampleContract.Presenter
-    @BindView(R.id.exampleWord)
-    lateinit var word: TextView
-    @BindView(R.id.exampleList)
-    lateinit var exampleList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_example)
         (application as App).createExampleComponent().injectExampleActivity(this)
-        ButterKnife.bind(this)
         presenter.attachView(this)
         val intent = intent
         val wordId = intent.getStringExtra(EXAMPLE_WORD_ID)
@@ -51,7 +43,7 @@ class ExampleActivity : AppCompatActivity(), ExampleContract.View {
 
     }
 
-    fun CloseExampleList(view: View) {
+    fun closeExampleList(view: View) {
         finish()
     }
 

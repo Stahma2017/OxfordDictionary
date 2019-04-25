@@ -4,10 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.example.stas.oxforddictionary.R
+import kotlinx.android.synthetic.main.recycler_category_item.view.*
+import kotlinx.android.synthetic.main.recycler_definitions_sense_item.view.*
+import kotlinx.android.synthetic.main.recycler_definitions_subsense_item.view.*
 import java.util.ArrayList
 
 class DefinitionAdapter(private val definitionExporter: DefinitionExportVisitor) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -62,56 +62,39 @@ class DefinitionAdapter(private val definitionExporter: DefinitionExportVisitor)
     }
 
     internal inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @BindView(R.id.lexicalHeader)
-        lateinit var lexicalHeader: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
 
         fun bindLexicalCategory(item: Item) {
-            val lexicalCategory = definitionExporter.export(item)
-            if (!lexicalCategory.isEmpty()) {
-                lexicalHeader.text = lexicalCategory[0]
+            itemView.let {
+                val lexicalCategory = definitionExporter.export(item)
+                if (!lexicalCategory.isEmpty()) {
+                    it.category.text = lexicalCategory[0]
+                }
             }
         }
     }
 
     internal inner class SenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @BindView(R.id.senseTW)
-        lateinit var sense: TextView
-        @BindView(R.id.senseExampleTW)
-        lateinit var example: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
 
         fun bindSense(item: Item) {
-            val definition = definitionExporter.export(item)
-            sense.text = definition[0]
-            if (definition.size > 1) {
-                this.example.text = definition[1]
+            itemView.let {
+                val definition = definitionExporter.export(item)
+                it.senseTW.text = definition[0]
+                if (definition.size > 1) {
+                    it.example.text = definition[1]
+                }
             }
         }
     }
 
     internal inner class SubsenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        @BindView(R.id.subsenseTW)
-        lateinit var subsense: TextView
-        @BindView(R.id.subsenseExampleTW)
-        lateinit var subExample: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
-
         fun bindSubsense(item: Item) {
-            val definition = definitionExporter.export(item)
-            this.subsense.text = definition[0]
-            if (definition.size > 1) {
-                subExample.text = definition[1]
+            itemView.let {
+                val definition = definitionExporter.export(item)
+                it.subsense.text = definition[0]
+                if (definition.size > 1) {
+                    it.subExample.text = definition[1]
+                }
             }
         }
     }

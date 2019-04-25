@@ -4,31 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.example.stas.oxforddictionary.App
 import com.example.stas.oxforddictionary.R
 import com.example.stas.oxforddictionary.presentation.view.base.BaseActivity
 import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsAdapter
 import com.example.stas.oxforddictionary.presentation.view.synonym.adapter.SynonymsItem
+import kotlinx.android.synthetic.main.activity_synonym.*
 import javax.inject.Inject
 
 class SynonymActivity : BaseActivity(), SynonymConrtact.View {
+
     @Inject
     lateinit var presenter: SynonymConrtact.Presenter
-    @BindView(R.id.synonymsWord)
-    lateinit var word: TextView
-    @BindView(R.id.synonymsList)
-    lateinit var synonymList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_synonym)
         (application as App).createSynonymComponent().injectSynonymActivity(this)
-        ButterKnife.bind(this)
         presenter.attachView(this)
         val intent = intent
         val wordId = intent.getStringExtra(SYNONYM_WORD_ID)
@@ -39,8 +32,8 @@ class SynonymActivity : BaseActivity(), SynonymConrtact.View {
     override fun showSynonyms(synonyms: List<SynonymsItem>) {
         val layoutManager = LinearLayoutManager(this)
         val synonymsAdapter = SynonymsAdapter(synonyms, this)
-        synonymList.layoutManager = layoutManager
-        synonymList.adapter = synonymsAdapter
+        synonymsList.layoutManager = layoutManager
+        synonymsList.adapter = synonymsAdapter
     }
 
     override fun onDestroy() {

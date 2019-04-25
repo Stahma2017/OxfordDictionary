@@ -1,7 +1,6 @@
 package com.example.stas.oxforddictionary.presentation.presenter.entry
 
 import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor
-import com.example.stas.oxforddictionary.presentation.mapper.definition.DefinitionModelDataMapper
 import com.example.stas.oxforddictionary.presentation.mapper.definition.toViewModel
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract

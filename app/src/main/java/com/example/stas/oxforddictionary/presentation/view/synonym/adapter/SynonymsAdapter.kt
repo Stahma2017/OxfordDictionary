@@ -5,14 +5,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.example.stas.oxforddictionary.R
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.ExampleModel
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.LexicalEntryModel
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SubsynonymModel
 import com.example.stas.oxforddictionary.presentation.viewmodel.synonym.SynonymModel
+import kotlinx.android.synthetic.main.recycler_category_item.view.*
+import kotlinx.android.synthetic.main.recycler_synonyms_example_item.view.*
+import kotlinx.android.synthetic.main.recycler_synonyms_synonym_item.view.*
 
 
 class SynonymsAdapter(private val synonyms: List<SynonymsItem>, private val context: Context) : RecyclerView.Adapter<SynonymsAdapter.ViewHolder>() {
@@ -58,54 +58,38 @@ class SynonymsAdapter(private val synonyms: List<SynonymsItem>, private val cont
     }
 
     inner class CategoryViewHolder internal constructor(itemView: View) : ViewHolder(itemView) {
-        @BindView(R.id.lexicalHeader)
-        lateinit var category: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
 
         override fun bindType(item: SynonymsItem) {
-            category.text = (item as LexicalEntryModel).lexicalCategory
+            itemView.let {
+              it.category.text = (item as LexicalEntryModel).lexicalCategory
+            }
         }
     }
 
     inner class ExampleViewHolder internal constructor(itemView: View) : ViewHolder(itemView) {
-        @BindView(R.id.synonymExample)
-        lateinit var example: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
 
         override fun bindType(item: SynonymsItem) {
-            example.text = context.getString(R.string.example_quotes, (item as ExampleModel).text)
+            itemView.let {
+                it.example.text = context.getString(R.string.example_quotes, (item as ExampleModel).text)
+            }
         }
     }
 
     inner class SynonymViewHolder internal constructor(itemView: View) : ViewHolder(itemView) {
-        @BindView(R.id.synonym)
-        lateinit var synonym: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
 
         override fun bindType(item: SynonymsItem) {
-            synonym.text = (item as SynonymModel).text
+            itemView.let {
+                it.synonym.text = (item as SynonymModel).text
+            }
         }
     }
 
     inner class SubsynonymViewHolder internal constructor(itemView: View) : ViewHolder(itemView) {
-        @BindView(R.id.synonym)
-        lateinit var synonym: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
 
         override fun bindType(item: SynonymsItem) {
-            synonym.text = (item as SubsynonymModel).text
+            itemView.let {
+                it.synonym.text = (item as SubsynonymModel).text
+            }
         }
     }
 }
