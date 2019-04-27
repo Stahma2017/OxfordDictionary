@@ -12,7 +12,6 @@ import io.reactivex.schedulers.Schedulers
 import java.util.ArrayList
 
 
-
 class EntryPresenter(private val interactor: DefinitonInteractor, private val compositeDisposable: CompositeDisposable,
                      private val errorHandler: ErrorHandler) : EntryContract.Presenter {
     private var view: EntryContract.View? = null
@@ -46,7 +45,8 @@ class EntryPresenter(private val interactor: DefinitonInteractor, private val co
         val soundDisp = interactor.loadDefinition(word)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ (_, _, lexicalEntries) -> view!!.playSound(lexicalEntries[0].pronunciations[0].audioFile) }, { throwable -> errorHandler.proceed(throwable) })
+                .subscribe({ (_, _, lexicalEntries) -> view!!.playSound(lexicalEntries[0].pronunciations[0].audioFile)
+                }, { throwable -> errorHandler.proceed(throwable) })
         compositeDisposable.add(soundDisp)
     }
 
