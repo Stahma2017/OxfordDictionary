@@ -26,11 +26,19 @@
     <string name="unknown_error">unknown error</string>
     <string name="example_quotes">\'%1$s\'</string>
     <string name="player_error">cannot prepare player for playback</string>
-    <string name="set_source_error">cannot set sourse to play</string>
+    <string name="set_source_error">cannot set sourсe to play</string>
     <string name="menu">Menu</string>
     <string name="learned">Learned</string>
     <string name="all">All</string>
     <string name="_0">0</string>
+
+    // Menu items
+    <string name="menu_search">Поиск</string>
+    <string name="menu_search_history">История поиска</string>
+    <string name="menu_training">Тренировка</string>
+    <string name="menu_saved">Избранное</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_author_about">Написать разработчику</string>
 
 
 </resources>

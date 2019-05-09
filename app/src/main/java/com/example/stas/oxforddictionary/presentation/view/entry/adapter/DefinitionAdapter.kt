@@ -12,6 +12,7 @@ import java.util.ArrayList
 
 class DefinitionAdapter(private val definitionExporter: DefinitionExportVisitor) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var definitions: List<Item> = ArrayList()
+    var listener: (String?) -> Unit = {}
 
     fun setItems(definitions: List<Item>) {
         this.definitions = definitions
@@ -82,20 +83,20 @@ class DefinitionAdapter(private val definitionExporter: DefinitionExportVisitor)
                 if (definition.size > 1) {
                     it.example.text = definition[1]
                 }
+                it.senseStar.setOnClickListener { listener.invoke(definition[0]) }
             }
         }
     }
 
     internal inner class SubsenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         fun bindSubsense(item: Item) {
-            itemView.let {
-                val definition = definitionExporter.export(item)
-                it.subsense.text = definition[0]
-                if (definition.size > 1) {
-                    it.subExample.text = definition[1]
+                with(itemView){
+                    val definition = definitionExporter.export(item)
+                    this.subsense.text = definition[0]
+                    if (definition.size > 1) {
+                        this.subExample.text = definition[1]
+                    }
                 }
-            }
         }
     }
 }

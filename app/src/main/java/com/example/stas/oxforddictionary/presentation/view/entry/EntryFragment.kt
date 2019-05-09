@@ -60,7 +60,6 @@ class EntryFragment : Fragment(), EntryContract.View {
         synonymsBtn.setOnClickListener {
             val wordId = title.text.toString()
             mainActivity!!.navigateToSynonyms(context, wordId)
-
         }
 
         examplesBtn.setOnClickListener {
@@ -69,6 +68,9 @@ class EntryFragment : Fragment(), EntryContract.View {
         }
 
         definitionRW.layoutManager = LinearLayoutManager(context)
+        definitionAdapter.listener = { item ->
+            Toast.makeText(context, "$item добавлен", Toast.LENGTH_SHORT).show()
+        }
         definitionRW.adapter = definitionAdapter
     }
 
@@ -91,17 +93,13 @@ class EntryFragment : Fragment(), EntryContract.View {
         } catch (e: IOException) {
             showError(getString(R.string.set_source_error))
         }
-
         try {
             mediaPlayer.prepare()
         } catch (e: IOException) {
             showError(getString(R.string.player_error))
         }
-
         mediaPlayer.start()
     }
-
-
 
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
