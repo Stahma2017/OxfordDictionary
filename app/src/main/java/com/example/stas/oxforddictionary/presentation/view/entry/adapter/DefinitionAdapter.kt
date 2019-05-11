@@ -12,7 +12,7 @@ import java.util.ArrayList
 
 class DefinitionAdapter(private val definitionExporter: DefinitionExportVisitor) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var definitions: List<Item> = ArrayList()
-    var listener: (String?) -> Unit = {}
+    var starClickListener: (String) -> Unit = {}
 
     fun setItems(definitions: List<Item>) {
         this.definitions = definitions
@@ -83,7 +83,7 @@ class DefinitionAdapter(private val definitionExporter: DefinitionExportVisitor)
                 if (definition.size > 1) {
                     it.example.text = definition[1]
                 }
-                it.senseStar.setOnClickListener { listener.invoke(definition[0]) }
+                it.senseStar.setOnClickListener { starClickListener.invoke(definition[0].toString()) }
             }
         }
     }

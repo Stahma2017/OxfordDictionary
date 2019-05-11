@@ -1,19 +1,22 @@
 package com.example.stas.oxforddictionary.presentation.presenter.entry
 
-import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor
+import com.example.stas.oxforddictionary.domain.usecase.DefinitonInteractor
+import com.example.stas.oxforddictionary.domain.usecase.definition.SaveWordUseCase
 import com.example.stas.oxforddictionary.presentation.mapper.definition.toViewModel
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.ResultModel
+import io.reactivex.CompletableObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.ArrayList
 
 
+
 class EntryPresenter(private val interactor: DefinitonInteractor, private val compositeDisposable: CompositeDisposable,
-                     private val errorHandler: ErrorHandler) : EntryContract.Presenter {
+                     private val errorHandler: ErrorHandler, private val saveWordUseCase: SaveWordUseCase) : EntryContract.Presenter {
     private var view: EntryContract.View? = null
 
     override fun attachView(view: EntryContract.View) {
@@ -48,6 +51,16 @@ class EntryPresenter(private val interactor: DefinitonInteractor, private val co
                 .subscribe({ (_, _, lexicalEntries) -> view!!.playSound(lexicalEntries[0].pronunciations[0].audioFile)
                 }, { throwable -> errorHandler.proceed(throwable) })
         compositeDisposable.add(soundDisp)
+    }
+
+    override fun saveDefinition(word: String, definition: String) {
+       val saveWordDisp = saveWordUseCase.saveWord(word, definition)
+               .subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribe({
+                   view?.showError("DONE!")},
+                       {throwable ->
+                           errorHandler.proceed(throwable)})
     }
 
     private fun extractDefinitions(result: ResultModel): List<Item> {

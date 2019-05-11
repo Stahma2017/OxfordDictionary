@@ -68,8 +68,9 @@ class EntryFragment : Fragment(), EntryContract.View {
         }
 
         definitionRW.layoutManager = LinearLayoutManager(context)
-        definitionAdapter.listener = { item ->
-            Toast.makeText(context, "$item добавлен", Toast.LENGTH_SHORT).show()
+        definitionAdapter.starClickListener = { definition ->
+            presenter.saveDefinition(title.text.toString(), definition)
+            Toast.makeText(context, "$definition добавлен", Toast.LENGTH_SHORT).show()
         }
         definitionRW.adapter = definitionAdapter
     }

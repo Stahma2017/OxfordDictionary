@@ -1,7 +1,10 @@
 package com.example.stas.oxforddictionary.di.app
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import android.content.Context
+import com.example.stas.oxforddictionary.data.database.AppDatabase
+import com.example.stas.oxforddictionary.data.database.dao.SavedWordDao
 import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import dagger.Component
@@ -17,9 +20,10 @@ import io.reactivex.disposables.CompositeDisposable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 
-@Component(modules = [ApplicationModule::class, ErrorHandlerModule::class, NetworkModule::class, NetworkModule.RxModule::class])
+@Component(modules = [ApplicationModule::class, ErrorHandlerModule::class, NetworkModule::class, RxModule::class, DatabaseModule::class])
 interface ApplicationComponent{
     fun addMainComponent(): MainComponent
 }
@@ -88,13 +92,26 @@ class NetworkModule{
                 .build()
                 .create(OxfordApi::class.java)
     }
+}
+@Module
+class RxModule{
+    @Provides
+    fun provideCompositeDisposable(): CompositeDisposable{
+        return CompositeDisposable()
+    }
+}
 
-    @Module
-    class RxModule{
-        @Provides
-        fun provideCompositeDisposable(): CompositeDisposable{
-            return CompositeDisposable()
-        }
+@Module
+class DatabaseModule{
+    @Provides
+    fun provideAppDatabase(context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, "database")
+                .build()
+    }
+
+    @Provides
+    fun provideSavedWordDao(appDatabase: AppDatabase) : SavedWordDao{
+        return appDatabase.savedWordDao()
     }
 }
 

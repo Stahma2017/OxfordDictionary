@@ -1,12 +1,13 @@
 package com.example.stas.oxforddictionary.di.main
 
+import com.example.stas.oxforddictionary.data.database.dao.SavedWordDao
 import com.example.stas.oxforddictionary.data.network.OxfordApi
 import com.example.stas.oxforddictionary.data.repository.DefinitionRepositoryImp
 import com.example.stas.oxforddictionary.di.entry.EntryComponent
 import com.example.stas.oxforddictionary.di.example.ExampleComponent
 import com.example.stas.oxforddictionary.di.synonym.SynonymComponent
 import com.example.stas.oxforddictionary.domain.DefinitionRepository
-import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor
+import com.example.stas.oxforddictionary.domain.usecase.DefinitonInteractor
 import com.example.stas.oxforddictionary.presentation.presenter.main.MainPresenter
 import com.example.stas.oxforddictionary.presentation.view.main.MainActivity
 import com.example.stas.oxforddictionary.presentation.view.main.MainContract
@@ -35,8 +36,8 @@ class DefinitionModule{
         DefinitonInteractor(repository)
 
     @Provides
-    fun provideDefinitionRepository(oxfordApi: OxfordApi): DefinitionRepository {
-       return DefinitionRepositoryImp(oxfordApi)
+    fun provideDefinitionRepository(oxfordApi: OxfordApi, savedWordDao: SavedWordDao): DefinitionRepository {
+       return DefinitionRepositoryImp(oxfordApi, savedWordDao)
     }
 
 }

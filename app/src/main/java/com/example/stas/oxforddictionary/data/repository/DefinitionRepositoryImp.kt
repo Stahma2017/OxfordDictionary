@@ -1,5 +1,7 @@
 package com.example.stas.oxforddictionary.data.repository
 
+import com.example.stas.oxforddictionary.data.database.dao.SavedWordDao
+import com.example.stas.oxforddictionary.data.database.model.SavedWordModel
 import com.example.stas.oxforddictionary.data.mapper.definition.toModel
 import com.example.stas.oxforddictionary.data.mapper.example.toModel
 import com.example.stas.oxforddictionary.data.mapper.synonym.toModel
@@ -8,9 +10,11 @@ import com.example.stas.oxforddictionary.domain.DefinitionRepository
 import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResult
 import com.example.stas.oxforddictionary.domain.model.example.ExampleResult
 import com.example.stas.oxforddictionary.domain.model.synonym.SynonymResult
+import io.reactivex.Completable
 import io.reactivex.Observable
 
-class DefinitionRepositoryImp(private val oxfordApi: OxfordApi) : DefinitionRepository {
+class DefinitionRepositoryImp(private val oxfordApi: OxfordApi,
+                              private val savedWordDao: SavedWordDao) : DefinitionRepository {
 
     override fun loadDefinition(word: String): Observable<DefinitionResult> {
         return oxfordApi.searchForEntry(word)
@@ -31,5 +35,10 @@ class DefinitionRepositoryImp(private val oxfordApi: OxfordApi) : DefinitionRepo
                 .map { exampleResponseEntity ->
                     exampleResponseEntity.toModel()
                 }
+    }
+
+    override fun saveDefinition(word: String, definition: String): Completable = Completable.fromAction {
+        val savedWord = SavedWordModel(null, word, definition)
+        savedWordDao.insert(savedWord)
     }
 }

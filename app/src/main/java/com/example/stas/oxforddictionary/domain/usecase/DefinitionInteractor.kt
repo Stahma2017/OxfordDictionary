@@ -1,4 +1,4 @@
-package com.example.stas.oxforddictionary.domain.interactor
+package com.example.stas.oxforddictionary.domain.usecase
 
 import com.example.stas.oxforddictionary.domain.DefinitionRepository
 import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResult

@@ -15,5 +15,6 @@ interface EntryContract {
         fun attachView(view: EntryContract.View)
         fun getDefinition(word: String)
         fun getSound(word: String)
+        fun saveDefinition(word: String, definition: String)
     }
 }

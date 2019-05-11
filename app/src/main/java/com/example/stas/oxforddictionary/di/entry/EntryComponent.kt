@@ -1,6 +1,8 @@
 package com.example.stas.oxforddictionary.di.entry
 
-import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor
+import com.example.stas.oxforddictionary.domain.DefinitionRepository
+import com.example.stas.oxforddictionary.domain.usecase.DefinitonInteractor
+import com.example.stas.oxforddictionary.domain.usecase.definition.SaveWordUseCase
 import com.example.stas.oxforddictionary.presentation.presenter.entry.EntryPresenter
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract
@@ -29,7 +31,12 @@ class EntryModule{
 
     @Provides
     fun provideEntryPresenter(interactor: DefinitonInteractor, compositeDisposable: CompositeDisposable,
-                              errorHandler: ErrorHandler): EntryContract.Presenter{
-        return EntryPresenter(interactor, compositeDisposable, errorHandler)
+                              errorHandler: ErrorHandler, saveWordUseCase: SaveWordUseCase): EntryContract.Presenter{
+        return EntryPresenter(interactor, compositeDisposable, errorHandler, saveWordUseCase)
+    }
+
+    @Provides
+    fun provideSaveWordUseCase(definitionRepository: DefinitionRepository): SaveWordUseCase{
+        return SaveWordUseCase(definitionRepository)
     }
 }

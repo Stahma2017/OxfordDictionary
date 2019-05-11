@@ -38,7 +38,6 @@ class App : Application() {
         return mainComponent!!
     }
 
-
     fun createEntryComponent(): EntryComponent {
         if (entryComponent == null) {
             entryComponent = mainComponent?.addEntryComponent()

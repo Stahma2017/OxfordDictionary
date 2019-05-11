@@ -1,6 +1,6 @@
 package com.example.stas.oxforddictionary.presentation.presenter.example
 
-import com.example.stas.oxforddictionary.domain.interactor.DefinitonInteractor
+import com.example.stas.oxforddictionary.domain.usecase.DefinitonInteractor
 import com.example.stas.oxforddictionary.presentation.mapper.example.toViewModel
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.example.ExampleContract

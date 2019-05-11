@@ -36,7 +36,7 @@ class DefinitionExportVisitor : Visitor {
             totalDefinition.append(subsense.definitions[i]).append("\n")
             definitions.add(totalDefinition.toString())
             if (!subsense.examples.isEmpty()) {
-                totalExample.append(subsense.examples[i].text).append("\n")
+                totalExample.append(subsense.examples[i].text) .append("\n")
                 definitions.add(totalExample.toString())
             }
         }
