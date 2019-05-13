@@ -7,6 +7,7 @@ import com.example.stas.oxforddictionary.di.app.DaggerApplicationComponent
 import com.example.stas.oxforddictionary.di.entry.EntryComponent
 import com.example.stas.oxforddictionary.di.example.ExampleComponent
 import com.example.stas.oxforddictionary.di.main.MainComponent
+import com.example.stas.oxforddictionary.di.save.SaveComponent
 import com.example.stas.oxforddictionary.di.synonym.SynonymComponent
 import com.squareup.leakcanary.LeakCanary
 
@@ -30,6 +31,7 @@ class App : Application() {
     private var entryComponent: EntryComponent? = null
     private var exampleComponent: ExampleComponent? = null
     private var synonymComponent: SynonymComponent? = null
+    private var saveComponent: SaveComponent? = null
 
     fun createMaincomponent(): MainComponent {
         if (mainComponent == null) {
@@ -57,5 +59,12 @@ class App : Application() {
             synonymComponent = mainComponent?.addSynonymComponent()
         }
         return synonymComponent!!
+    }
+
+    fun createSaveComponent(): SaveComponent{
+        if (saveComponent == null){
+            saveComponent = mainComponent?.addSaveComponent()
+        }
+        return saveComponent!!
     }
 }

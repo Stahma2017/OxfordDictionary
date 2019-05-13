@@ -5,10 +5,11 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 @Entity
-data class SavedWordModel(@PrimaryKey(autoGenerate = true)
-                @ColumnInfo(name = "id")
-                val id: Long?,
-                          @ColumnInfo(name = "value")
-                val value: String,
-                          @ColumnInfo(name = "definition")
-                val definition: String)
+data class SavedWordModel(
+        @PrimaryKey(autoGenerate = true)
+        @ColumnInfo(name = "id")
+        val id: Long? = null,
+        @ColumnInfo(name = "value")
+        val value: String,
+        @ColumnInfo(name = "definition")
+        val definition: String)

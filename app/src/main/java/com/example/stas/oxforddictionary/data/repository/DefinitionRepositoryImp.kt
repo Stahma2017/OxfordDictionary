@@ -11,6 +11,7 @@ import com.example.stas.oxforddictionary.domain.model.definition.DefinitionResul
 import com.example.stas.oxforddictionary.domain.model.example.ExampleResult
 import com.example.stas.oxforddictionary.domain.model.synonym.SynonymResult
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Observable
 
 class DefinitionRepositoryImp(private val oxfordApi: OxfordApi,
@@ -37,8 +38,11 @@ class DefinitionRepositoryImp(private val oxfordApi: OxfordApi,
                 }
     }
 
-    override fun saveDefinition(word: String, definition: String): Completable = Completable.fromAction {
-        val savedWord = SavedWordModel(null, word, definition)
-        savedWordDao.insert(savedWord)
+    override fun saveDefinition(model: SavedWordModel): Completable = Completable.fromAction {
+        savedWordDao.insert(model)
+    }
+
+    override fun fetchSavedWords():Flowable<List<SavedWordModel>>  {
+        return savedWordDao.getAll()
     }
 }

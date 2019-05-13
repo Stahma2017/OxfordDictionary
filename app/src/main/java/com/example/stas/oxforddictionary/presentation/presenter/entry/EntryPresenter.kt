@@ -1,5 +1,6 @@
 package com.example.stas.oxforddictionary.presentation.presenter.entry
 
+import com.example.stas.oxforddictionary.data.database.model.SavedWordModel
 import com.example.stas.oxforddictionary.domain.usecase.DefinitonInteractor
 import com.example.stas.oxforddictionary.domain.usecase.definition.SaveWordUseCase
 import com.example.stas.oxforddictionary.presentation.mapper.definition.toViewModel
@@ -7,7 +8,6 @@ import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.ResultModel
-import io.reactivex.CompletableObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -54,13 +54,14 @@ class EntryPresenter(private val interactor: DefinitonInteractor, private val co
     }
 
     override fun saveDefinition(word: String, definition: String) {
-       val saveWordDisp = saveWordUseCase.saveWord(word, definition)
+       val saveWordDisp = saveWordUseCase.saveWord(SavedWordModel(value = word, definition =  definition))
                .subscribeOn(Schedulers.io())
                .observeOn(AndroidSchedulers.mainThread())
                .subscribe({
                    view?.showError("DONE!")},
                        {throwable ->
                            errorHandler.proceed(throwable)})
+        compositeDisposable.add(saveWordDisp)
     }
 
     private fun extractDefinitions(result: ResultModel): List<Item> {

@@ -10,6 +10,7 @@ import com.example.stas.oxforddictionary.App
 import com.example.stas.oxforddictionary.R
 import com.example.stas.oxforddictionary.presentation.view.base.BaseActivity
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryFragment
+import com.example.stas.oxforddictionary.presentation.view.save.SaveFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 import javax.inject.Inject
@@ -31,23 +32,23 @@ class MainActivity : BaseActivity(), MainContract.View, IMainActivity {
             menuItem.isChecked = true
             drawer.closeDrawers()
             //swapping fragments here
-            inflateFragment(menuItem.title.toString(), "")
+            inflateFragment(menuItem.title.toString())
             true
         }
     }
 
-    private fun inflateFragment(fragmentTag: String, word: String) {
+    private fun inflateFragment(fragmentTag: String, message: String = "") {
         lateinit var fragment: Fragment
         when(fragmentTag){
-            getString(R.string.menu_search).toString() -> fragment = EntryFragment() //do nothing
+            getString(R.string.menu_search).toString() -> fragment = EntryFragment() //todo to play with launchmode
             getString(R.string.menu_search_history).toString() -> Unit
             getString(R.string.menu_training).toString() -> Unit
-            getString(R.string.menu_saved).toString() -> Unit
+            getString(R.string.menu_saved).toString() -> fragment = SaveFragment()
             getString(R.string.menu_settings).toString() -> Unit
             getString(R.string.menu_author_about).toString() -> Unit
             else -> throw RuntimeException("Something went wrong")
         }
-        doFragmentTransaction(fragment, fragmentTag, false, word)
+        doFragmentTransaction(fragment, fragmentTag, false, message)
     }
 
     private fun init() {

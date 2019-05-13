@@ -5,6 +5,7 @@ import com.example.stas.oxforddictionary.data.network.OxfordApi
 import com.example.stas.oxforddictionary.data.repository.DefinitionRepositoryImp
 import com.example.stas.oxforddictionary.di.entry.EntryComponent
 import com.example.stas.oxforddictionary.di.example.ExampleComponent
+import com.example.stas.oxforddictionary.di.save.SaveComponent
 import com.example.stas.oxforddictionary.di.synonym.SynonymComponent
 import com.example.stas.oxforddictionary.domain.DefinitionRepository
 import com.example.stas.oxforddictionary.domain.usecase.DefinitonInteractor
@@ -21,6 +22,7 @@ interface MainComponent {
     fun addEntryComponent(): EntryComponent
     fun addExampleComponent(): ExampleComponent
     fun addSynonymComponent(): SynonymComponent
+    fun addSaveComponent(): SaveComponent
 }
 
 @Module
