@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
     android:paddingStart="@dimen/entry_constraint_padding_start"
-    android:paddingTop="@dimen/entry_constraint_padding_top"
+    android:paddingTop="@dimen/main_fragment_padding_top"
     android:paddingEnd="@dimen/entry_constraint_padding_end"
     tools:context=".presentation.view.entry.EntryFragment">
 

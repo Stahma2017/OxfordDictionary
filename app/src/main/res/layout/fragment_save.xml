@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.save.SaveFragment"
-    android:background="@drawable/background_main">
+    android:background="@drawable/background_main"
+    android:paddingTop="@dimen/main_fragment_padding_top"
+    android:paddingStart="@dimen/standard_padding"
+    android:paddingEnd="@dimen/standard_padding"
+    tools:context=".presentation.view.save.SaveFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/savedRec"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:text="SaveFragment" />
-
+        android:layout_height="wrap_content"/>
 </LinearLayout>

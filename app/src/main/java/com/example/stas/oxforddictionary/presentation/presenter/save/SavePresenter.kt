@@ -5,7 +5,6 @@ import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.save.SaveContract
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 class SavePresenter(private val errorHandler: ErrorHandler,
@@ -26,12 +25,11 @@ class SavePresenter(private val errorHandler: ErrorHandler,
     }
 
     override fun fetchSavedWords() {
-
        val savedDisp = fetchSavedWordsUseCase.fetchSavedWord()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    view?.showError(it[1].definition)
+                    view?.showSavedWords(it)
                 },{ error -> errorHandler.proceed(error)})
         compositeDisposable.add(savedDisp)
     }
