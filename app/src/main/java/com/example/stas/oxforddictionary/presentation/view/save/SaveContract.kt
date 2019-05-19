@@ -10,7 +10,7 @@ interface SaveContract {
 
     interface Presenter{
         fun detachView()
-        fun attachView(view: SaveContract.View)
+        fun attachView(view: View)
         fun fetchSavedWords()
     }
 

@@ -37,18 +37,20 @@ class MainActivity : BaseActivity(), MainContract.View, IMainActivity {
         }
     }
 
-    private fun inflateFragment(fragmentTag: String, message: String = "") {
-        lateinit var fragment: Fragment
+    private fun inflateFragment(fragmentTag: String, message: String = "")  {
+       // lateinit var fragment: Fragment
         when(fragmentTag){
-            getString(R.string.menu_search).toString() -> fragment = EntryFragment() //todo to play with launchmode
+            getString(R.string.menu_search).toString() ->  doFragmentTransaction(EntryFragment(), fragmentTag, false, message)
             getString(R.string.menu_search_history).toString() -> Unit
-            getString(R.string.menu_training).toString() -> Unit
-            getString(R.string.menu_saved).toString() -> fragment = SaveFragment()
+            getString(R.string.menu_training).toString() -> navigateToPractice(this, "")
+            getString(R.string.menu_saved).toString() ->  doFragmentTransaction(SaveFragment(), fragmentTag, false, message)
             getString(R.string.menu_settings).toString() -> Unit
             getString(R.string.menu_author_about).toString() -> Unit
             else -> throw RuntimeException("Something went wrong")
         }
-        doFragmentTransaction(fragment, fragmentTag, false, message)
+
+
+
     }
 
     private fun init() {
@@ -77,6 +79,10 @@ class MainActivity : BaseActivity(), MainContract.View, IMainActivity {
 
     override fun navigateToExamples(context: Context?, wordId: String) {
         navigator.navigateToExamples(context, wordId)
+    }
+
+    override fun navigateToPractice(context: Context?, wordId: String) {
+        navigator.navigateToPractice(context, wordId)
     }
 
     override fun onDestroy() {

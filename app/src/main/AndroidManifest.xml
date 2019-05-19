@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".presentation.view.practice.PracticeActivity"></activity>
         <activity android:name=".presentation.view.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +22,6 @@
         </activity>
         <activity android:name=".presentation.view.example.ExampleActivity" />
         <activity android:name=".presentation.view.synonym.SynonymActivity" />
-
     </application>
+
 </manifest>

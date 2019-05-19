@@ -105,7 +105,7 @@ class RxModule{
 class DatabaseModule{
     @Provides
     fun provideAppDatabase(context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, "database")
+        return Room.databaseBuilder(context, AppDatabase::class.java, "db")
                 .build()
     }
 
