@@ -14,4 +14,5 @@ interface DefinitionRepository {
     fun loadExamples(word: String): Observable<ExampleResult>
     fun saveDefinition(model: SavedWordModel): Completable
     fun fetchSavedWords(): Flowable<List<SavedWordModel>>
+    fun updateWords(list: List<SavedWordModel>): Completable
 }

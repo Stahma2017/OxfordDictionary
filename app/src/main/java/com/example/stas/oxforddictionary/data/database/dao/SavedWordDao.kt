@@ -2,6 +2,7 @@ package com.example.stas.oxforddictionary.data.database.dao
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.example.stas.oxforddictionary.data.database.model.SavedWordModel
 import io.reactivex.Flowable
@@ -14,4 +15,7 @@ interface SavedWordDao {
 
     @Insert
     fun insert(word: SavedWordModel)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun updateWords(words: List<SavedWordModel>)
 }

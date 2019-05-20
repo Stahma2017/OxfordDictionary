@@ -34,6 +34,7 @@ class SavedAdapter() : RecyclerView.Adapter<SavedAdapter.SavedViewHolder>() {
         fun bind(word: SavedWordModel){
             itemView.let {
                 it.savedWord.text = word.value
+                it.guessCount.text = "${word.guess}/10"
             }
         }
 

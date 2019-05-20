@@ -12,4 +12,7 @@ data class SavedWordModel(
         @ColumnInfo(name = "value")
         val value: String,
         @ColumnInfo(name = "definition")
-        val definition: String)
+        val definition: String,
+        @ColumnInfo(name = "guess")
+        var guess: Int)
+

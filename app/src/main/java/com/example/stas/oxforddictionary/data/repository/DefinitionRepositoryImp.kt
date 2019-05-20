@@ -17,6 +17,10 @@ import io.reactivex.Observable
 class DefinitionRepositoryImp(private val oxfordApi: OxfordApi,
                               private val savedWordDao: SavedWordDao) : DefinitionRepository {
 
+    override fun updateWords(list: List<SavedWordModel>): Completable = Completable.fromAction{
+        savedWordDao.updateWords(list)
+    }
+
     override fun loadDefinition(word: String): Observable<DefinitionResult> {
         return oxfordApi.searchForEntry(word)
                 .map { entryResponseEntity ->

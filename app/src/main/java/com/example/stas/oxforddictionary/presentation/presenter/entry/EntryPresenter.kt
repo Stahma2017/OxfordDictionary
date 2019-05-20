@@ -54,7 +54,7 @@ class EntryPresenter(private val interactor: DefinitonInteractor, private val co
     }
 
     override fun saveDefinition(word: String, definition: String) {
-       val saveWordDisp = saveWordUseCase.saveWord(SavedWordModel(value = word, definition =  definition))
+       val saveWordDisp = saveWordUseCase.saveWord(SavedWordModel(value = word, definition =  definition, guess = 0))
                .subscribeOn(Schedulers.io())
                .observeOn(AndroidSchedulers.mainThread())
                .subscribe({
