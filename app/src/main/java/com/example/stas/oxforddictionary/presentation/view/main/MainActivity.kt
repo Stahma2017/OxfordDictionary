@@ -1,6 +1,7 @@
 package com.example.stas.oxforddictionary.presentation.view.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
@@ -38,18 +39,26 @@ class MainActivity : BaseActivity(), MainContract.View, IMainActivity {
     }
 
     private fun inflateFragment(fragmentTag: String, message: String = "")  {
-        lateinit var fragment: Fragment
         when(fragmentTag){
-            getString(R.string.menu_search).toString() -> fragment = EntryFragment()
+            getString(R.string.menu_search).toString() -> doFragmentTransaction(EntryFragment(), fragmentTag, false, message)
             getString(R.string.menu_search_history).toString() -> Unit
-            getString(R.string.menu_training).toString() -> fragment = PracticeFragment()
-            getString(R.string.menu_saved).toString() ->  fragment = SaveFragment()
+            getString(R.string.menu_training).toString() ->  doFragmentTransaction(PracticeFragment(), fragmentTag, false, message)
+            getString(R.string.menu_saved).toString() ->   doFragmentTransaction(SaveFragment(), fragmentTag, false, message)
             getString(R.string.menu_settings).toString() -> Unit
-            getString(R.string.menu_author_about).toString() -> Unit
+            getString(R.string.menu_author_about).toString() -> sendToAuthor()
             else -> throw RuntimeException("Something went wrong")
         }
-        doFragmentTransaction(fragment, fragmentTag, false, message)
     }
+
+    private fun sendToAuthor(){
+        val emailIntent = Intent(Intent.ACTION_SEND)
+        emailIntent.type = "text/plain"
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("StasStahmaJob@gmail.com"))
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Отклик Пользователя")
+        startActivity(Intent.createChooser(emailIntent, "Send Email..."))
+    }
+
+
 
     private fun init() {
         val entryFragment = EntryFragment()

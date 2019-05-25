@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_search_black_24dp"
             android:title="@string/menu_search" />
         <item
-            android:id="@+id/search_history"
-            android:icon="@drawable/ic_search_history_black_24dp"
-            android:title="@string/menu_search_history" />
-        <item
             android:id="@+id/training"
             android:icon="@drawable/ic_school_black_24dp"
             android:title="@string/menu_training" />
@@ -28,5 +24,9 @@
             android:id="@+id/author_about"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/menu_author_about" />
+        <!--<item
+            android:id="@+id/search_history"
+            android:icon="@drawable/ic_search_history_black_24dp"
+            android:title="@string/menu_search_history" />-->
     </group>
 </menu>

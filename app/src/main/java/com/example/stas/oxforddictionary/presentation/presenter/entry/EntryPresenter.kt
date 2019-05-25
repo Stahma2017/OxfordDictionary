@@ -8,16 +8,20 @@ import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item
 import com.example.stas.oxforddictionary.presentation.viewmodel.definition.ResultModel
+import io.reactivex.Observable
+import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.util.ArrayList
-
+import io.reactivex.subjects.PublishSubject
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 class EntryPresenter(private val interactor: DefinitonInteractor, private val compositeDisposable: CompositeDisposable,
                      private val errorHandler: ErrorHandler, private val saveWordUseCase: SaveWordUseCase) : EntryContract.Presenter {
     private var view: EntryContract.View? = null
+    private val subject = PublishSubject.create<String>()
 
     override fun attachView(view: EntryContract.View) {
         this.view = view
@@ -62,6 +66,29 @@ class EntryPresenter(private val interactor: DefinitonInteractor, private val co
                        {throwable ->
                            errorHandler.proceed(throwable)})
         compositeDisposable.add(saveWordDisp)
+    }
+
+    override fun onEntryTextChanged(text: String) {
+        /*subject.debounce(1000, TimeUnit.MILLISECONDS)
+                .switchMap { Observable.just(listOf("swipe", "swing", "swirl")) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{t -> view?.showAutocompletes(t)}*/
+
+
+       /* Observable.just(listOf("swipe", "swing", "swirl"))
+                .debounce(3000, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{t -> view?.showAutocompletes(t)}*/
+       /* val subject = PublishSubject.create<String>()
+       val bla = subject.debounce(100, TimeUnit.MILLISECONDS)
+                .switchMap { Observable.fromArray(listOf("swipe", "glow", "swing")) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { t -> view?.showAutocompletes(t) }
+        compositeDisposable.add(bla)*/
+      //  view?.showAutocompletes(listOf("swipe", "glow", "swing"))
     }
 
     private fun extractDefinitions(result: ResultModel): List<Item> {

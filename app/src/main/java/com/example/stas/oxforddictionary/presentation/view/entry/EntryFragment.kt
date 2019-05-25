@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +19,13 @@ import com.example.stas.oxforddictionary.R
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionAdapter
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item
 import com.example.stas.oxforddictionary.presentation.view.main.IMainActivity
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_entry.*
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class EntryFragment : Fragment(), EntryContract.View {
@@ -29,6 +36,7 @@ class EntryFragment : Fragment(), EntryContract.View {
     lateinit var definitionAdapter: DefinitionAdapter
     private var moveUp: Animation? = null
     private var mainActivity: IMainActivity? = null
+    lateinit var subject: PublishSubject<String>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -42,6 +50,26 @@ class EntryFragment : Fragment(), EntryContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        subject = PublishSubject.create<String>()
+        subject.debounce(5000, TimeUnit.MILLISECONDS)
+                .switchMap { Observable.just(listOf("swipe", "swing", "swirl")) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{t-> showAutocompletes(t)}
+
+        wordEntryET.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+               subject.onNext(wordEntryET.text.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
 
         searchSubmitBtn.setOnClickListener {
             if (wordEntryET.length() > 0) {
@@ -100,6 +128,10 @@ class EntryFragment : Fragment(), EntryContract.View {
             showError(getString(R.string.player_error))
         }
         mediaPlayer.start()
+    }
+
+    override fun showAutocompletes(t: List<String>?) {
+        Toast.makeText(context, "${t?.get(0)}", Toast.LENGTH_SHORT).show()
     }
 
     override fun hideProgressBar() {

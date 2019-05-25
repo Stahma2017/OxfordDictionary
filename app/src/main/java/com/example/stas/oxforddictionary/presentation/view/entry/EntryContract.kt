@@ -8,6 +8,7 @@ interface EntryContract {
         fun showDefinition(definitions: List<Item>, titleSet: List<String?>)
         fun playSound(soundURL: String?)
         fun hideProgressBar()
+       fun showAutocompletes(t: List<String>?)
     }
 
     interface Presenter {
@@ -16,5 +17,6 @@ interface EntryContract {
         fun getDefinition(word: String)
         fun getSound(word: String)
         fun saveDefinition(word: String, definition: String)
+        fun onEntryTextChanged(text: String)
     }
 }
