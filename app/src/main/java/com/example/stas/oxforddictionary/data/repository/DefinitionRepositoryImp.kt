@@ -1,7 +1,9 @@
 package com.example.stas.oxforddictionary.data.repository
 
 import com.example.stas.oxforddictionary.data.database.dao.SavedWordDao
+import com.example.stas.oxforddictionary.data.database.dao.ViewedWordDao
 import com.example.stas.oxforddictionary.data.database.model.SavedWordModel
+import com.example.stas.oxforddictionary.data.database.model.ViewedWordModel
 import com.example.stas.oxforddictionary.data.mapper.definition.toModel
 import com.example.stas.oxforddictionary.data.mapper.example.toModel
 import com.example.stas.oxforddictionary.data.mapper.synonym.toModel
@@ -15,7 +17,8 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 
 class DefinitionRepositoryImp(private val oxfordApi: OxfordApi,
-                              private val savedWordDao: SavedWordDao) : DefinitionRepository {
+                              private val savedWordDao: SavedWordDao,
+                              private val viewedWordDao: ViewedWordDao) : DefinitionRepository {
 
     override fun updateWords(list: List<SavedWordModel>): Completable = Completable.fromAction{
         savedWordDao.updateWords(list)
@@ -46,7 +49,15 @@ class DefinitionRepositoryImp(private val oxfordApi: OxfordApi,
         savedWordDao.insert(model)
     }
 
+    override fun saveViewed(model: ViewedWordModel): Completable = Completable.fromAction {
+        viewedWordDao.insert(model)
+    }
+
     override fun fetchSavedWords():Flowable<List<SavedWordModel>>  {
         return savedWordDao.getAll()
+    }
+
+    override fun searchViewedWords(text: String): Observable<List<ViewedWordModel>> {
+       return Observable.fromArray(viewedWordDao.searchWord(text))
     }
 }

@@ -16,6 +16,8 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import com.example.stas.oxforddictionary.App
 import com.example.stas.oxforddictionary.R
+import com.example.stas.oxforddictionary.data.database.model.ViewedWordModel
+import com.example.stas.oxforddictionary.presentation.view.entry.adapter.AutocompleteAdapter
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionAdapter
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item
 import com.example.stas.oxforddictionary.presentation.view.main.IMainActivity
@@ -26,6 +28,7 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_entry.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import java.util.function.Function
 import javax.inject.Inject
 
 class EntryFragment : Fragment(), EntryContract.View {
@@ -34,6 +37,8 @@ class EntryFragment : Fragment(), EntryContract.View {
     lateinit var presenter: EntryContract.Presenter
     @Inject
     lateinit var definitionAdapter: DefinitionAdapter
+    @Inject
+    lateinit var autocompleteAdapter: AutocompleteAdapter
     private var moveUp: Animation? = null
     private var mainActivity: IMainActivity? = null
     lateinit var subject: PublishSubject<String>
@@ -50,16 +55,16 @@ class EntryFragment : Fragment(), EntryContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         subject = PublishSubject.create<String>()
-        subject.debounce(5000, TimeUnit.MILLISECONDS)
-                .switchMap { Observable.just(listOf("swipe", "swing", "swirl")) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe{t-> showAutocompletes(t)}
 
         wordEntryET.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
+                subject.debounce(1000, TimeUnit.MILLISECONDS)
+                        .switchMap { presenter.onEntryTextChanged(wordEntryET.text.toString()) }
+                        .map { mapper: List<ViewedWordModel> -> mapper.map { it.word } }
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe{t-> showAutocompletes(t)}
                subject.onNext(wordEntryET.text.toString())
             }
 
@@ -72,6 +77,9 @@ class EntryFragment : Fragment(), EntryContract.View {
         })
 
         searchSubmitBtn.setOnClickListener {
+            autocompleteAdapter.clear()
+            autocompleteAdapter.notifyDataSetChanged()
+
             if (wordEntryET.length() > 0) {
                 presenter.getDefinition(wordEntryET.text.toString())
                 wordInfoContainer.visibility = View.INVISIBLE
@@ -94,6 +102,9 @@ class EntryFragment : Fragment(), EntryContract.View {
             val wordId = title.text.toString()
             mainActivity!!.navigateToExamples(context, wordId)
         }
+        autocompleteRec.layoutManager = LinearLayoutManager(context)
+        autocompleteRec.adapter = autocompleteAdapter
+
 
         definitionRW.layoutManager = LinearLayoutManager(context)
         definitionAdapter.starClickListener = { definition ->
@@ -131,7 +142,8 @@ class EntryFragment : Fragment(), EntryContract.View {
     }
 
     override fun showAutocompletes(t: List<String>?) {
-        Toast.makeText(context, "${t?.get(0)}", Toast.LENGTH_SHORT).show()
+        t?.let { autocompleteAdapter.setList(it)
+        autocompleteAdapter.notifyDataSetChanged()}
     }
 
     override fun hideProgressBar() {

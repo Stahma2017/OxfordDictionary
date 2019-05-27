@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import com.example.stas.oxforddictionary.data.database.AppDatabase
 import com.example.stas.oxforddictionary.data.database.dao.SavedWordDao
+import com.example.stas.oxforddictionary.data.database.dao.ViewedWordDao
 import com.example.stas.oxforddictionary.presentation.view.base.BaseErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import dagger.Component
@@ -112,6 +113,11 @@ class DatabaseModule{
     @Provides
     fun provideSavedWordDao(appDatabase: AppDatabase) : SavedWordDao{
         return appDatabase.savedWordDao()
+    }
+
+    @Provides
+    fun provideViewedWordDao(appDatabase: AppDatabase): ViewedWordDao{
+        return appDatabase.viewedWordDao()
     }
 }
 

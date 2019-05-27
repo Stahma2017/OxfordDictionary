@@ -7,7 +7,7 @@ import com.example.stas.oxforddictionary.data.database.dao.ViewedWordDao
 import com.example.stas.oxforddictionary.data.database.model.SavedWordModel
 import com.example.stas.oxforddictionary.data.database.model.ViewedWordModel
 
-@Database(entities = [SavedWordModel::class, ViewedWordModel::class], version = 1)
+@Database(entities = [SavedWordModel::class, ViewedWordModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun savedWordDao(): SavedWordDao
     abstract fun viewedWordDao(): ViewedWordDao

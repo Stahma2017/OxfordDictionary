@@ -1,6 +1,7 @@
 package com.example.stas.oxforddictionary.di.main
 
 import com.example.stas.oxforddictionary.data.database.dao.SavedWordDao
+import com.example.stas.oxforddictionary.data.database.dao.ViewedWordDao
 import com.example.stas.oxforddictionary.data.network.OxfordApi
 import com.example.stas.oxforddictionary.data.repository.DefinitionRepositoryImp
 import com.example.stas.oxforddictionary.di.entry.EntryComponent
@@ -40,8 +41,9 @@ class DefinitionModule{
         DefinitonInteractor(repository)
 
     @Provides
-    fun provideDefinitionRepository(oxfordApi: OxfordApi, savedWordDao: SavedWordDao): DefinitionRepository {
-       return DefinitionRepositoryImp(oxfordApi, savedWordDao)
+    fun provideDefinitionRepository(oxfordApi: OxfordApi, savedWordDao: SavedWordDao,
+                                    viewedWordDao: ViewedWordDao): DefinitionRepository {
+       return DefinitionRepositoryImp(oxfordApi, savedWordDao, viewedWordDao)
     }
 
 }

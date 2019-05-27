@@ -2,11 +2,14 @@ package com.example.stas.oxforddictionary.di.entry
 
 import com.example.stas.oxforddictionary.domain.DefinitionRepository
 import com.example.stas.oxforddictionary.domain.usecase.DefinitonInteractor
+import com.example.stas.oxforddictionary.domain.usecase.definition.SaveToViewedUseCase
 import com.example.stas.oxforddictionary.domain.usecase.definition.SaveWordUseCase
+import com.example.stas.oxforddictionary.domain.usecase.definition.SearchViewedWordsUseCase
 import com.example.stas.oxforddictionary.presentation.presenter.entry.EntryPresenter
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryContract
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryFragment
+import com.example.stas.oxforddictionary.presentation.view.entry.adapter.AutocompleteAdapter
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionAdapter
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionExportVisitor
 import dagger.Module
@@ -21,6 +24,11 @@ interface EntryComponent {
 
 @Module
 class EntryModule{
+
+    @Provides
+    fun provideAutocompleteAdapter():AutocompleteAdapter =
+            AutocompleteAdapter()
+
     @Provides
     fun provideDefinitionAdapter(definitionExporter: DefinitionExportVisitor): DefinitionAdapter =
         DefinitionAdapter(definitionExporter)
@@ -31,12 +39,23 @@ class EntryModule{
 
     @Provides
     fun provideEntryPresenter(interactor: DefinitonInteractor, compositeDisposable: CompositeDisposable,
-                              errorHandler: ErrorHandler, saveWordUseCase: SaveWordUseCase): EntryContract.Presenter{
-        return EntryPresenter(interactor, compositeDisposable, errorHandler, saveWordUseCase)
+                              errorHandler: ErrorHandler, saveWordUseCase: SaveWordUseCase,
+                              saveToViewedUseCase: SaveToViewedUseCase, searchViewedWordsUseCase: SearchViewedWordsUseCase): EntryContract.Presenter{
+        return EntryPresenter(interactor, compositeDisposable, errorHandler, saveWordUseCase, saveToViewedUseCase, searchViewedWordsUseCase)
     }
 
     @Provides
     fun provideSaveWordUseCase(definitionRepository: DefinitionRepository): SaveWordUseCase{
         return SaveWordUseCase(definitionRepository)
+    }
+
+    @Provides
+    fun provideSaveToViewedUseCase(definitionRepository: DefinitionRepository): SaveToViewedUseCase{
+        return SaveToViewedUseCase(definitionRepository)
+    }
+
+    @Provides
+    fun provideSearchViewedWordsUseCase(definitionRepository: DefinitionRepository): SearchViewedWordsUseCase{
+        return SearchViewedWordsUseCase(definitionRepository)
     }
 }
