@@ -13,6 +13,7 @@ import com.example.stas.oxforddictionary.presentation.view.base.BaseActivity
 import com.example.stas.oxforddictionary.presentation.view.entry.EntryFragment
 import com.example.stas.oxforddictionary.presentation.view.practice.PracticeFragment
 import com.example.stas.oxforddictionary.presentation.view.save.SaveFragment
+import com.example.stas.oxforddictionary.presentation.view.statistic.StatisticFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 import javax.inject.Inject
@@ -44,7 +45,7 @@ class MainActivity : BaseActivity(), MainContract.View, IMainActivity {
             getString(R.string.menu_search_history).toString() -> Unit
             getString(R.string.menu_training).toString() ->  doFragmentTransaction(PracticeFragment(), fragmentTag, false, message)
             getString(R.string.menu_saved).toString() ->   doFragmentTransaction(SaveFragment(), fragmentTag, false, message)
-            getString(R.string.menu_settings).toString() -> Unit
+            getString(R.string.menu_settings).toString() -> doFragmentTransaction(StatisticFragment(),fragmentTag, false, message)
             getString(R.string.menu_author_about).toString() -> sendToAuthor()
             else -> throw RuntimeException("Something went wrong")
         }
