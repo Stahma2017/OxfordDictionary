@@ -37,11 +37,24 @@
     <string name="menu_search_history">История поиска</string>
     <string name="menu_training">Тренировка</string>
     <string name="menu_saved">Избранное</string>
-    <string name="menu_settings">Настройки</string>
+    <string name="menu_statistics">Статистика</string>
     <string name="menu_author_about">Написать разработчику</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="txt_card_1">card 1</string>
+    <string name="txt_card_2">card 2</string>
+    <string name="txt_card_3">card 3</string>
+    <string name="txt_card_4">card 4</string>
+    <string name="txt_card_5">card 5</string>
+    <string name="txt_card_6">card 6</string>
+    <string name="txt_card_7">card 7</string>
+    <string name="txt_card_8">card 8</string>
+    <string name="txt_card_9">card 9</string>
+    <string name="txt_card_10">card 10</string>
+
+
 
 
 </resources>

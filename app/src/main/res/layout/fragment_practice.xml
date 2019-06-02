@@ -9,41 +9,99 @@
     android:background="@drawable/background_main"
     android:paddingTop="@dimen/main_fragment_padding_top">
 
-    <TextView
-        android:id="@+id/question"
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:visibility="gone"
+        android:id="@+id/konfetti"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.example.stas.oxforddictionary.presentation.custom.CustomViewPager
+        android:id="@+id/quizViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.example.stas.oxforddictionary.presentation.custom.CustomSpringIndicator
+        android:id="@+id/springIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="EXAMPLE QUIZZ"
+        app:dotsColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/quizViewPager"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/resultScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
         android:textColor="#ffffff"
-        android:textSize="22sp"
+        android:textSize="26sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <ImageButton
+        android:id="@+id/retryTest"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_action_refresh"
+        android:background="@drawable/background_transparent_round"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/resultScore"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <ImageButton
+        android:id="@+id/statisticBtn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_action_statistic"
+        android:background="@drawable/background_transparent_round"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/resultScore"
+        app:layout_constraintVertical_bias="0.3" />
+
+
 
     <Button
         android:id="@+id/option1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="52dp"
         android:background="@drawable/background_option_btn"
-        android:textColor="#ffffff"
+        android:textColor="#3949ab"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question" />
+        app:layout_constraintTop_toBottomOf="@+id/springIndicator" />
 
     <Button
         android:id="@+id/option2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="52dp"
         android:background="@drawable/background_option_btn"
-        android:textColor="#ffffff"
+        android:textColor="#3949ab"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,13 +109,13 @@
 
     <Button
         android:id="@+id/option3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="52dp"
         android:background="@drawable/background_option_btn"
-        android:textColor="#ffffff"
+        android:textColor="#3949ab"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,11 +123,13 @@
 
     <Button
         android:id="@+id/option4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="52dp"
         android:background="@drawable/background_option_btn"
-        android:textColor="#ffffff"
+        android:textColor="#3949ab"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

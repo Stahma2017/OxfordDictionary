@@ -31,6 +31,7 @@ class MainActivity : BaseActivity(), MainContract.View, IMainActivity {
         presenter.attachView(this)
         init()
 
+
         navView.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
             drawer.closeDrawers()
@@ -39,16 +40,29 @@ class MainActivity : BaseActivity(), MainContract.View, IMainActivity {
         }
     }
 
+    fun navigateToPractice(){
+        inflateFragment(getString(R.string.menu_training), "")
+        navView.menu.getItem(1).isChecked = true
+    }
+
+    fun navigateToStatistic(){
+        inflateFragment(getString(R.string.menu_statistics), "")
+        navView.menu.getItem(3).isChecked = true
+    }
+
+
+
     private fun inflateFragment(fragmentTag: String, message: String = "")  {
         when(fragmentTag){
             getString(R.string.menu_search).toString() -> doFragmentTransaction(EntryFragment(), fragmentTag, false, message)
             getString(R.string.menu_search_history).toString() -> Unit
             getString(R.string.menu_training).toString() ->  doFragmentTransaction(PracticeFragment(), fragmentTag, false, message)
             getString(R.string.menu_saved).toString() ->   doFragmentTransaction(SaveFragment(), fragmentTag, false, message)
-            getString(R.string.menu_settings).toString() -> doFragmentTransaction(StatisticFragment(),fragmentTag, false, message)
+            getString(R.string.menu_statistics).toString() -> doFragmentTransaction(StatisticFragment(),fragmentTag, false, message)
             getString(R.string.menu_author_about).toString() -> sendToAuthor()
             else -> throw RuntimeException("Something went wrong")
         }
+        closeKeyboard()
     }
 
     private fun sendToAuthor(){

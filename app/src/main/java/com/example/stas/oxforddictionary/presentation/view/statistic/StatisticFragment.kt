@@ -6,23 +6,58 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.stas.oxforddictionary.App
 import com.example.stas.oxforddictionary.R
+import com.example.stas.oxforddictionary.data.database.model.WeekStatisticModel
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.DataPoint
 import kotlinx.android.synthetic.main.fragment_statistic.*
+import javax.inject.Inject
 
-class StatisticFragment : Fragment() {
+class StatisticFragment : Fragment(), StatisticContract.View {
+
+    @Inject
+    lateinit var presenter: StatisticContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistic, container, false)
-
+        val view = inflater.inflate(R.layout.fragment_statistic, container, false)
+        (activity!!.application as App).createStatisticComponent().injectStatisticFragment(this)
+        presenter.attachView(this)
+        presenter.fetchStatistic()
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val series = BarGraphSeries(arrayOf(DataPoint(0.0, 1.0), DataPoint(1.0, 5.0), DataPoint(2.0, 3.0), DataPoint(3.0, 2.0), DataPoint(4.0, 6.0)))
+        presenter.fetchStatistic()
+    }
+
+    override fun showError(errorMessage: String) {
+        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.detachView()
+    }
+
+    override fun showStatistic(list: List<WeekStatisticModel>) {
+        val statList = arrayOf(DataPoint(0.0, 0.0),
+                DataPoint(1.0, 0.0),
+                DataPoint(2.0, 0.0),
+                DataPoint(3.0, 0.0),
+                DataPoint(4.0, 0.0),
+                DataPoint(5.0, 0.0),
+                DataPoint(6.0, 0.0))
+
+        list.forEach {
+            statList[it.id!!.toInt()] = DataPoint(it.id.toDouble(), it.count.toDouble())
+        }
+
+        val series = BarGraphSeries(statList)
         graphView.addSeries(series)
+        graphView.onDataChanged(true, false)
     }
 }

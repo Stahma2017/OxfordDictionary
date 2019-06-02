@@ -25,12 +25,12 @@ class SavePresenter(private val errorHandler: ErrorHandler,
     }
 
     override fun fetchSavedWords() {
-       val savedDisp = fetchSavedWordsUseCase.fetchSavedWord()
+        val savedDisp = fetchSavedWordsUseCase.fetchSavedWord()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     view?.showSavedWords(it)
-                },{ error -> errorHandler.proceed(error)})
+                }, { error -> errorHandler.proceed(error) })
         compositeDisposable.add(savedDisp)
     }
 }

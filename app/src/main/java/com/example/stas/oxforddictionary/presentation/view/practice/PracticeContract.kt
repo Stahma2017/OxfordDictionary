@@ -12,5 +12,6 @@ interface PracticeContract {
         fun attachView(view: View)
         fun getQuiz()
         fun updateWords(words: List<SavedWordModel>)
+        fun updateStatistic(result: Int, day: Int)
     }
 }

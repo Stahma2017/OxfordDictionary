@@ -50,7 +50,7 @@ class DefinitionRepositoryImp(private val oxfordApi: OxfordApi,
     }
 
     override fun saveViewed(model: ViewedWordModel): Completable = Completable.fromAction {
-        viewedWordDao.insert(model)
+        viewedWordDao.updateWord(model)
     }
 
     override fun fetchSavedWords():Flowable<List<SavedWordModel>>  {

@@ -26,7 +26,6 @@ class SaveFragment : Fragment(), SaveContract.View {
         (activity!!.application as App).createSaveComponent().injectSaveFragment(this)
         presenter.attachView(this)
         presenter.fetchSavedWords()
-
         return view
     }
 

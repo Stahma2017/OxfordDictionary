@@ -69,6 +69,12 @@ dependencies {
     // GraphView
     implementation 'com.jjoe64:graphview:4.2.2'
 
+    //dotsindicator
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
+
+    //konfetti
+    implementation 'nl.dionsegijn:konfetti:1.1.2'
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 

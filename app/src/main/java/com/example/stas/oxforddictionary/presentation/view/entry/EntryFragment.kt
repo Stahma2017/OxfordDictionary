@@ -21,6 +21,7 @@ import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Autocom
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.DefinitionAdapter
 import com.example.stas.oxforddictionary.presentation.view.entry.adapter.Item
 import com.example.stas.oxforddictionary.presentation.view.main.IMainActivity
+import com.example.stas.oxforddictionary.presentation.view.main.MainActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -79,6 +80,7 @@ class EntryFragment : Fragment(), EntryContract.View {
         searchSubmitBtn.setOnClickListener {
             autocompleteAdapter.clear()
             autocompleteAdapter.notifyDataSetChanged()
+            (activity as MainActivity).closeKeyboard()
 
             if (wordEntryET.length() > 0) {
                 presenter.getDefinition(wordEntryET.text.toString())
@@ -87,6 +89,7 @@ class EntryFragment : Fragment(), EntryContract.View {
             } else {
                 Toast.makeText(context, "word is missing", Toast.LENGTH_SHORT).show()
             }
+
         }
         soundImBtn.setOnClickListener {
             progressBar.visibility = View.VISIBLE

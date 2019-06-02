@@ -19,7 +19,7 @@
         <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/menu_settings" />
+            android:title="@string/menu_statistics" />
         <item
             android:id="@+id/author_about"
             android:icon="@drawable/ic_person_black_24dp"

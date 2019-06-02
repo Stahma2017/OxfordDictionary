@@ -9,6 +9,7 @@ import com.example.stas.oxforddictionary.di.example.ExampleComponent
 import com.example.stas.oxforddictionary.di.main.MainComponent
 import com.example.stas.oxforddictionary.di.practice.PracticeComponent
 import com.example.stas.oxforddictionary.di.save.SaveComponent
+import com.example.stas.oxforddictionary.di.statistic.StatisticComponent
 import com.example.stas.oxforddictionary.di.synonym.SynonymComponent
 import com.squareup.leakcanary.LeakCanary
 
@@ -34,6 +35,14 @@ class App : Application() {
     private var synonymComponent: SynonymComponent? = null
     private var saveComponent: SaveComponent? = null
     private var practiceComponent: PracticeComponent? = null
+    private var statisticComponent: StatisticComponent? = null
+
+    fun createStatisticComponent(): StatisticComponent{
+        if ( statisticComponent == null){
+            statisticComponent = mainComponent?.addStatisticComponent()
+        }
+        return statisticComponent!!
+    }
 
     fun createMaincomponent(): MainComponent {
         if (mainComponent == null) {

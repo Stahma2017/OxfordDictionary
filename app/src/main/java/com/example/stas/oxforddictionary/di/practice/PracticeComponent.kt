@@ -1,8 +1,10 @@
 package com.example.stas.oxforddictionary.di.practice
 
 import com.example.stas.oxforddictionary.domain.DefinitionRepository
+import com.example.stas.oxforddictionary.domain.StatisticRepository
 import com.example.stas.oxforddictionary.domain.usecase.definition.FetchSavedWordsUseCase
 import com.example.stas.oxforddictionary.domain.usecase.definition.UpdateSavedWordsUseCase
+import com.example.stas.oxforddictionary.domain.usecase.statistic.UpdateWeekStatisticUseCase
 import com.example.stas.oxforddictionary.presentation.presenter.practice.PracticePresenter
 import com.example.stas.oxforddictionary.presentation.view.base.ErrorHandler
 import com.example.stas.oxforddictionary.presentation.view.practice.PracticeContract
@@ -23,8 +25,9 @@ class PracticeModule{
     fun providePracticePresenter(errorHandler: ErrorHandler,
                                  compositeDisposable: CompositeDisposable,
                                  fetchSavedWordsUseCase: FetchSavedWordsUseCase,
-                                 updateSavedWordsUseCase: UpdateSavedWordsUseCase): PracticeContract.Presenter{
-        return PracticePresenter(errorHandler, compositeDisposable, fetchSavedWordsUseCase, updateSavedWordsUseCase)
+                                 updateSavedWordsUseCase: UpdateSavedWordsUseCase,
+                                 updateWeekStatisticUseCase: UpdateWeekStatisticUseCase): PracticeContract.Presenter{
+        return PracticePresenter(errorHandler, compositeDisposable, fetchSavedWordsUseCase, updateSavedWordsUseCase, updateWeekStatisticUseCase)
     }
 
     @Provides
@@ -35,5 +38,10 @@ class PracticeModule{
     @Provides
     fun provideUpdateSavedWordsUseCase(definitionRepository: DefinitionRepository): UpdateSavedWordsUseCase{
         return UpdateSavedWordsUseCase(definitionRepository)
+    }
+
+    @Provides
+    fun provideUpdateWeekStatisticUseCase(statisticRepository: StatisticRepository): UpdateWeekStatisticUseCase{
+        return UpdateWeekStatisticUseCase(statisticRepository)
     }
 }
