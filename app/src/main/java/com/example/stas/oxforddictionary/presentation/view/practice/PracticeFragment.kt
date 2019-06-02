@@ -65,7 +65,6 @@ class PracticeFragment : Fragment(), PracticeContract.View, View.OnClickListener
         statisticBtn.setOnClickListener {
             (activity as MainActivity).navigateToStatistic()
         }
-
     }
 
     override fun showQuiz(words: List<SavedWordModel>) {
@@ -107,7 +106,6 @@ class PracticeFragment : Fragment(), PracticeContract.View, View.OnClickListener
         count++
         quizViewPager.currentItem++
         nextQuiz(random.nextInt(words.size))
-
     }
 
     private fun nextQuiz(n: Int) {
@@ -148,6 +146,7 @@ class PracticeFragment : Fragment(), PracticeContract.View, View.OnClickListener
         option4.visibility = View.GONE
         presenter.updateWords(words)
         val calendar = Calendar.getInstance()
+
         presenter.updateStatistic(results, calendar.get(Calendar.DAY_OF_WEEK))
         resultScore.visibility = View.VISIBLE
         retryTest.visibility = View.VISIBLE

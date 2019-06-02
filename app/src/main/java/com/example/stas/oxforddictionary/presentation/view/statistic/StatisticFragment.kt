@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.stas.oxforddictionary.App
 import com.example.stas.oxforddictionary.R
 import com.example.stas.oxforddictionary.data.database.model.WeekStatisticModel
+import com.jjoe64.graphview.helper.StaticLabelsFormatter
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.DataPoint
 import kotlinx.android.synthetic.main.fragment_statistic.*
@@ -44,19 +45,26 @@ class StatisticFragment : Fragment(), StatisticContract.View {
     }
 
     override fun showStatistic(list: List<WeekStatisticModel>) {
-        val statList = arrayOf(DataPoint(0.0, 0.0),
+        val statList = arrayOf(
                 DataPoint(1.0, 0.0),
                 DataPoint(2.0, 0.0),
                 DataPoint(3.0, 0.0),
                 DataPoint(4.0, 0.0),
                 DataPoint(5.0, 0.0),
-                DataPoint(6.0, 0.0))
+                DataPoint(6.0, 0.0),
+                DataPoint(7.0, 0.0))
 
         list.forEach {
             statList[it.id!!.toInt()] = DataPoint(it.id.toDouble(), it.count.toDouble())
         }
 
+        val staticLabelsFormatter = StaticLabelsFormatter(graphView)
+        staticLabelsFormatter.setHorizontalLabels(arrayOf("Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Cб"))
+        graphView.gridLabelRenderer.labelFormatter = staticLabelsFormatter
+
         val series = BarGraphSeries(statList)
+        graphView.title = "количество угаданных слов за неделю"
+        graphView.titleTextSize = 55f
         graphView.addSeries(series)
         graphView.onDataChanged(true, false)
     }
