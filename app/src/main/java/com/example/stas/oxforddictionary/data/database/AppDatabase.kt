@@ -14,5 +14,4 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun savedWordDao(): SavedWordDao
     abstract fun viewedWordDao(): ViewedWordDao
     abstract fun weekStatisticDao(): WeekStatisticDao
-
 }

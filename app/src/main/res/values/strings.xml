@@ -31,6 +31,7 @@
     <string name="learned">Learned</string>
     <string name="all">All</string>
     <string name="_0">0</string>
+    <string name="_4">4</string>
 
     // Menu items
     <string name="menu_search">Поиск</string>

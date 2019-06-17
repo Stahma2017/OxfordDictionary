@@ -19,6 +19,4 @@ class HistoryPresenter(private val compositeDisposable: CompositeDisposable,
         view = null
         compositeDisposable.dispose()
     }
-
-
 }

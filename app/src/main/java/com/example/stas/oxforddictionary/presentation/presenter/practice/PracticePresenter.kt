@@ -74,6 +74,4 @@ class PracticePresenter(private val errorHandler: ErrorHandler,
             view?.showQuiz(words)
         }
     }
-
-
 }

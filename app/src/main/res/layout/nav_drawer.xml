@@ -20,20 +20,24 @@
         android:columnCount="2"
         android:orientation="horizontal">
         <TextView
+            android:textColor="#000000"
             android:layout_gravity="fill"
             android:text="@string/learned"
             android:gravity="center"/>
         <TextView
+            android:textColor="#000000"
             android:layout_gravity="center"
             android:text="@string/all"/>
         <TextView
+            android:textColor="#000000"
             android:layout_gravity="center"
             android:id="@+id/learnedWordsCount"
             android:text="@string/_0"/>
         <TextView
+            android:textColor="#000000"
             android:layout_gravity="center"
             android:id="@+id/allWordsCount"
-            android:text="@string/_0"/>
+            android:text="@string/_4"/>
     </GridLayout>
 
 </LinearLayout>
